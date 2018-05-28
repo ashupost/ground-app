@@ -12,58 +12,37 @@ import { StoreKey } from '../../app/sources/model/store-key.enum';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { SaveUserGeolocationService } from '../../app/sources/services/save-user-geolocation.service';
 import { GMapsWapperService } from '../../app/sources/google/google.map.wapper.service';
-import { GMapsService } from '../../app/sources/google/gmap.service';
 
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [GoogleLoginService, FaceBookLoginService, GMapsService]
+  providers: [GoogleLoginService, FaceBookLoginService]
 })
 export class LoginPage {
 
   user: Observable<firebase.User>;
   userInformation: UserDetails = new UserDetails();
 
-  lat: any;
+  //lat: any;
 
 
 
-  getAddress() {
-    this._gMapsService.geocodeAddress().subscribe((result: AddressUser) => {
-      this.__zone.run(() => {
-        console.log('dil',result);
-        if(result){
-          console.log('Available', result.country);
-        }else{
-          console.log('Not Available');
-        }
-      })
-    },
-      error => console.log(error),
-      () => console.log('Geocoding completed!')
-    );
-  }
-
+  
   constructor(
     private _storage: Storage,
     public navCtrl: NavController,
     private afAuth: AngularFireAuth,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private _gMapsService: GMapsService,
+  
     private _faceBookLoginService: FaceBookLoginService,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private _saveUserGeolocationService: SaveUserGeolocationService,
     private _googleLoginService: GoogleLoginService,
     private __zone: NgZone
   ) {
-    this.getAddress();
-    //this._gMapsService.getLatLan().subscribe(value => {
-    //    alert(JSON.stringify(value));
-    //    console.log(value);
-    //});
     this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {

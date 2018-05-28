@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { filter, catchError, tap, map, switchMap } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { AddressUser } from '../model/userdetails';
+import { Geoposition } from '@ionic-native/geolocation';
 
 declare var google: any;
 
@@ -79,7 +80,7 @@ private  getaddress(results: any): AddressUser {
     return storableLocation
   }
  
-  geocodeAddress(): Observable<any> {
+  geocodeAddress(position: Geoposition): Observable<any> {
     let location = 'Amsterdam';
   //  alert('2=>' + location);
     console.log('Start geocoding!');
@@ -87,14 +88,14 @@ private  getaddress(results: any): AddressUser {
       // filter(loaded => loaded),
       switchMap(() => {
         return new Observable(observer => {
-          var input = '52.3062812,4.977725899999996';
-          var latlngStr = input.split(',', 2);
-          var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
+        //  var input = '52.3062812,4.977725899999996';
+        //  var latlngStr = input.split(',', 2);
+          let latlng = { lat: position.coords.latitude, lng: position.coords.longitude };
           this.geocoder.geocode({ 'location': latlng }, (results, status) => {
             console.log('status', status);
             if (status == google.maps.GeocoderStatus.OK) {
               console.log('Geocoding complete!');
-              console.log('result1 ->', JSON.stringify(this.getaddress(results)));
+              //console.log('result1 ->', JSON.stringify(this.getaddress(results)));
               observer.next(this.getaddress(results));
             } else {
               console.log('Error - ', results, ' & Status - ', status);

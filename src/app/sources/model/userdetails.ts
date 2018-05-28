@@ -14,6 +14,7 @@ export class UserDetails {
     latitude: number;
     longitude: number;
     status: string;
+    address: AddressUser;
 }
 
 export class GeoCordinate {
