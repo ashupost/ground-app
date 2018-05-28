@@ -1,0 +1,74 @@
+{
+  "project_info": {
+    "project_number": "329915457638",
+    "firebase_url": "https://ground-firebase.firebaseio.com",
+    "project_id": "ground-firebase",
+    "storage_bucket": "ground-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329915457638:android:792981a293793b13",
+        "android_client_info": {
+          "package_name": "com.ground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329915457638-0h2kbt0587l6g6elciafag5bujvnru7c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ground",
+            "certificate_hash": "6598dbf2e5015f9902fe59b7406d6ff1e6476512"
+          }
+        },
+        {
+          "client_id": "329915457638-r7d4bfd6rv21acur3cpdmtmobavumuud.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ground",
+            "certificate_hash": "71ef6eeb08dd9f0988c216a9138c1dc00e1f4cb6"
+          }
+        },
+        {
+          "client_id": "329915457638-4648vo7u1kukboqe1e35te5u2e15hhpo.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "329915457638-4648vo7u1kukboqe1e35te5u2e15hhpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcYCFXhkqvYLH5dN0IIlT7HylAwSOCbqg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329915457638-4648vo7u1kukboqe1e35te5u2e15hhpo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "329915457638-em64c9hnmai6ncargrme9pjau9ph8phr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ground"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

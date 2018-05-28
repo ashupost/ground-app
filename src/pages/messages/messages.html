@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+
+        <ion-icon ios="ios-disc" [color]="toUserDetails.status" md="md-disc"></ion-icon>
+        <span><ion-icon ios="ios-plane" md="md-plane"></ion-icon>   {{distance | number }}KM</span> 
+        <span><ion-icon ios="ios-time" md="md-time"> {{otherTimestamp | date:'dd.MM hh:mm:ss'}}</ion-icon></span>
+      
+      {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }}  
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!--
+      https://github.com/HsuanXyz/ionic3-chat/blob/master/src/pages/chat/chat.scss
+-->
+
+<div class="message-wrap">
+   
+    <div *ngFor="let msg of messages"
+         class="message"
+         [class.left]="msg.fromId !== fromId "
+         [class.right]="msg.fromId === fromId">
+      <img class="user-img" [src]="msg.fromId === fromId ? user.photoURL : toUserDetails.photoURL" alt="" src="">
+      <ion-spinner name="dots" *ngIf="!msg.timestamp"></ion-spinner>
+      <div class="msg-detail">
+        <div class="msg-info">
+        <p>{{msg.timestamp | relativeTimePipe}}</p>
+        
+        </div>
+        <div class="msg-content">
+          <span class="triangle"></span>
+          <p class="line-breaker ">{{msg.message}}</p>
+        </div>
+      </div>
+    </div>
+</div>
+
+</ion-content>
+
+
+<ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
+    <div class="input-wrap">
+        <button ion-button clear icon-only item-right (click)="switchEmojiPicker()">
+            <ion-icon name="md-happy"></ion-icon>
+          </button>
+            <textarea #chat_input
+            placeholder="Text Input"
+            [(ngModel)]="newMessage"
+            (keyup.enter)="sendMessage()"
+            (focusin)="onFocus()">
+
+          </textarea>
+      
+        <button ion-button clear icon-only item-right color="primary" 
+        (click)="sendMessage()" [disabled]="newMessage === ''">
+        <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+      </button>
+   </div>
+</ion-footer>

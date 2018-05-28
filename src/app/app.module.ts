@@ -1,0 +1,103 @@
+import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Geolocation } from '@ionic-native/geolocation';
+import { IonicStorageModule } from '@ionic/storage';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { AngularFireModule } from 'angularfire2';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AgmCoreModule } from '@agm/core';
+import { StatusBar } from '@ionic-native/status-bar';
+
+import { MyApp } from './app.component';
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
+import { HomePage } from '../pages/home/home';
+import { TabsPage } from '../pages/tabs/tabs';
+import { MessagesPage } from '../pages/messages/messages';
+
+import { GeolocationService } from './sources/services/geolocation.service';
+import { GroundFirebaseStoreService } from './sources/services/ground-firebasestore.service';
+import { GroundStorageService } from './sources/services/ground-storage.service';
+import { LocationTrackerService } from './sources/services/location-tracker.service';
+import { PhoneLoginService } from './sources/services/phone-login.service';
+import { SaveUserGeolocationService } from './sources/services/save-user-geolocation.service';
+import { DistanceService } from './sources/services/distance.service';
+import { AuthServiceStatusService } from './sources/status-service/auth-service';
+import { GroundDatabaseStatusService } from './sources/status-service/ground-database-status.service';
+import { NotificationService } from './sources/notification.service';
+import { UtilService } from './sources/services/util.service';
+import { GoogleLoginService } from './sources/services/google-login.service';
+import { FaceBookLoginService } from './sources/services/facebook-login.service';
+import { LoginPage } from '../pages/login/login';
+import { LoginPageModule } from '../pages/login/login.module';
+import { MessagesPageModule } from '../pages/messages/messages.module';
+import { PipesModule } from '../pipes/pipes.module';
+import { GMapsService } from './sources/google/gmap.service';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8",
+  authDomain: "ground-firebase.firebaseapp.com",
+  databaseURL: "https://ground-firebase.firebaseio.com",
+  projectId: "ground-firebase",
+  storageBucket: "ground-firebase.appspot.com",
+  messagingSenderId: "329915457638"
+};
+
+@NgModule({
+  declarations: [
+    MyApp
+    
+  ],
+  imports: [
+    PipesModule,
+    MessagesPageModule,
+    BrowserModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' }),
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    //   IonicStorageModule.forRoot({name: '__mydb1', driverOrder: ['sqlite', 'websql']}),
+    AngularFireStorageModule,
+    IonicStorageModule.forRoot()
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    MessagesPage
+    
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    AngularFireDatabase,
+    GooglePlus,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    Facebook,
+    GoogleLoginService,
+    FaceBookLoginService,
+    PhoneLoginService,
+    Geolocation,
+    BackgroundGeolocation,
+    GeolocationService,
+    GroundFirebaseStoreService,
+    GroundStorageService,
+    LocationTrackerService,
+    SaveUserGeolocationService,
+    DistanceService,
+    AuthServiceStatusService,
+    GroundDatabaseStatusService,
+    NotificationService,
+    UtilService,
+    GMapsService
+  ]
+})
+export class AppModule { }

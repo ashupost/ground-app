@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach Ionic 2 App with sourcemaps",
+        
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "sourceMaps": true,
+            "url": "http://localhost:8100/",
+            "webRoot": "${workspaceRoot}/www"
+
+        },
+        {
+            "name": "Launch Ionic 2 App with sourcemaps",
+            
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:8100/",
+            "webRoot": "${workspaceRoot}/www",
+            "sourceMaps": true
+        }
+    ]
+}

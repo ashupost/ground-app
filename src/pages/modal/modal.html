@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>ModalPage</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div id="recaptcha-container"></div>
+  <ion-item>
+    <ion-label stacked>Phone Number</ion-label>
+    <ion-input type="number" [(ngModel)]="phoneNumber" placeholder="Enter Phone Number"></ion-input>
+  </ion-item>
+  <button ion-button id="sign-in-button" (click)="signInPhone1(phoneNumber)">Sign In Phone</button>
+</ion-content>

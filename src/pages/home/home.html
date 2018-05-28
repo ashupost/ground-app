@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<<ion-content padding>
+
+   <div *ngIf="(user | async) || {} as user">
+        <button ion-button (tap)= "googlePlusLogin()">Login with Google</button>
+        <button ion-button (tap)= "signInWithFacebook()">Login with Facebook</button>
+
+          <div *ngIf="user.uid"> You are looged with UID : {{user.uid}}</div>
+          <div *ngIf="user.uid"> You are looged with JSON : {{user | json}}</div>
+   </div>
+      
+  <!--
+  Details: {{userInfo | json}}
+  <h1>Hello {{userInfo.displayName}}</h1>  
+  
+	<button ion-button outline (click)="login()">Login</button>  
+  <button ion-button outline (click)="logout()">Logout</button>
+  <p> <img  [src]="userInfo.photo" alt=""></p>
+
+  {{userInfo | json }}
+  -->
+<!--
+  <div *ngIf="afAuth.authState | async as user; else showLogin">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <button (click)="logout()">Logout</button>
+  </div>
+  <ng-template #showLogin>
+    <p>Please login.</p>
+    <button (click)="login()">Login with Google</button>
+  </ng-template>
+  -->
+<ion-item>
+  <ion-label stacked>Phone Number</ion-label>
+  <ion-input type="number" [(ngModel)]="phoneNumber"></ion-input>
+</ion-item>
+
+<button ion-button id="sign-in-button" (click)="signInPhone(phoneNumber)">Sign In Phone</button>
+</ion-content>

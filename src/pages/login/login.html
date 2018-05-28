@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <div *ngIf="(user | async) || {} as user">
+          <button ion-button icon-only *ngIf="!user.uid">
+              <ion-icon  ios="ios-lock" md="md-lock"></ion-icon>
+          </button>
+          <button ion-button icon-only *ngIf="user.uid" (click)="signOut()">
+              <ion-icon  ios="ios-log-out" md="md-log-out"></ion-icon>
+          </button>
+    </div>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <p><button ion-button full (click)="googlePlusLogin()">Login with Google</button></p>
+  <p><button ion-button color="secondary" full (click)="facebookLogin()">Login with Facebook</button></p>
+  <p><button ion-button full (click)="phonelogin()">Phone Login</button></p>
+ 
+
+  <p><button *ngIf="!user.uid" ion-button full (click)="doLogin()">Login</button></p>
+
+  <div *ngIf="(user | async) || {} as user"> 
+ 
+    <div *ngIf="user.uid"> You are looged with UID : {{user.uid}}</div>
+    <div *ngIf="user.uid"> You are looged with JSON : {{user | json}}</div>
+    <img [src]="user.photoURL" *ngIf="user.uid" alt="">
+  </div>
+
+</ion-content>

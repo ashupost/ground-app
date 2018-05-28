@@ -1,0 +1,53 @@
+<!--
+  Generated template for the PicturePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>PicturePage</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="page-picture">
+
+    <button ion-button color="secondary" block (click)="doPrompt()">Show Prompt Alert</button>
+
+    <ion-list>
+        <ion-item>
+          <ion-input placeholder="Title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Location"></ion-input>
+        </ion-item>
+    </ion-list>
+    
+ 
+    <ion-list>
+        <ion-item>
+          <ion-label>Start Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+        </ion-item>
+    </ion-list>    
+
+
+
+    <ion-card *ngIf="downloadURL | async">
+        <img [src]="downloadURL | async"/>
+        <div class="card-title">Card Title</div>
+        <div class="card-subtitle">41 Listings</div>
+    </ion-card>
+    
+
+    <input type="file" (change)="uploadFile($event)" />
+    <div>{{ uploadPercent | async }}</div>
+    <pre><code>{{ (meta | async) | json }}</code></pre>
+
+
+
+
+</ion-content>
