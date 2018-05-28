@@ -5,20 +5,21 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
-import { UserDetails, UserStatus } from '../../app/sources/model/userdetails';
+import { UserDetails, UserStatus, AddressUser } from '../../app/sources/model/userdetails';
 import { GoogleLoginService } from '../../app/sources/services/google-login.service';
 import { FaceBookLoginService } from '../../app/sources/services/facebook-login.service';
 import { StoreKey } from '../../app/sources/model/store-key.enum';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { SaveUserGeolocationService } from '../../app/sources/services/save-user-geolocation.service';
 import { GMapsWapperService } from '../../app/sources/google/google.map.wapper.service';
+import { GMapsService } from '../../app/sources/google/gmap.service';
 
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [GoogleLoginService, FaceBookLoginService, GMapsWapperService]
+  providers: [GoogleLoginService, FaceBookLoginService, GMapsService]
 })
 export class LoginPage {
 
@@ -30,9 +31,14 @@ export class LoginPage {
 
 
   getAddress() {
-    this._gMapsService.getLatLan().subscribe(result => {
+    this._gMapsService.geocodeAddress().subscribe((result: AddressUser) => {
       this.__zone.run(() => {
-        console.log(result.lat());
+        console.log('dil',result);
+        if(result){
+          console.log('Available', result.country);
+        }else{
+          console.log('Not Available');
+        }
       })
     },
       error => console.log(error),
@@ -46,7 +52,7 @@ export class LoginPage {
     private afAuth: AngularFireAuth,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private _gMapsService: GMapsWapperService,
+    private _gMapsService: GMapsService,
     private _faceBookLoginService: FaceBookLoginService,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private _saveUserGeolocationService: SaveUserGeolocationService,

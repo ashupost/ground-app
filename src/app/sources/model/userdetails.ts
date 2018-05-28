@@ -36,3 +36,11 @@ export interface OnlineStatus{
     status: string,
     timestamp: firebase.firestore.FieldValue
 }
+
+export interface AddressUser {
+    street: string,
+    city: string,
+    state: string,
+    country: string,
+    country_iso_code: string
+}

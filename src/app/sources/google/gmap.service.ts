@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { of } from 'rxjs/observable/of';
 import { filter, catchError, tap, map, switchMap } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { AddressUser } from '../model/userdetails';
 
 declare var google: any;
 
@@ -12,74 +13,99 @@ declare var google: any;
 export class GMapsService {
   private geocoder: any;
 
-  constructor(private mapLoader: MapsAPILoader) {}
+  constructor(private mapLoader: MapsAPILoader) { }
 
   private initGeocoder() {
     console.log('Init geocoder!');
     this.geocoder = new google.maps.Geocoder();
   }
 
- private waitForMapsToLoad(): Observable<boolean> {
-    if(!this.geocoder) {
+  private waitForMapsToLoad(): Observable<boolean> {
+    if (!this.geocoder) {
       return fromPromise(this.mapLoader.load())
-      .pipe(tap(() => this.initGeocoder()),map(() => true));
+        .pipe(tap(() => this.initGeocoder()), map(() => true));
     }
     return of(true);
   }
 
   geocodeAddress3(): Observable<any> {
-      let location = 'Amsterdam';
-      alert('2=>'+location);
+    let location = 'Amsterdam';
+    alert('2=>' + location);
     console.log('Start geocoding!');
     return this.waitForMapsToLoad().pipe(
       // filter(loaded => loaded),
       switchMap(() => {
         return new Observable(observer => {
-          this.geocoder.geocode({'address': location}, (results, status) => {
-              console.log('status', status);
+          this.geocoder.geocode({ 'address': location }, (results, status) => {
+            console.log('status', status);
             if (status == google.maps.GeocoderStatus.OK) {
               console.log('Geocoding complete!');
               observer.next({
-                lat: results[0].geometry.location.lat(), 
+                lat: results[0].geometry.location.lat(),
                 lng: results[0].geometry.location.lng()
               });
             } else {
-                console.log('Error - ', results, ' & Status - ', status);
-                observer.next({});
+              console.log('Error - ', results, ' & Status - ', status);
+              observer.next({});
             }
             observer.complete();
           });
-        })        
+        })
       })
     )
   }
 
+private  getaddress(results: any): AddressUser {
+    let storableLocation: any = {};
+    for (let ac = 0; ac < results[0].address_components.length; ac++) {
+      let component = results[0].address_components[ac];
+
+      switch (component.types[0]) {
+        case 'locality':
+          storableLocation.city = component.long_name;
+          break;
+        case 'administrative_area_level_1':
+          storableLocation.state = component.short_name;
+          break;
+        case 'country':
+          storableLocation.country = component.long_name;
+          storableLocation.country_iso_code = component.short_name;
+          break;
+        case 'route':
+          storableLocation.street = component.long_name;
+          break;
+      }
+    };
+    return storableLocation
+  }
+ 
   geocodeAddress(): Observable<any> {
     let location = 'Amsterdam';
-    alert('2=>'+location);
-  console.log('Start geocoding!');
-  return this.waitForMapsToLoad().pipe(
-    // filter(loaded => loaded),
-    switchMap(() => {
-      return new Observable(observer => {
-        var input = '40.714224,-73.961452';
-        var latlngStr = input.split(',', 2);
-        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-        this.geocoder.geocode({'location': latlng}, (results, status) => {
+  //  alert('2=>' + location);
+    console.log('Start geocoding!');
+    return this.waitForMapsToLoad().pipe(
+      // filter(loaded => loaded),
+      switchMap(() => {
+        return new Observable(observer => {
+          var input = '52.3062812,4.977725899999996';
+          var latlngStr = input.split(',', 2);
+          var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
+          this.geocoder.geocode({ 'location': latlng }, (results, status) => {
             console.log('status', status);
-          if (status == google.maps.GeocoderStatus.OK) {
-            console.log('Geocoding complete!');
-            observer.next(results[0]);
-          } else {
+            if (status == google.maps.GeocoderStatus.OK) {
+              console.log('Geocoding complete!');
+              console.log('result1 ->', JSON.stringify(this.getaddress(results)));
+              observer.next(this.getaddress(results));
+            } else {
               console.log('Error - ', results, ' & Status - ', status);
-              observer.next({});
-          }
-          observer.complete();
-        });
-      })        
-    })
-  )
-}
+              observer.next(null);
+            }
+            observer.complete();
+          });
+        })
+      })
+    )
+  }
 
-  
+
 }

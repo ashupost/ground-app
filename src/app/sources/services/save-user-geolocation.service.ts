@@ -15,6 +15,7 @@ export class SaveUserGeolocationService {
       
     ) { }
     private stop: number = 0;
+
     setGeoCoordinate(userId: string) {
         let options = { frequency: 3000, enableHighAccuracy: true };
 
@@ -32,6 +33,8 @@ export class SaveUserGeolocationService {
                             longitude: position.coords.longitude,
                             timestamp: timestamp
                      });
+
+                     
                 }
             }
             

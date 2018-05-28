@@ -41,8 +41,6 @@ export class SpecialPage {
   startTrack(){
     this._locationTrackerService.startTracking('MK');
    
-   
-    
   }
 
   ionViewDidLoad() {
