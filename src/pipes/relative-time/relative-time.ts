@@ -10,7 +10,6 @@ export class RelativeTimePipe implements PipeTransform {
    */
   transform(value: string, args) {
     if(!value) return 'NO_TIME';
-    console.log('value',value);
     return this.timeDifference(new Date(), new Date(value));
   }
 
@@ -20,7 +19,7 @@ export class RelativeTimePipe implements PipeTransform {
    * @return {string}       
    */
   timeDifference(current, previous):string {
-    var msPerMinute = 60 * 1000;
+    var msPerMinute = 60000;
     var msPerHour = msPerMinute * 60;
     var msPerDay = msPerHour * 24;
     var msPerMonth = msPerDay * 30;
@@ -50,15 +49,12 @@ export class RelativeTimePipe implements PipeTransform {
     else if (elapsed < msPerYear) {
       return 'about ' + Math.round(elapsed/msPerMonth) + ' month ago';
     }
-
     else {
       return this.dateFormat(previous);
     }
   }
 
 dateFormat(value):string{
-        var datePipe = new DatePipe("en-US");
-        value = datePipe.transform(value, 'dd-MM-yyyy HH:mm');      
-         return value;
-        }
+         return new DatePipe("en-US").transform(value, 'dd-MM-yyyy HH:mm');
+    }
 }

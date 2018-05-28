@@ -12,13 +12,14 @@ import { StoreKey } from '../../app/sources/model/store-key.enum';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { SaveUserGeolocationService } from '../../app/sources/services/save-user-geolocation.service';
 import { GMapsWapperService } from '../../app/sources/google/google.map.wapper.service';
+import { UtilService } from '../../app/sources/services/util.service';
 
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [GoogleLoginService, FaceBookLoginService]
+  providers: [GoogleLoginService, FaceBookLoginService, UtilService]
 })
 export class LoginPage {
 
@@ -36,7 +37,7 @@ export class LoginPage {
     private afAuth: AngularFireAuth,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-  
+    private __utilService: UtilService,
     private _faceBookLoginService: FaceBookLoginService,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private _saveUserGeolocationService: SaveUserGeolocationService,
@@ -64,7 +65,7 @@ export class LoginPage {
             this._storage.set('STORAGE:LOGIN:USERINFO', this.userInformation);
           });
         });
-        //  this.doLogin();
+         this.doLogin();
       }
     });
   }
@@ -77,7 +78,10 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+  //  if(this.__utilService.getCurrentUser())
+   // this.doLogin();
   }
+
 
   doLogin() {
     this._saveUserGeolocationService.setGeoCoordinate(this.userInformation.uid);

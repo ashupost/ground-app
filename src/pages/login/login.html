@@ -21,12 +21,12 @@
  
 
   <p><button *ngIf="!user.uid" ion-button full (click)="doLogin()">Login</button></p>
-
+<!--
   <div *ngIf="(user | async) || {} as user"> 
  
     <div *ngIf="user.uid"> You are looged with UID : {{user.uid}}</div>
     <div *ngIf="user.uid"> You are looged with JSON : {{user | json}}</div>
     <img [src]="user.photoURL" *ngIf="user.uid" alt="">
   </div>
-
+-->
 </ion-content>

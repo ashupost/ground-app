@@ -43,5 +43,6 @@ export interface AddressUser {
     city: string,
     state: string,
     country: string,
-    country_iso_code: string
+    country_iso_code: string,
+    formatted_address: string
 }

@@ -60,6 +60,8 @@ private  getaddress(results: any): AddressUser {
     let storableLocation: any = {};
     for (let ac = 0; ac < results[0].address_components.length; ac++) {
       let component = results[0].address_components[ac];
+       
+      storableLocation.formatted_address = results[0].formatted_address;
 
       switch (component.types[0]) {
         case 'locality':
