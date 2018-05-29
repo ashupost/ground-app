@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-contact',
@@ -9,13 +9,14 @@ export class ContactPage {
 
   isUserLoggedIn: any =false;
   userInfo: any = {};
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams) {
 
   }
   login(){
     (<any>window).AccountKitPlugin.loginWithPhoneNumber({
       useAccessToken: true,
-     
       defaultCountryCode: "IN",
       facebookNotificationEnabled: true
     }, data => {

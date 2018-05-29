@@ -1,15 +1,15 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>
-        Facebook Phone
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-   
-    <p *ngIf="isUserLoggedIn"> Phone Number UserInfo : {{userInfo | json}} </p>
-    <button *ngIf="!isUserLoggedIn" ion-button block (click)="login()">Login </button>
-    <button *ngIf="isUserLoggedIn" ion-button block (click)="logout()">Logout </button>
-  </ion-content>
-  
+  <ion-navbar>
+    <ion-title>
+      Facebook Phone
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <p *ngIf="isUserLoggedIn"> Phone Number UserInfo : {{userInfo | json}} </p>
+  <button *ngIf="!isUserLoggedIn" ion-button block (click)="login()">Login </button>
+  <button *ngIf="isUserLoggedIn" ion-button block (click)="logout()">Logout </button>
+
+</ion-content>

@@ -53,7 +53,6 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp
-    
   ],
   imports: [
     PipesModule,
@@ -66,8 +65,9 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     AngularFirestoreModule,
     //   IonicStorageModule.forRoot({name: '__mydb1', driverOrder: ['sqlite', 'websql']}),
-    AngularFireStorageModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireStorageModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
