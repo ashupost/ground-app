@@ -10,6 +10,35 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <div *ngIf="items | async; let items; else loading">
+      <div *ngFor="let item of items">
+        <div *ngIf="myId !== (item && item.uid) ? item.uid : ''">
+          <ion-item (click)="goToMessagePage(item)">
+            <ion-thumbnail item-start>
+              <img [src]="item.photoURL" *ngIf="item.photoURL">
+              <img src="assets/imgs/photo.jpg.png" *ngIf="!item.photoURL">
+            </ion-thumbnail>
+
+            <ion-icon item-end ios="ios-disc" [color]="item.status" md="md-disc"></ion-icon>
+            <ion-icon item-end *ngIf="item.accountType === 'facebook.com'" color="primary" ios="logo-facebook" md="logo-facebook"></ion-icon>
+            <ion-icon item-end *ngIf="item.accountType === 'google.com'" color="primary" ios="logo-google" md="logo-google"></ion-icon>
+            <ion-icon item-end *ngIf="item.accountType === 'phone'" color="primary" ios="ios-phone-portrait" md="md-phone-portrait"></ion-icon>
+            
+            <h2>{{item.name}}</h2> 
+            <h3>{{item.timestamp | relativeTimePipe}}</h3>
+            <p>{{item.country}}&nbsp;{{item.state}}&nbsp;{{item.city}}&nbsp;{{item.street}}</p>
+          </ion-item>
+        </div>
+        <!--
+        {{item | json}}
+        -->
+
+      </div>
+        </div>
+  </ion-list>
+
+  <ng-template #loading>Loading&hellip;</ng-template>
 
 </ion-content>

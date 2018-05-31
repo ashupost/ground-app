@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { UserDetails, GeoCordinate } from '../model/userdetails';
+import { UserDetails, GeoCordinate, UserStatus } from '../model/userdetails';
 import { AngularFirestore, AngularFirestoreDocument, Action } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
@@ -117,6 +117,22 @@ export class GroundFirebaseStoreService {
     public getUsers(): Observable<UserDetails[]> {
         return this._angularFirestore.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
+            query = query.orderBy('timestamp', 'desc').limit(300);
+            return query;
+        }).snapshotChanges(['added', 'removed', 'modified'])
+            .pipe()
+            .map(actions => actions.map(a => {
+                const data = a.payload.doc.data() as UserDetails;
+                //const id = a.payload.doc.id; // this is firebase generated id.
+                data.docId = a.payload.doc.id;
+                return { ...data };
+            }));
+    }
+
+    public getUsersOnline(): Observable<UserDetails[]> {
+        return this._angularFirestore.collection<UserDetails>('users', ref => {
+            let query: firebase.firestore.Query = ref;
+            query = query.where('status','==',UserStatus.ONLINE);
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
         }).snapshotChanges(['added', 'removed', 'modified'])
