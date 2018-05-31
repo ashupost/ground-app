@@ -7,19 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>PicturePage</ion-title>
+    <ion-title>Setting</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content class="page-picture">
-
+   
 
     <ion-list>
+
         <ion-item>
-          <ion-label>Gender</ion-label>
-          <ion-select (ionChange)="setUserData($event,'gender')">
+            <ion-label color="primary" stacked>Display Name</ion-label>
+            <ion-input placeholder="Change Display Name" [(ngModel)]="name"
+            (ionChange)="setUserDataName()"></ion-input>
+        </ion-item>
+     
+        <ion-item>
+          <ion-label color="primary" stacked>Gender</ion-label>
+          <ion-select placeholder="Change Display Name" (ionChange)="setUserData($event,'gender')">
             <ion-option value="Male">Male</ion-option>
             <ion-option value="Female">Female</ion-option>
             <ion-option value="Other">Other</ion-option>
@@ -27,28 +34,65 @@
         </ion-item>
 
         <ion-item>
-            <ion-label>Date of Birth1</ion-label>
-            <ion-datetime #changeTime displayFormat="MMM DD YYYY"
+            <ion-label color="primary" stacked>Date of Birth</ion-label>
+           <ion-datetime placeholder="Change Display Name" #changeTime displayFormat="MMM DD YYYY"
                                        [(ngModel)]="changeDate"
                                        (ionChange)="handleChangeDate(changeDate)">
             </ion-datetime>
         </ion-item>
+     
+        <ion-item>
+            <ion-label color="primary" stacked>Interest In</ion-label>
+            <ion-select placeholder="Change Display Name"
+            (ionChange)="setSettingData($event,'interest_in')">
+              <ion-option value="Male">Male</ion-option>
+              <ion-option value="Female">Female</ion-option>
+              <ion-option value="Other">Other</ion-option>
+            </ion-select>
+       </ion-item>
+
+ 
+      <ion-item>
+      \      <ion-label color="primary" stacked>Set Range in Year {{ structure | json}}</ion-label>
+            <ion-range dualKnobs="true" pin="true" (ionChange)="setSettingAgeRange()"
+            placeholder="Change Display Name"
+             [(ngModel)]="structure" color="dark" > 
+              <ion-icon range-left small name="brush"></ion-icon>
+              <ion-icon range-right name="brush"></ion-icon>
+            </ion-range>
+      </ion-item>
+
+
+      <ion-item>
+          <ion-label color="primary" stacked>About me</ion-label>
+          <ion-textarea placeholder="Enter a description"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+          <ion-label color="primary" stacked>Phone Number</ion-label>
+          <ion-input placeholder="Phone Number" [(ngModel)]="name"
+          (ionChange)="setUserDataName()"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label color="primary" stacked>Email</ion-label>
+          <ion-input placeholder="Email" [(ngModel)]="name"
+          (ionChange)="setUserDataName()"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label color="primary" stacked>Education</ion-label>
+          <ion-input placeholder="Change Display Name" [(ngModel)]="name"
+          (ionChange)="setUserDataName()"></ion-input>
+      </ion-item>
+
+  
       
     </ion-list>
 
+     
    
-    <button ion-button color="secondary" block (click)="doPrompt()">Show Prompt Alert</button>
-
-    <ion-list>
-        <ion-item>
-          <ion-input placeholder="Title1" (focusout)="setUserData($event,'gender')"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input placeholder="Location"></ion-input>
-        </ion-item>
-    </ion-list>
-    
- 
+  
 
 
 

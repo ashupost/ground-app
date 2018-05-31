@@ -18,19 +18,46 @@ export class GroundFirebaseStoreService {
         private zone: NgZone
     ) { }
 
+
+
+
+    setSettingData(userId: string, value: string, param: string) {
+        let data = {};
+        let timestamp = firebase.firestore.FieldValue.serverTimestamp();
+        switch (param) {
+            case 'interest_in':
+                data = { interest_in: value, timestamp: timestamp };
+                break;
+            case 'age_lower':
+                data = { age_lower: value, timestamp: timestamp };
+                break;
+            case 'age_upper':
+                data = { age_upper: value, timestamp: timestamp };
+                break;
+    
+            default:
+                data = { param: value, timestamp: timestamp };
+        }
+        this._angularFirestore.collection<UserDetails>('settings').doc(userId).set(data, { merge: true });
+    }
+
+
     setUserData(userId: string, value: string, param: string) {
-        // alert(userId);
-        let data= {};
+        let data = {};
         let timestamp = firebase.firestore.FieldValue.serverTimestamp();
         switch (param) {
             case 'gender':
                 data = { gender: value, timestamp: timestamp };
                 break;
             case 'dob':
-               data = { dob: value, timestamp: timestamp };
+                data = { dob: value, timestamp: timestamp };
                 break;
+            case 'name':
+                data = { name: value, timestamp: timestamp };
+                break;
+
             default:
-               data = { param: value, timestamp: timestamp };
+                data = { param: value, timestamp: timestamp };
         }
         this._angularFirestore.collection<UserDetails>('users').doc(userId).set(data, { merge: true });
     }
