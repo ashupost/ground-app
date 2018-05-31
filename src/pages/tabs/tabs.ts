@@ -10,6 +10,9 @@ export class TabsPage {
  
   tab1Root: any = 'Tab1Page';
   tab2Root: any = 'Tab2Page';
+  tab3Root: any = 'Tab3Page';
+
+  Tab3Page
   myIndex: number;
  
   constructor(navParams: NavParams) {
