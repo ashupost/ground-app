@@ -18,6 +18,23 @@ export class GroundFirebaseStoreService {
         private zone: NgZone
     ) { }
 
+    setUserData(userId: string, value: string, param: string) {
+        // alert(userId);
+        let data= {};
+        let timestamp = firebase.firestore.FieldValue.serverTimestamp();
+        switch (param) {
+            case 'gender':
+                data = { gender: value, timestamp: timestamp };
+                break;
+            case 'dob':
+               data = { dob: value, timestamp: timestamp };
+                break;
+            default:
+               data = { param: value, timestamp: timestamp };
+        }
+        this._angularFirestore.collection<UserDetails>('users').doc(userId).set(data, { merge: true });
+    }
+
     updatePhotoURL(userId: string, value: string) {
         let timestamp = firebase.firestore.FieldValue.serverTimestamp();
         this._angularFirestore.collection<UserDetails>('users')
@@ -61,7 +78,7 @@ export class GroundFirebaseStoreService {
                 .snapshotChanges().map(actions => {
                     return actions.map(a => {
                         const data = a.payload.doc.data();
-                       // console.log('data', JSON.stringify(data));
+                        // console.log('data', JSON.stringify(data));
                         data.uid = a.payload.doc.id;
                         //const id = a.payload.doc.id; // this is firebase generated id.
                         return { ...data };
@@ -132,7 +149,7 @@ export class GroundFirebaseStoreService {
     public getUsersOnline(): Observable<UserDetails[]> {
         return this._angularFirestore.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
-            query = query.where('status','==',UserStatus.ONLINE);
+            query = query.where('status', '==', UserStatus.ONLINE);
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
         }).snapshotChanges(['added', 'removed', 'modified'])

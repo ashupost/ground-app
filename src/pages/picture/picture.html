@@ -15,11 +15,33 @@
 
 <ion-content class="page-picture">
 
+
+    <ion-list>
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select (ionChange)="setUserData($event,'gender')">
+            <ion-option value="Male">Male</ion-option>
+            <ion-option value="Female">Female</ion-option>
+            <ion-option value="Other">Other</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Date of Birth1</ion-label>
+            <ion-datetime #changeTime displayFormat="MMM DD YYYY"
+                                       [(ngModel)]="changeDate"
+                                       (ionChange)="handleChangeDate(changeDate)">
+            </ion-datetime>
+        </ion-item>
+      
+    </ion-list>
+
+   
     <button ion-button color="secondary" block (click)="doPrompt()">Show Prompt Alert</button>
 
     <ion-list>
         <ion-item>
-          <ion-input placeholder="Title"></ion-input>
+          <ion-input placeholder="Title1" (focusout)="setUserData($event,'gender')"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input placeholder="Location"></ion-input>
@@ -27,12 +49,6 @@
     </ion-list>
     
  
-    <ion-list>
-        <ion-item>
-          <ion-label>Start Date</ion-label>
-          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
-        </ion-item>
-    </ion-list>    
 
 
 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, DateTime } from 'ionic-angular';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
@@ -7,6 +7,8 @@ import { GroundFirebaseStoreService } from '../../app/sources/services/ground-fi
 import { AngularFireAuth } from 'angularfire2/auth';
 import { GroundStorageService } from '../../app/sources/services/ground-storage.service';
 import { UserDetails } from '../../app/sources/model/userdetails';
+import * as firebase from 'firebase/app';
+import { DatePipe } from '@angular/common';
 
 
 @IonicPage()
@@ -20,26 +22,46 @@ export class PicturePage {
   downloadURL: Observable<string | null>;
   profileUrl: Observable<string | null>;
   meta: Observable<any>;
-
-  public event = {
-    month: '1990-02-19',
-    timeStarts: '07:43',
-    timeEnds: '1990-02-20'
-  }
+  user: Observable<firebase.User>;
+  currentUserId: string;
   
+  @ViewChild('changeTime') changeDateTime: DateTime;
+
+  changeDate = '';
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController,
     private _groundStorageService: GroundStorageService,
- 
     private afAuth: AngularFireAuth,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
+    this.user = this.afAuth.authState;
+    this.afAuth.authState.subscribe(res => {
+        if (res && res.uid) {
+          this.currentUserId = res.uid;
+        }
+    });  
+
+    let datePipe = new DatePipe('en-US');
+    this.changeDate = datePipe.transform(new Date(), 'yyyy-MM-dd');
     
+  }
+
+  handleChangeDate(changeDate: string) {
+    this.changeDate = changeDate;
+    this.changeDateTime._text = changeDate;
+    alert(this.changeDateTime._text);
+    this._groundFirebaseStoreService.setUserData(this.currentUserId, this.changeDateTime._text, 'dob')
+}
+
+  setUserData($event: any, param: string){
+    console.log('$event', $event);
+    this._groundFirebaseStoreService.setUserData(this.currentUserId, $event, param);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PicturePage');
+    this.changeDateTime.updateText = () => {};
   }
 
   doPrompt() {
