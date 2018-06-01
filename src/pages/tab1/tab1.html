@@ -25,14 +25,18 @@
             <ion-icon item-end *ngIf="item.accountType === 'facebook.com'" color="primary" ios="logo-facebook" md="logo-facebook"></ion-icon>
             <ion-icon item-end *ngIf="item.accountType === 'google.com'" color="primary" ios="logo-google" md="logo-google"></ion-icon>
             <ion-icon item-end *ngIf="item.accountType === 'phone'" color="primary" ios="ios-phone-portrait" md="md-phone-portrait"></ion-icon>
-            
-            <h2>{{item.name}}</h2> 
+            <ion-icon item-end *ngIf="item.gender === 'Male'" ios="ios-man" md="md-man"></ion-icon>
+            <ion-icon item-end *ngIf="item.gender === 'Female'" ios="ios-woman" md="md-woman"></ion-icon>
+
+
+            <h2>{{item.name}} <span *ngIf="item.dob">, {{item.dob | agePipe}}</span></h2> 
             <h3>{{item.timestamp | relativeTimePipe}}</h3>
             <p>{{item.country}}&nbsp;{{item.state}}&nbsp;{{item.city}}&nbsp;{{item.street}}</p>
           </ion-item>
         </div>
-        
+        <!--
         {{item | json}}
+        -->
         
 
       </div>
