@@ -26,9 +26,9 @@ export class AuthServiceStatusService {
             .subscribe(user => {
                 if (user) {
                     this.userId = user.uid
-                   // this.updateOnConnect(); // working
+                    this.updateOnConnect(); // working
                     this.rtdb_and_local_fs_presence();
-                    //this.updateOnIdle()   // <-- new line added
+                    this.updateOnIdle()   // <-- new line added
                    
                 }
             });
