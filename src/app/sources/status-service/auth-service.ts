@@ -26,9 +26,9 @@ export class AuthServiceStatusService {
             .subscribe(user => {
                 if (user) {
                     this.userId = user.uid
-                    this.updateOnConnect(); // working
+                   // this.updateOnConnect(); // working
                     this.rtdb_and_local_fs_presence();
-                    this.updateOnIdle()   // <-- new line added
+                    //this.updateOnIdle()   // <-- new line added
                    
                 }
             });
@@ -36,8 +36,6 @@ export class AuthServiceStatusService {
 
 
     rtdb_and_local_fs_presence() {
-        // [START rtdb_and_local_fs_presence]
-        // [START_EXCLUDE]
         var uid = firebase.auth().currentUser.uid;
         var userStatusDatabaseRef = firebase.database().ref('/status/' + uid);
 
@@ -50,9 +48,7 @@ export class AuthServiceStatusService {
             status: UserStatus.IDLE,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
         };
-
-        // [END_EXCLUDE]
-        var userStatusFirestoreRef = firebase.firestore().doc('users/' + uid);
+       var userStatusFirestoreRef = firebase.firestore().doc('users/' + uid);
 
         // Firestore uses a different server timestamp value, so we'll 
         // create two more constants for Firestore state.

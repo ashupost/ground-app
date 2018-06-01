@@ -28,9 +28,10 @@ export class MessagesPage {
   distance: number;
   otherTimestamp: firebase.firestore.FieldValue;
 
-  constructor(public _navCtrl: NavController, public _navParams: NavParams, private _distanceService: DistanceService,
+  constructor(public _navCtrl: NavController, 
+    public _navParams: NavParams, 
+    private _distanceService: DistanceService,
     private _groundDatabaseStatusService: GroundDatabaseStatusService,
-
     private _groundFirebaseStoreService: GroundFirebaseStoreService) {
     this.toUserDetails = this._navParams.get('toUserDetails'); // other user
     this._groundDatabaseStatusService.getUserByid(this.toUserDetails.uid);
