@@ -14,100 +14,87 @@
 
 
 <ion-content class="page-picture">
-   
 
-    <ion-list>
 
-        <ion-item>
-            <ion-label color="primary" stacked>Display Name</ion-label>
-            <ion-input placeholder="Change Display Name" [(ngModel)]="name"
-            (ionChange)="setUserDataName()"></ion-input>
-        </ion-item>
-     
-        <ion-item>
-          <ion-label color="primary" stacked>Gender</ion-label>
-          <ion-select placeholder="Change Display Name" (ionChange)="setUserData($event,'gender')">
-            <ion-option value="Male">Male</ion-option>
-            <ion-option value="Female">Female</ion-option>
-            <ion-option value="Other">Other</ion-option>
-          </ion-select>
-        </ion-item>
+  <ion-list>
 
-        <ion-item>
-            <ion-label color="primary" stacked>Date of Birth</ion-label>
-           <ion-datetime placeholder="Change Display Name" #changeTime displayFormat="MMM DD YYYY"
-                                       [(ngModel)]="changeDate"
-                                       (ionChange)="handleChangeDate(changeDate)">
-            </ion-datetime>
-        </ion-item>
-     
-        <ion-item>
-            <ion-label color="primary" stacked>Interest In</ion-label>
-            <ion-select placeholder="Change Display Name"
-            (ionChange)="setSettingData($event,'interest_in')">
-              <ion-option value="Male">Male</ion-option>
-              <ion-option value="Female">Female</ion-option>
-              <ion-option value="Other">Other</ion-option>
-            </ion-select>
-       </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Display Name</ion-label>
+      <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
+    </ion-item>
 
- 
-      <ion-item>
-      \      <ion-label color="primary" stacked>Set Range in Year {{ structure | json}}</ion-label>
-            <ion-range dualKnobs="true" pin="true" (ionChange)="setSettingAgeRange()"
-            placeholder="Change Display Name"
-             [(ngModel)]="structure" color="dark" > 
-              <ion-icon range-left small name="brush"></ion-icon>
-              <ion-icon range-right name="brush"></ion-icon>
-            </ion-range>
+    <ion-item>
+      <ion-label color="primary" stacked>Gender</ion-label>
+      <ion-select placeholder="Change Display Name" (ionChange)="setUserData($event,'gender')">
+        <ion-option value="Male">Male</ion-option>
+        <ion-option value="Female">Female</ion-option>
+        <ion-option value="Other">Other</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Date of Birth</ion-label>
+      <ion-datetime placeholder="Change Display Name" #changeTime displayFormat="MMM DD YYYY" [(ngModel)]="changeDate" (ionChange)="handleChangeDate(changeDate)">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Interest In</ion-label>
+      <ion-select placeholder="Change Display Name" (ionChange)="setSettingData($event,'interest_in')">
+        <ion-option value="Male">Male</ion-option>
+        <ion-option value="Female">Female</ion-option>
+        <ion-option value="Other">Other</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      \
+      <ion-label color="primary" stacked>Set Range in Year {{ structure | json}}</ion-label>
+      <ion-range dualKnobs="true" pin="true" (ionChange)="setSettingAgeRange()" placeholder="Change Display Name" [(ngModel)]="structure"
+        color="dark">
+        <ion-icon range-left small name="brush"></ion-icon>
+        <ion-icon range-right name="brush"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label color="primary" stacked>About me</ion-label>
+      <ion-textarea placeholder="Enter a description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Phone Number</ion-label>
+      <ion-input placeholder="Phone Number" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Email</ion-label>
+      <ion-input placeholder="Email" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Education</ion-label>
+      <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <label>{{label}}</label>
+        <input type="file" (change)="uploadFile($event)" id="file-input" style="opacity: 0" #fileInp>
+        <button ion-button (click)="onClick()">Upload</button>
       </ion-item>
-
-
-      <ion-item>
-          <ion-label color="primary" stacked>About me</ion-label>
-          <ion-textarea placeholder="Enter a description"></ion-textarea>
-      </ion-item>
-
-      <ion-item>
-          <ion-label color="primary" stacked>Phone Number</ion-label>
-          <ion-input placeholder="Phone Number" [(ngModel)]="name"
-          (ionChange)="setUserDataName()"></ion-input>
-      </ion-item>
-
-      <ion-item>
-          <ion-label color="primary" stacked>Email</ion-label>
-          <ion-input placeholder="Email" [(ngModel)]="name"
-          (ionChange)="setUserDataName()"></ion-input>
-      </ion-item>
-
-      <ion-item>
-          <ion-label color="primary" stacked>Education</ion-label>
-          <ion-input placeholder="Change Display Name" [(ngModel)]="name"
-          (ionChange)="setUserDataName()"></ion-input>
-      </ion-item>
-
-  
-      
     </ion-list>
 
-     
-   
+  <ion-card *ngIf="downloadURL | async">
+    <img [src]="downloadURL | async" />
+    <div class="card-title">Card Title</div>
+    <div class="card-subtitle">41 Listings</div>
+  </ion-card>
+
+  <div *ngIf="(uploadPercent | async) !== null">{{ uploadPercent | async }}</div>
+  <pre><code>{{ (meta | async) | json }}</code></pre>
+
+
   
-
-
-
-    <ion-card *ngIf="downloadURL | async">
-        <img [src]="downloadURL | async"/>
-        <div class="card-title">Card Title</div>
-        <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-    
-
-    <input type="file" (change)="uploadFile($event)" />
-    <div>{{ uploadPercent | async }}</div>
-    <pre><code>{{ (meta | async) | json }}</code></pre>
-
-
-
-
 </ion-content>

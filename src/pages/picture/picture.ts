@@ -7,7 +7,7 @@ import { GroundFirebaseStoreService } from '../../app/sources/services/ground-fi
 import { AngularFireAuth } from 'angularfire2/auth';
 import { GroundStorageService } from '../../app/sources/services/ground-storage.service';
 import { UserDetails } from '../../app/sources/model/userdetails';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 
 
@@ -24,13 +24,13 @@ export class PicturePage {
   meta: Observable<any>;
   user: Observable<firebase.User>;
   currentUserId: string;
-  name: string; 
+  name: string;
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
 
   @ViewChild('changeTime') changeDateTime: DateTime;
+  //currentUserDeatils: Observable<UserDetails>;
 
- 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController,
     private _groundStorageService: GroundStorageService,
@@ -38,9 +38,12 @@ export class PicturePage {
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
     this.user = this.afAuth.authState;
+    
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
         this.currentUserId = res.uid;
+       // this.currentUserDeatils = this._groundFirebaseStoreService.getUserByid(firebase.auth().currentUser.uid);
+   
       }
     });
 
@@ -55,7 +58,7 @@ export class PicturePage {
     this._groundFirebaseStoreService.setUserData(this.currentUserId, this.changeDateTime._text, 'dob')
   }
 
-  setSettingAgeRange(){
+  setSettingAgeRange() {
     this._groundFirebaseStoreService.setSettingData(this.currentUserId, this.structure.lower, 'age_lower');
     this._groundFirebaseStoreService.setSettingData(this.currentUserId, this.structure.upper, 'age_upper');
 
@@ -66,9 +69,9 @@ export class PicturePage {
     this._groundFirebaseStoreService.setSettingData(this.currentUserId, $event, param);
   }
 
- 
+
   setUserDataName() {
-  
+
     this._groundFirebaseStoreService.setUserData(this.currentUserId, this.name, 'name');
   }
 
@@ -81,25 +84,25 @@ export class PicturePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PicturePage');
     this.changeDateTime.updateText = () => { };
+      
   }
 
- 
-  uploadFile(event) {
-  
-      const file = event.target.files[0];
-      const filePath = this.currentUserId;
-      const ref = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, file);
-      this.uploadPercent = task.percentageChanges();
-      // get notified when the download URL is available
-      task.snapshotChanges().pipe(finalize(() => {
-        this.downloadURL = ref.getDownloadURL();
-        this.downloadURL.subscribe((data) => {
-          this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, data);
-        });
 
-      })).subscribe();
-      this.meta = ref.getMetadata(); 
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = this.currentUserId; // uid
+    const ref = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(finalize(() => {
+      this.downloadURL = ref.getDownloadURL();
+      this.downloadURL.subscribe((data) => {
+        this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, data);
+      });
+
+    })).subscribe();
+    this.meta = ref.getMetadata();
   }
 
 }

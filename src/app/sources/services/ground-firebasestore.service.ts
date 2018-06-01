@@ -72,6 +72,7 @@ export class GroundFirebaseStoreService {
             });
     }
 
+  
     getLatestGeoCordinidateByUsers(userid: string): Observable<GeoCordinate[]> {
 
         return this._angularFirestore.collection<UserDetails>('users')
@@ -139,8 +140,8 @@ export class GroundFirebaseStoreService {
         });
     }
 
-    getUserByid(id: string) {
-        return this._angularFirestore.collection<UserDetails>('users')
+    getUserByid(id: string): Observable<UserDetails> {
+        return this._angularFirestore.collection<any>('users')
             .doc<UserDetails>(id).valueChanges();
 
     }
