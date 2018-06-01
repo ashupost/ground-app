@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content>
+    
   <ion-list>
     <div *ngIf="items | async; let items; else loading">
       <div *ngFor="let item of items">
@@ -38,6 +39,9 @@
         </div>
   </ion-list>
 
-  <ng-template #loading>Loading&hellip;</ng-template>
+  
+  <ng-template #loading>
+    <ion-spinner class="spinnerCenter" name="crescent"></ion-spinner>
+  </ng-template>
 
 </ion-content>
