@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { MyExampleDirective } from './my-example/my-example';
+import { HighLightDirective } from './high-light/high-light';
 @NgModule({
-	declarations: [MyExampleDirective],
+	declarations: [MyExampleDirective,
+    HighLightDirective],
 	imports: [],
-	exports: [MyExampleDirective]
+	exports: [MyExampleDirective,
+    HighLightDirective]
 })
 export class DirectivesModule {}

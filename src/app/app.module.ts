@@ -40,6 +40,7 @@ import { LoginPageModule } from '../pages/login/login.module';
 import { MessagesPageModule } from '../pages/messages/messages.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { GMapsService } from './sources/google/gmap.service';
+import { DirectivesModule } from '../directives/directives.module';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8",
@@ -56,6 +57,7 @@ export const firebaseConfig = {
   ],
   imports: [
     PipesModule,
+    DirectivesModule,
     MessagesPageModule,
     BrowserModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' }),
