@@ -29,8 +29,8 @@ export class PicturePage {
   changeDate = '';
 
   @ViewChild('changeTime') changeDateTime: DateTime;
-  //currentUserDeatils: Observable<UserDetails>;
-
+  //currentUserPhotoURL: Observable<string | null>;
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController,
     private _groundStorageService: GroundStorageService,
@@ -40,11 +40,7 @@ export class PicturePage {
     this.user = this.afAuth.authState;
     
     this.afAuth.authState.subscribe(res => {
-      if (res && res.uid) {
-        this.currentUserId = res.uid;
-       // this.currentUserDeatils = this._groundFirebaseStoreService.getUserByid(firebase.auth().currentUser.uid);
-   
-      }
+      if (res && res.uid) { this.currentUserId = res.uid; }
     });
 
     let datePipe = new DatePipe('en-US');
@@ -100,7 +96,6 @@ export class PicturePage {
       this.downloadURL.subscribe((data) => {
         this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, data);
       });
-
     })).subscribe();
     this.meta = ref.getMetadata();
   }

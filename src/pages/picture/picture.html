@@ -92,9 +92,10 @@
     <div class="card-subtitle">41 Listings</div>
   </ion-card>
 
-  <div *ngIf="(uploadPercent | async) !== null">{{ uploadPercent | async }}</div>
+
+  <div>{{ uploadPercent | async }}</div>
   <pre><code>{{ (meta | async) | json }}</code></pre>
 
-
+  
   
 </ion-content>
