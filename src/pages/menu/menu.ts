@@ -23,14 +23,14 @@ export class MenuPage {
   @ViewChild(Nav) nav: Nav;
  
   pages: PageInterface[] = [
-    { title: 'Tab 1', pageName: 'TabsPage', tabComponent: 'Tab1Page', index: 0, icon: 'home' },
-    { title: 'Tab 2', pageName: 'TabsPage', tabComponent: 'Tab2Page', index: 1, icon: 'contacts' },
-    { title: 'Tab 3', pageName: 'TabsPage', tabComponent: 'Tab3Page', index: 2, icon: 'contacts' },
+    { title: 'Global User', pageName: 'TabsPage', tabComponent: 'Tab1Page', index: 0, icon: 'people' },
+    { title: 'Tab 2', pageName: 'TabsPage', tabComponent: 'Tab2Page', index: 1, icon: 'chatbubbles' },
+    { title: 'Online User', pageName: 'TabsPage', tabComponent: 'Tab3Page', index: 2, icon: 'contact' },
   
     { title: 'Special', pageName: 'SpecialPage', icon: 'shuffle' },
     { title: 'ContactPage', pageName: 'ContactPage', icon: 'image' },
     { title: 'Users', pageName: 'UsersPage', icon: 'man' },
-    { title: 'PicturePage', pageName: 'PicturePage', icon: 'image' },
+    { title: 'PicturePage', pageName: 'PicturePage', icon: 'settings' },
     { title: 'AboutPage', pageName: 'AboutPage', icon: 'image' },
     { title: 'PersonalPage', pageName: 'PersonalPage', icon: 'image' }
    
