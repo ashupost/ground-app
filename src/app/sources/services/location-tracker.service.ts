@@ -11,20 +11,20 @@ export class LocationTrackerService {
     public lat: number = 0;
     public lng: number = 0;
 
-    constructor(public zone: NgZone,
-        public geolocation: Geolocation) {
+    constructor(public __zone: NgZone,
+        public __geolocation: Geolocation) {
     }
 
-    startTracking(storeKey?: string | null) {
+    startTracking($storeKey?: string | null) {
         let options = {
             frequency: 3000,
             enableHighAccuracy: true
         };
 
-        this.watch = this.geolocation.watchPosition(options)
+        this.watch = this.__geolocation.watchPosition(options)
             .filter((p: any) => p.code === undefined)
             .subscribe((position: Geoposition) => {
-                this.zone.run(() => {
+                this.__zone.run(() => {
                     this.lat = position.coords.latitude;
                     this.lng = position.coords.longitude;
                 });

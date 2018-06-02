@@ -11,8 +11,8 @@ import * as firebase from 'firebase/app';
 @Injectable()
 
 export class GroundFirebaseStoreService {
-    constructor(private zone: NgZone,
-        private _angularFirestore: AngularFirestore
+    constructor(private __zone: NgZone,
+        private __afs: AngularFirestore
     ) { }
 
     getPhotoUserData(userId: string): Observable<any[]> {
@@ -20,7 +20,7 @@ export class GroundFirebaseStoreService {
         return Observable.combineLatest(
             timestamp$
         ).switchMap(([timestamp]) =>
-            this._angularFirestore.collection<any>('photos')
+            this.__afs.collection<any>('photos')
                 .doc(userId)
                 .collection('photo', ref => {
                     let query: firebase.firestore.Query = ref;
@@ -37,10 +37,10 @@ export class GroundFirebaseStoreService {
     }
 
     setPhotoUserData(userId: string, value: PictureDetail) {
-        this.zone.run(() => {
+        this.__zone.run(() => {
             let data = JSON.parse(JSON.stringify(value));
             data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            this._angularFirestore.collection<PictureDetail>('photos')
+            this.__afs.collection<PictureDetail>('photos')
                 .doc(userId).collection('photo').add(data);
         });
     }
@@ -61,8 +61,8 @@ export class GroundFirebaseStoreService {
             default:
                 data = { param: value, timestamp: timestamp };
         }
-        this.zone.run(() => {
-            this._angularFirestore.collection<UserDetails>('settings').doc(userId).set(data, { merge: true });
+        this.__zone.run(() => {
+            this.__afs.collection<UserDetails>('settings').doc(userId).set(data, { merge: true });
         });
     }
 
@@ -84,15 +84,15 @@ export class GroundFirebaseStoreService {
             default:
                 data = { param: value, timestamp: timestamp };
         }
-        this.zone.run(() => {
-            this._angularFirestore.collection<UserDetails>('users').doc(userId).set(data, { merge: true });
+        this.__zone.run(() => {
+            this.__afs.collection<UserDetails>('users').doc(userId).set(data, { merge: true });
         });
     }
 
     updatePhotoURL(userId: string, value: string) {
         let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-        this.zone.run(() => {
-            this._angularFirestore.collection<UserDetails>('users')
+        this.__zone.run(() => {
+            this.__afs.collection<UserDetails>('users')
                 .doc(userId)
                 .update({
                     photoURL: value,
@@ -103,7 +103,7 @@ export class GroundFirebaseStoreService {
 
 
     getLatestGeoCordinidateByUsers(userid: string): Observable<GeoCordinate[]> {
-        return this._angularFirestore.collection<UserDetails>('users')
+        return this.__afs.collection<UserDetails>('users')
             .doc(userid).collection('geolocation', ref => {
                 let query: firebase.firestore.Query = ref;
                 query = query.orderBy('timestamp', 'desc').limit(1);
@@ -125,7 +125,7 @@ export class GroundFirebaseStoreService {
         return Observable.combineLatest(
             timestamp$
         ).switchMap(([timestamp]) =>
-            this._angularFirestore.collection<UserDetails>('users')
+            this.__afs.collection<UserDetails>('users')
                 .doc(myId).collection('messages').doc(otherId).collection('chat', ref => {
                     let query: firebase.firestore.Query = ref;
                     query = query.orderBy('timestamp', 'asc');
@@ -146,10 +146,10 @@ export class GroundFirebaseStoreService {
 
 
     sendMessage(toId: string, fromId: string, newMessage: string) {
-        this.zone.run(() => {
+        this.__zone.run(() => {
             // const merge: firebase.firestore.SetOptions = { merge: false };
             let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            this._angularFirestore.collection<UserDetails>('users')
+            this.__afs.collection<UserDetails>('users')
                 .doc(toId).collection('messages').doc(fromId).collection('chat')
                 .add({
                     toId: toId,
@@ -157,7 +157,7 @@ export class GroundFirebaseStoreService {
                     message: newMessage,
                     timestamp: timestamp
                 });
-            this._angularFirestore.collection<UserDetails>('users')
+            this.__afs.collection<UserDetails>('users')
                 .doc(fromId).collection('messages').doc(toId).collection('chat')
                 .add({
                     toId: toId,
@@ -169,20 +169,20 @@ export class GroundFirebaseStoreService {
     }
 
     getUserByid(id: string): Observable<UserDetails> {
-        return this._angularFirestore.collection<any>('users')
+        return this.__afs.collection<any>('users')
             .doc<UserDetails>(id).valueChanges();
 
     }
 
     addUsers(userDetails: UserDetails) {
-        this.zone.run(() => {
-            this._angularFirestore.collection<UserDetails>('users')
+        this.__zone.run(() => {
+            this.__afs.collection<UserDetails>('users')
                 .doc(userDetails.uid).snapshotChanges()
                 .subscribe((value: Action<firebase.firestore.DocumentSnapshot>) => {
                     if (value.payload.exists !== true) {
                         let data = JSON.parse(JSON.stringify(userDetails));
                         data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
-                        this._angularFirestore.collection<UserDetails>('users')
+                        this.__afs.collection<UserDetails>('users')
                             .doc(userDetails.uid).set(data);
                     }
                 });
@@ -190,7 +190,7 @@ export class GroundFirebaseStoreService {
     }
 
     public getUsers(): Observable<UserDetails[]> {
-        return this._angularFirestore.collection<UserDetails>('users', ref => {
+        return this.__afs.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
@@ -205,7 +205,7 @@ export class GroundFirebaseStoreService {
     }
 
     public getUsersOnline(): Observable<UserDetails[]> {
-        return this._angularFirestore.collection<UserDetails>('users', ref => {
+        return this.__afs.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
             query = query.where('status', '==', UserStatus.ONLINE);
             query = query.orderBy('timestamp', 'desc').limit(300);

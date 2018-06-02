@@ -10,8 +10,8 @@ import { GMapsService } from '../google/gmap.service';
 @Injectable()
 export class SaveUserGeolocationService {
     private watch: any;
-    constructor(private _angularFirestore: AngularFirestore,
-        private geolocation: Geolocation,
+    constructor(private __afs: AngularFirestore,
+        private __geolocation: Geolocation,
         private __zone: NgZone,
         private __gMapsService: GMapsService
 
@@ -21,14 +21,14 @@ export class SaveUserGeolocationService {
     setGeoCoordinate(userId: string) {
         let options = { frequency: 3000, enableHighAccuracy: true };
 
-        this.watch = this.geolocation.watchPosition(options)
+        this.watch = this.__geolocation.watchPosition(options)
             .filter((p: any) => p.code === undefined)
             .subscribe((position: Geoposition) => {
                 this.__zone.run(() => {
                     if (this.stop === 0) {
                         this.stop = position.coords.latitude;
                         let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-                        this._angularFirestore.collection<UserDetails>('users')
+                        this.__afs.collection<UserDetails>('users')
                             .doc(userId).collection('geolocation')
                             .add({
                                 latitude: position.coords.latitude,
@@ -50,7 +50,7 @@ export class SaveUserGeolocationService {
             this.__zone.run(() => {
                 console.log('dil', result);
                 if (result) {
-                    this._angularFirestore.collection<UserDetails>('users')
+                    this.__afs.collection<UserDetails>('users')
                         .doc(userId).set(result, { merge: true })
                 } else {
                     console.log('Not Available');
