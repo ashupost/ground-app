@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GeoCordinate } from '../model/userdetails';
 import * as firebase from 'firebase/app';
-import { Footer, Platform } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 
 
 @Injectable()

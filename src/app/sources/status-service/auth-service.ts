@@ -7,8 +7,7 @@ import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/throttleTime';
-import { UserStatus, UserDetails } from '../model/userdetails';
-import { Action } from 'angularfire2/firestore';
+import { UserStatus } from '../model/userdetails';
 
 
 @Injectable()
@@ -29,7 +28,7 @@ export class AuthServiceStatusService {
                     this.updateOnConnect(); // working
                     this.rtdb_and_local_fs_presence();
                     this.updateOnIdle()   // <-- new line added
-                   
+
                 }
             });
     }
@@ -41,44 +40,31 @@ export class AuthServiceStatusService {
 
         var isOfflineForDatabase = {
             status: UserStatus.OFFLINE,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            timestamp: firebase.database.ServerValue.TIMESTAMP
         };
 
         var isOnlineForDatabase = {
             status: UserStatus.IDLE,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-        };
-       var userStatusFirestoreRef = firebase.firestore().doc('users/' + uid);
-
-        // Firestore uses a different server timestamp value, so we'll 
-        // create two more constants for Firestore state.
-        var isOfflineForFirestore = {
-            status: UserStatus.OFFLINE,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            timestamp: firebase.database.ServerValue.TIMESTAMP
         };
 
-        var isOnlineForFirestore = {
-            status: UserStatus.IDLE,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        };
-
-        firebase.database().ref('.info/connected').on('value', function(snapshot) {
+        firebase.database().ref('.info/connected').on('value', function (snapshot) {
             if (snapshot.val() == false) {
                 // Instead of simply returning, we'll also set Firestore's state
                 // to 'offline'. This ensures that our Firestore cache is aware
                 // of the switch to 'offline.'
-              //  userStatusFirestoreRef.update(isOfflineForFirestore);
+                //  userStatusFirestoreRef.update(isOfflineForFirestore);
                 return;
             };
-    
-            userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+
+            userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function () {
                 userStatusDatabaseRef.set(isOnlineForDatabase);
-    
+
                 // We'll also add Firestore set here for when we come online.
-               //  userStatusFirestoreRef.update(isOnlineForFirestore);
+                //  userStatusFirestoreRef.update(isOnlineForFirestore);
             });
         });
-        }
+    }
 
 
     get timestamp() {

@@ -16,11 +16,6 @@ import { AgmCoreModule } from '@agm/core';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-import { MessagesPage } from '../pages/messages/messages';
 
 import { GeolocationService } from './sources/services/geolocation.service';
 import { GroundFirebaseStoreService } from './sources/services/ground-firebasestore.service';
@@ -35,15 +30,12 @@ import { NotificationService } from './sources/notification.service';
 import { UtilService } from './sources/services/util.service';
 import { GoogleLoginService } from './sources/services/google-login.service';
 import { FaceBookLoginService } from './sources/services/facebook-login.service';
-import { LoginPage } from '../pages/login/login';
-import { LoginPageModule } from '../pages/login/login.module';
 import { MessagesPageModule } from '../pages/messages/messages.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { GMapsService } from './sources/google/gmap.service';
 import { DirectivesModule } from '../directives/directives.module';
 import { CameraService } from './sources/camera/camera.service';
 import { Camera } from '@ionic-native/camera';
-import { DisplayUserPage } from '../pages/display-user/display-user';
 import { DisplayUserPageModule } from '../pages/display-user/display-user.module';
 
 export const firebaseConfig = {
@@ -74,12 +66,12 @@ export const firebaseConfig = {
     //   IonicStorageModule.forRoot({name: '__mydb1', driverOrder: ['sqlite', 'websql']}),
     IonicStorageModule.forRoot(),
     AngularFireStorageModule
-    
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
-   ],
+  ],
   providers: [
     StatusBar,
     SplashScreen,

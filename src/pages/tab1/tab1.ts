@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Nav, NavOptions, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Nav, App } from 'ionic-angular';
 
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { UserDetails } from '../../app/sources/model/userdetails';

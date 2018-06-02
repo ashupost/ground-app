@@ -1,11 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
-import { Observable } from 'rxjs/Observable';
-import { Events, Content } from 'ionic-angular';
+import {  Content } from 'ionic-angular';
 import firebase from 'firebase';
 import { GroundDatabaseStatusService } from '../../app/sources/status-service/ground-database-status.service';
-import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
 import { UserDetails, GeoCordinate } from '../../app/sources/model/userdetails';
 import { DistanceService } from '../../app/sources/services/distance.service';
 import { DisplayUserPage } from '../display-user/display-user';

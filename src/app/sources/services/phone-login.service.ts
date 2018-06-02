@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Platform, AlertController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Injectable()
 export class PhoneLoginService {
 
-  constructor(private _platform: Platform, 
-    private alertCtrl: AlertController, 
-    private afAuth: AngularFireAuth) {  
+  constructor(
+    private alertCtrl: AlertController,
+    private afAuth: AngularFireAuth) {
 
   }
 

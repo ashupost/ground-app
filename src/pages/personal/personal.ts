@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { tap } from 'rxjs/operators';
-//import { NotificationService } from '../../app/sources/notification.service';
+import { IonicPage } from 'ionic-angular';
 import { MouseEvent } from '@agm/core';
 import { LocationTrackerService } from '../../app/sources/services/location-tracker.service';
 
@@ -11,40 +9,37 @@ import { LocationTrackerService } from '../../app/sources/services/location-trac
   selector: 'page-personal',
   templateUrl: 'personal.html'
 })
-export class PersonalPage implements OnInit, OnDestroy  {
+export class PersonalPage implements OnInit, OnDestroy {
   zoom: number = 8;
   lat: number;
   lng: number;
-  //message;
   ngOnInit(): void {
     console.log('ngOnInit');
     this.getUserLocation();
-    //this._notificationService.getPermission()
-    //this._notificationService.receiveMessage()
-    //this.message = this._notificationService.currentMessage
+
   }
   private getUserLocation() {
-    /// locate the user
+
     if (navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition(position => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
       });
     }
   }
- 
+
 
   ngOnDestroy() {
   }
 
-  constructor(private locationTrackerService: LocationTrackerService){
-   // this.getUserLocation();
-        this.locationTrackerService.startTracking();
-        this.lat=  this.locationTrackerService.lat;
-        this.lng= this.locationTrackerService.lng;
-    
+  constructor(private locationTrackerService: LocationTrackerService) {
+    // this.getUserLocation();
+    this.locationTrackerService.startTracking();
+    this.lat = this.locationTrackerService.lat;
+    this.lng = this.locationTrackerService.lng;
+
   }
-  
+
 
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
@@ -57,26 +52,26 @@ export class PersonalPage implements OnInit, OnDestroy  {
       draggable: true
     });
   }
-  
+
   markers: marker[] = [
-	  {
-		  lat: 51.673858,
-		  lng: 7.815982,
-		  label: 'A',
-		  draggable: true
-	  },
-	  {
-		  lat: 51.373858,
-		  lng: 7.215982,
-		  label: 'B',
-		  draggable: false
-	  },
-	  {
-		  lat: 51.723858,
-		  lng: 7.895982,
-		  label: 'C',
-		  draggable: true
-	  }
+    {
+      lat: 51.673858,
+      lng: 7.815982,
+      label: 'A',
+      draggable: true
+    },
+    {
+      lat: 51.373858,
+      lng: 7.215982,
+      label: 'B',
+      draggable: false
+    },
+    {
+      lat: 51.723858,
+      lng: 7.895982,
+      label: 'C',
+      draggable: true
+    }
   ];
 
   ionViewDidLoad() {
@@ -106,8 +101,8 @@ export class PersonalPage implements OnInit, OnDestroy  {
 
 // just an interface for type safety.
 interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-	draggable: boolean;
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
 }
