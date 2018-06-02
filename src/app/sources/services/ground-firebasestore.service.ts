@@ -58,7 +58,6 @@ export class GroundFirebaseStoreService {
             case 'age_upper':
                 data = { age_upper: value, timestamp: timestamp };
                 break;
-
             default:
                 data = { param: value, timestamp: timestamp };
         }

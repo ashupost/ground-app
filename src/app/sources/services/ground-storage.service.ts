@@ -13,12 +13,12 @@ export class GroundStorageService {
         });
     }
 
-    setStorage(key: string, value: any){
+    setStorage(key: string, value: any) {
         this._storage.ready().then(() => {
             this._storage.set(key, value);
-         } );
-        
+        });
+
     }
 
-   
+
 }
