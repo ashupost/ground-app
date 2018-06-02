@@ -9,8 +9,16 @@
       </span>
       {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }}
     </ion-title>
+
+    
+    <ion-buttons end>
+        <button ion-button icon-only color="royal" (click)= "moveToOtherUserdetails()">
+          <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 <ion-content>
   <!--
       https://github.com/HsuanXyz/ionic3-chat/blob/master/src/pages/chat/chat.scss

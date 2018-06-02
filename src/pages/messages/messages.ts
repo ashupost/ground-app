@@ -120,4 +120,8 @@ export class MessagesPage {
     console.log('ionViewDidLoad MessagesPage');
   }
 
+  moveToOtherUserdetails(){
+    alert('This is moveTo OtherUserdetails=>' + JSON.stringify(this.toUserDetails.uid));
+  }
+
 }
