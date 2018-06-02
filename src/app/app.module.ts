@@ -41,6 +41,8 @@ import { MessagesPageModule } from '../pages/messages/messages.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { GMapsService } from './sources/google/gmap.service';
 import { DirectivesModule } from '../directives/directives.module';
+import { CameraService } from './sources/camera/camera.service';
+import { Camera } from '@ionic-native/camera';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8",
@@ -99,7 +101,9 @@ export const firebaseConfig = {
     GroundDatabaseStatusService,
     NotificationService,
     UtilService,
-    GMapsService
+    GMapsService,
+    CameraService,
+    Camera
   ]
 })
 export class AppModule { }

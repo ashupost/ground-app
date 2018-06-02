@@ -9,12 +9,16 @@ import { GroundStorageService } from '../../app/sources/services/ground-storage.
 import { UserDetails } from '../../app/sources/model/userdetails';
 import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
+import { CameraService } from '../../app/sources/camera/camera.service';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { UtilService } from '../../app/sources/services/util.service';
+
 
 
 @IonicPage()
 @Component({
   selector: 'page-picture',
-  templateUrl: 'picture.html',
+  templateUrl: 'picture.html'
 })
 export class PicturePage {
 
@@ -27,18 +31,23 @@ export class PicturePage {
   name: string;
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
+  base64Image: any;
+  isCordova: boolean;
 
   @ViewChild('changeTime') changeDateTime: DateTime;
   //currentUserPhotoURL: Observable<string | null>;
- 
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController,
+    private __cameraService: CameraService,
+    private __utilService: UtilService,
     private _groundStorageService: GroundStorageService,
     private afAuth: AngularFireAuth,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
+    this.isCordova = this.__utilService.isCordova();
     this.user = this.afAuth.authState;
-    
+
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) { this.currentUserId = res.uid; }
     });
@@ -80,7 +89,21 @@ export class PicturePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PicturePage');
     this.changeDateTime.updateText = () => { };
-      
+
+  }
+
+  takePhoto($event: any | null) {
+    if (this.isCordova) {
+      this.__cameraService.takePhoto().then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64:
+        this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => { console.log(err); });
+    } else {
+      this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
+        this.base64Image = data;
+      });
+    }
   }
 
 

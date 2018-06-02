@@ -77,11 +77,30 @@
     </ion-item>
 
     <ion-item>
+      <label>{{label}}</label>
+      <input type="file" (change)="uploadFile($event)" id="file-input" style="opacity: 0" #fileInp1>
+      <button ion-button (click)="onClick()">Upload</button>
+    </ion-item>
+
+
+    <div *ngIf="!isCordova">
+      <ion-item>
         <label>{{label}}</label>
-        <input type="file" (change)="uploadFile($event)" id="file-input" style="opacity: 0" #fileInp>
-        <button ion-button (click)="onClick()">Upload</button>
+        <input type="file" (change)="takePhoto($event)" id="file-input" style="opacity: 0" #fileInp1>
+        <button ion-button (click)="onClick()">Upload File</button>
       </ion-item>
-    </ion-list>
+    </div>
+
+    <div *ngIf="isCordova">
+      <button ion-button color="dark" (click)="takePhoto()">Take Photo</button>
+    </div>
+    
+    <ion-item>
+      <img [src]="base64Image" *ngIf="base64Image" />
+    </ion-item>
+  
+  
+  </ion-list>
 
   <ion-card *ngIf="downloadURL | async">
     <img [src]="downloadURL | async" />
@@ -93,6 +112,12 @@
   <div>{{ uploadPercent | async }}</div>
   <pre><code>{{ (meta | async) | json }}</code></pre>
 
+ 
+ 
+
+
   
-  
+
+
+
 </ion-content>

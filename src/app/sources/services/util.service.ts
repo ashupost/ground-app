@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { GeoCordinate } from '../model/userdetails';
 import * as firebase from 'firebase/app';
-import { Footer } from 'ionic-angular';
+import { Footer, Platform } from 'ionic-angular';
 
 
 @Injectable()
 export class UtilService {
-  constructor() { }
+  constructor(private __platform: Platform) { }
 
 
   firebaseConneted() {
@@ -22,6 +22,11 @@ export class UtilService {
 
   getCurrentUser(): firebase.User {
     return firebase.auth().currentUser
+  }
+
+  isCordova() {
+    if (this.__platform.is('cordova')) return true;
+    else false;
   }
 
 
