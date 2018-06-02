@@ -43,6 +43,8 @@ import { GMapsService } from './sources/google/gmap.service';
 import { DirectivesModule } from '../directives/directives.module';
 import { CameraService } from './sources/camera/camera.service';
 import { Camera } from '@ionic-native/camera';
+import { DisplayUserPage } from '../pages/display-user/display-user';
+import { DisplayUserPageModule } from '../pages/display-user/display-user.module';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8",
@@ -61,6 +63,7 @@ export const firebaseConfig = {
     PipesModule,
     DirectivesModule,
     MessagesPageModule,
+    DisplayUserPageModule,
     BrowserModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' }),
     IonicModule.forRoot(MyApp),
@@ -75,10 +78,8 @@ export const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    MessagesPage
-    
-  ],
+    MyApp
+   ],
   providers: [
     StatusBar,
     SplashScreen,

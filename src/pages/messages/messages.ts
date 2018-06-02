@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { Observable } from 'rxjs/Observable';
 import { Events, Content } from 'ionic-angular';
@@ -8,6 +8,7 @@ import { GroundDatabaseStatusService } from '../../app/sources/status-service/gr
 import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
 import { UserDetails, GeoCordinate } from '../../app/sources/model/userdetails';
 import { DistanceService } from '../../app/sources/services/distance.service';
+import { DisplayUserPage } from '../display-user/display-user';
 
 @IonicPage()
 @Component({
@@ -29,6 +30,7 @@ export class MessagesPage {
   otherTimestamp: firebase.firestore.FieldValue;
 
   constructor(public _navCtrl: NavController, 
+    private _app: App,
     public _navParams: NavParams, 
     private _distanceService: DistanceService,
     private _groundDatabaseStatusService: GroundDatabaseStatusService,
@@ -121,7 +123,10 @@ export class MessagesPage {
   }
 
   moveToOtherUserdetails(){
-    alert('This is moveTo OtherUserdetails=>' + JSON.stringify(this.toUserDetails.uid));
+   // alert('This is moveTo OtherUserdetails=>' + JSON.stringify(this.toUserDetails.uid));
+   let data = { userUID: this.toUserDetails.uid};
+     
+    this._app.getRootNav().push(DisplayUserPage, data);
   }
 
 }
