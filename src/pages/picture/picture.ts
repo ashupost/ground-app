@@ -5,11 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { UserDetails, PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
+import { PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
 import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { CameraService } from '../../app/sources/camera/camera.service';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UtilService } from '../../app/sources/services/util.service';
 
 

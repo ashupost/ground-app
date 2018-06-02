@@ -9,7 +9,7 @@ export class CameraService {
     constructor(private __camera: Camera) { }
     takePhoto() {
         const options: CameraOptions = {
-            quality: 70,
+            quality: 50,
             destinationType: this.__camera.DestinationType.DATA_URL,
             encodingType: this.__camera.EncodingType.JPEG,
             mediaType: this.__camera.MediaType.PICTURE
