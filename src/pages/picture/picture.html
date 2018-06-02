@@ -13,15 +13,13 @@
 <ion-content class="page-picture">
 
   <ion-slides loop="true" pager="true">
-    <div *ngFor="let photo of photos">
-      <ion-slide>
+      <ion-slide *ngFor="let photo of photos">
         <ion-card>
           <img [src]="photo.data" />
-          <div class="card-title">{{photo.timestamp}}</div>
-          <div class="card-subtitle">{{photo.timestamp}}</div>
+          <div class="card-title"></div>
+          <div class="card-subtitle"></div>
         </ion-card>
       </ion-slide>
-    </div>
   </ion-slides>
 
 
