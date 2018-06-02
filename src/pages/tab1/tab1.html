@@ -10,16 +10,14 @@
 </ion-header>
 
 <ion-content>
-
   <ion-list>
     <div *ngIf="items | async; let items; else loading">
       <div *ngFor="let item of items">
-
         <div *ngIf="myId !== (item && item.uid) ? item.uid : ''">
           <ion-item-sliding>
             <ion-item (click)="goToMessagePage(item)">
               <ion-thumbnail item-start>
-                <img *ngIf="item.photoURL"  [src]="item.photoURL" >
+                <img *ngIf="item.photoURL" [src]="item.photoURL">
                 <img *ngIf="!item.photoURL" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
               </ion-thumbnail>
               <ion-icon item-end ios="ios-disc" [color]="item.status" md="md-disc"></ion-icon>
@@ -28,7 +26,9 @@
               <ion-icon item-end *ngIf="item.accountType === 'phone'" color="primary" ios="ios-phone-portrait" md="md-phone-portrait"></ion-icon>
               <ion-icon item-end *ngIf="item.gender === 'Male'" ios="ios-man" md="md-man"></ion-icon>
               <ion-icon item-end *ngIf="item.gender === 'Female'" ios="ios-woman" md="md-woman"></ion-icon>
-              <h2>{{item.name}} <span *ngIf="item.dob">, {{item.dob | agePipe}}</span></h2>
+              <h2>{{item.name}}
+                <span *ngIf="item.dob">, {{item.dob | agePipe}}</span>
+              </h2>
               <h3>{{item.timestamp | relativeTimePipe}}</h3>
               <p>{{item.country}}&nbsp;{{item.state}}&nbsp;{{item.city}}&nbsp;{{item.street}}</p>
             </ion-item>
@@ -45,10 +45,7 @@
       </div>
     </div>
   </ion-list>
-
-
   <ng-template #loading>
     <ion-spinner class="spinnerCenter" name="crescent"></ion-spinner>
   </ng-template>
-
 </ion-content>
