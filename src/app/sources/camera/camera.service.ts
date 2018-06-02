@@ -18,7 +18,7 @@ export class CameraService {
        return  this.__camera.getPicture(options);
     }
 
-    getFileBase64(file) {
+    getFileBase64(file) : Promise<{}>{
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
