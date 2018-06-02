@@ -12,9 +12,20 @@
 
 <ion-content class="page-picture">
 
+  <ion-slides loop="true" pager="true">
+    <div *ngFor="let photo of photos">
+      <ion-slide>
+        <ion-card>
+          <img [src]="photo.data" />
+          <div class="card-title">{{photo.timestamp}}</div>
+          <div class="card-subtitle">{{photo.timestamp}}</div>
+        </ion-card>
+      </ion-slide>
+    </div>
+  </ion-slides>
+
 
   <ion-list>
-
     <ion-item>
       <ion-label color="primary" stacked>Display Name</ion-label>
       <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
@@ -46,7 +57,6 @@
 
 
     <ion-item>
-      \
       <ion-label color="primary" stacked>Set Range in Year {{ structure | json}}</ion-label>
       <ion-range dualKnobs="true" pin="true" (ionChange)="setSettingAgeRange()" placeholder="Change Display Name" [(ngModel)]="structure"
         color="dark">
@@ -54,7 +64,6 @@
         <ion-icon range-right name="brush"></ion-icon>
       </ion-range>
     </ion-item>
-
 
     <ion-item>
       <ion-label color="primary" stacked>About me</ion-label>
@@ -76,13 +85,13 @@
       <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
     </ion-item>
 
-    
-   
+    <!--
     <ion-item>
       <label>{{label}}</label>
       <input type="file" (change)="uploadFile($event)" id="file-input" style="opacity: 0" #fileInp1>
       <button ion-button (click)="onClick()">Upload</button>
     </ion-item>
+    -->
 
     <div *ngIf="!isCordova">
       <ion-item>
@@ -103,31 +112,9 @@
         <div class="card-subtitle">41 Listings</div>
       </ion-card>
     </ion-item>
-  
+
   </ion-list>
-
-  <ion-slides>
-      <div  *ngFor="let photo of photos">
-        <ion-slide>
-            <ion-card>
-            <img [src]="photo.data" />
-            <div class="card-title">{{photo.timestamp}}</div>
-            <div class="card-subtitle">{{photo.timestamp}}</div>
-          </ion-card>
-        </ion-slide>
-      </div>
-  </ion-slides>
-
-
-   
-  
-  
-        
-  
-       
-   
-
-
+  <!--
   <ion-card *ngIf="downloadURL | async">
     <img [src]="downloadURL | async" />
     <div class="card-title">Card Title</div>
@@ -135,6 +122,5 @@
   </ion-card>
   <div>{{ uploadPercent | async }}</div>
   <pre><code>{{ (meta | async) | json }}</code></pre>
-
-
+  -->
 </ion-content>
