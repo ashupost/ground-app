@@ -1,6 +1,21 @@
 
 import firebase from 'firebase';
 
+
+export interface PictureDetail {
+    photoType: PhotoStatus,
+    dataType: string,
+    data: string,
+    timestamp: firebase.firestore.FieldValue
+}
+
+export enum PhotoStatus {
+    MAIN = "MAIN",
+    NOT_MAIN = "NOT_MAIN",
+}
+
+
+
 export class UserDetails {
     docId: string;
     uid: string;

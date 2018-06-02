@@ -100,7 +100,7 @@ export class PicturePage {
         this.base64Image = 'data:image/jpeg;base64,' + imageData;
       }, (err) => { console.log(err); });
     } else {
-      this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
+        this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
         this.base64Image = data;
       });
     }
