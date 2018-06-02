@@ -18,7 +18,7 @@
           <ion-item (click)="goToMessagePage(item)">
             <ion-thumbnail item-start>
               <img [src]="item.photoURL" *ngIf="item.photoURL">
-              <img src="assets/imgs/photo.jpg.png" *ngIf="!item.photoURL">
+              <img *ngIf="!item.photoURL"src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg" >
             </ion-thumbnail>
 
             <ion-icon item-end ios="ios-disc" [color]="item.status" md="md-disc"></ion-icon>
@@ -34,9 +34,9 @@
             <p>{{item.country}}&nbsp;{{item.state}}&nbsp;{{item.city}}&nbsp;{{item.street}}</p>
           </ion-item>
         </div>
-        <!--
+        
         {{item | json}}
-        -->
+        
         
 
       </div>
