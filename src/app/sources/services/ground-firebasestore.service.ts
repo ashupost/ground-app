@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { UserDetails, GeoCordinate, UserStatus } from '../model/userdetails';
+import { UserDetails, GeoCordinate, UserStatus, PictureDetail } from '../model/userdetails';
 import { AngularFirestore, Action } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
@@ -9,10 +9,41 @@ import 'firebase/firestore';
 import * as firebase from 'firebase/app';
 
 @Injectable()
+
 export class GroundFirebaseStoreService {
     constructor(private zone: NgZone,
         private _angularFirestore: AngularFirestore
     ) { }
+
+    getPhotoUserData(userId: string): Observable<any[]> {
+        let timestamp$ = new BehaviorSubject(null);
+        return Observable.combineLatest(
+            timestamp$
+        ).switchMap(([timestamp]) =>
+            this._angularFirestore.collection<any>('photos')
+                .doc(userId)
+                .collection('photo', ref => {
+                    let query: firebase.firestore.Query = ref;
+                    query = query.orderBy('timestamp', 'asc');
+                    return query;
+                })
+                .snapshotChanges().map(actions => {
+                    return actions.map(a => {
+                        const data = a.payload.doc.data();
+                        data.uid = a.payload.doc.id;
+                        return { ...data };
+                    });
+                }));
+    }
+
+    setPhotoUserData(userId: string, value: PictureDetail) {
+        this.zone.run(() => {
+            let data = JSON.parse(JSON.stringify(value));
+            data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+            this._angularFirestore.collection<PictureDetail>('photos')
+                .doc(userId).collection('photo').add(data);
+        });
+    }
 
     setSettingData(userId: string, value: string, param: string) {
         let data = {};

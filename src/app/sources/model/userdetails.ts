@@ -2,11 +2,12 @@
 import firebase from 'firebase';
 
 
-export interface PictureDetail {
-    photoType: PhotoStatus,
-    dataType: string,
-    data: string,
-    timestamp: firebase.firestore.FieldValue
+export class PictureDetail {
+    photoType: PhotoStatus;
+    dataType: string;
+    data: any;
+    timestamp: firebase.firestore.FieldValue;
+    
 }
 
 export enum PhotoStatus {

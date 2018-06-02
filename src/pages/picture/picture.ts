@@ -5,8 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { GroundStorageService } from '../../app/sources/services/ground-storage.service';
-import { UserDetails } from '../../app/sources/model/userdetails';
+import { UserDetails, PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
 import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { CameraService } from '../../app/sources/camera/camera.service';
@@ -33,6 +32,9 @@ export class PicturePage {
   changeDate = '';
   base64Image: any;
   isCordova: boolean;
+  // photos: Observable<any[]>;
+  photos: any = [];
+
 
   @ViewChild('changeTime') changeDateTime: DateTime;
   //currentUserPhotoURL: Observable<string | null>;
@@ -41,7 +43,6 @@ export class PicturePage {
     public alertCtrl: AlertController,
     private __cameraService: CameraService,
     private __utilService: UtilService,
-    private _groundStorageService: GroundStorageService,
     private afAuth: AngularFireAuth,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
@@ -49,11 +50,15 @@ export class PicturePage {
     this.user = this.afAuth.authState;
 
     this.afAuth.authState.subscribe(res => {
-      if (res && res.uid) { this.currentUserId = res.uid; }
+      if (res && res.uid) {
+        this.currentUserId = res.uid;
+
+      }
     });
 
     let datePipe = new DatePipe('en-US');
     this.changeDate = datePipe.transform(new Date(), 'yyyy-MM-dd');
+
 
   }
 
@@ -89,7 +94,13 @@ export class PicturePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PicturePage');
     this.changeDateTime.updateText = () => { };
-
+    this.afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
+            this.photos = data;
+          });
+      }
+    });
   }
 
   takePhoto($event: any | null) {
@@ -98,10 +109,21 @@ export class PicturePage {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64:
         this.base64Image = 'data:image/jpeg;base64,' + imageData;
+        let value = new PictureDetail();
+        value.data = this.base64Image;
+        value.dataType = 'string';
+        value.photoType = PhotoStatus.MAIN;
+        this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
+
       }, (err) => { console.log(err); });
     } else {
-        this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
+      this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
         this.base64Image = data;
+        let value = new PictureDetail();
+        value.data = data;
+        value.dataType = 'string';
+        value.photoType = PhotoStatus.MAIN;
+        this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
       });
     }
   }

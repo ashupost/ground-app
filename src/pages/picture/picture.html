@@ -76,6 +76,8 @@
       <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
     </ion-item>
 
+    
+   
     <ion-item>
       <label>{{label}}</label>
       <input type="file" (change)="uploadFile($event)" id="file-input" style="opacity: 0" #fileInp1>
@@ -102,7 +104,31 @@
       </ion-card>
     </ion-item>
 
+   
   </ion-list>
+
+  <ion-slides>
+      <div  *ngFor="let photo of photos">
+        <ion-slide>
+            <ion-card>
+            <img [src]="photo.data" />
+            <div class="card-title">Card Title</div>
+            <div class="card-subtitle">41 Listings</div>
+     
+          </ion-card>
+        </ion-slide>
+      </div>
+  </ion-slides>
+
+
+   
+  
+  
+        
+  
+       
+   
+
 
   <ion-card *ngIf="downloadURL | async">
     <img [src]="downloadURL | async" />

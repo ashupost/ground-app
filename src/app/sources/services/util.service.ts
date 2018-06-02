@@ -8,7 +8,6 @@ import { Footer, Platform } from 'ionic-angular';
 export class UtilService {
   constructor(private __platform: Platform) { }
 
-
   firebaseConneted() {
     var connectedRef = firebase.database().ref(".info/connected");
     connectedRef.on("value", (snap) => {
@@ -28,7 +27,5 @@ export class UtilService {
     if (this.__platform.is('cordova')) return true;
     else false;
   }
-
-
 }
 
