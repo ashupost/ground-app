@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
-import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
-import {  Content } from 'ionic-angular';
+import { Content } from 'ionic-angular';
 import firebase from 'firebase';
+import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { GroundDatabaseStatusService } from '../../app/sources/status-service/ground-database-status.service';
 import { UserDetails, GeoCordinate } from '../../app/sources/model/userdetails';
 import { DistanceService } from '../../app/sources/services/distance.service';
@@ -14,25 +14,28 @@ import { DisplayUserPage } from '../display-user/display-user';
   templateUrl: 'messages.html',
 })
 export class MessagesPage {
-  // toId: string;
-  fromId: string;
+
+  private fromId: string;
   user: any = {};
   messages: any = [];
-  newMessage: string = '';
-  @ViewChild(Content) content: Content;
-  @ViewChild('chat_input') messageInput: ElementRef;
+  private newMessage: string = '';
   editorMsg = '';
-  showEmojiPicker = false;
-  toUserDetails: UserDetails;
+  private showEmojiPicker = false;
+  private toUserDetails: UserDetails;
   distance: number;
   otherTimestamp: firebase.firestore.FieldValue;
 
-  constructor(public _navCtrl: NavController, 
+  @ViewChild(Content) content: Content;
+  @ViewChild('chat_input') messageInput: ElementRef;
+
+  constructor(
     private _app: App,
-    public _navParams: NavParams, 
+    public _navParams: NavParams,
+    public _navCtrl: NavController,
     private _distanceService: DistanceService,
     private _groundDatabaseStatusService: GroundDatabaseStatusService,
-    private _groundFirebaseStoreService: GroundFirebaseStoreService) {
+    private _groundFirebaseStoreService: GroundFirebaseStoreService) 
+    {
     this.toUserDetails = this._navParams.get('toUserDetails'); // other user
     this._groundDatabaseStatusService.getUserByid(this.toUserDetails.uid);
     this.fromId = this._navParams.get('user').uid; // this myself
@@ -50,17 +53,14 @@ export class MessagesPage {
           this.distance = this._distanceService.getDistanceByGeoCordinate(point1, point2);
         });
     });
-
   }
 
   ionViewWillLoad() {
-    // this.toUserDetails = this._navParams.get('toUserDetails');
     this._groundFirebaseStoreService.getMessages(this.fromId, this.toUserDetails.uid)
       .subscribe(res => {
         this.messages = res;
         this.scrollToBottom();
       });
-
   }
 
   sendMessage() {
@@ -70,7 +70,6 @@ export class MessagesPage {
   }
 
   removeItem(id: string) {
-
   }
 
   onFocus() {
@@ -101,7 +100,7 @@ export class MessagesPage {
     textarea.scrollTop = textarea.scrollHeight;
   }
 
-  scrollToBottom() {
+  private scrollToBottom() {
     setTimeout(() => {
       if (this.content.scrollToBottom) {
         if (this.content) {
@@ -120,11 +119,8 @@ export class MessagesPage {
     console.log('ionViewDidLoad MessagesPage');
   }
 
-  moveToOtherUserdetails(){
-   // alert('This is moveTo OtherUserdetails=>' + JSON.stringify(this.toUserDetails.uid));
-   let data = { userUID: this.toUserDetails.uid};
-     
-    this._app.getRootNav().push(DisplayUserPage, data);
+  moveToOtherUserdetails() {
+    this._app.getRootNav().push(DisplayUserPage, { userUID: this.toUserDetails.uid });
   }
 
 }

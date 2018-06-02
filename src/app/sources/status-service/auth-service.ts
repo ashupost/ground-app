@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -9,32 +9,30 @@ import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/throttleTime';
 import { UserStatus } from '../model/userdetails';
 
-
 @Injectable()
 export class AuthServiceStatusService {
 
-    userId: string; // current user uid
-    mouseEvents: Subscription
-    timer: Subscription;
-    constructor(private afAuth: AngularFireAuth,
-        private _angularFirestore: AngularFirestore,
-        private db: AngularFireDatabase) {
+    private userId: string; // current user uid
+    private mouseEvents: Subscription
+    private timer: Subscription;
 
-        /// Subscribe to auth state in firebase
-        this.afAuth.authState
+    constructor(
+        private __zone: NgZone,
+        private __afAuth: AngularFireAuth,
+        private __afs: AngularFirestore,
+        private __db: AngularFireDatabase) {
+        this.__afAuth.authState
             .subscribe(user => {
                 if (user) {
                     this.userId = user.uid
                     this.updateOnConnect(); // working
                     this.rtdb_and_local_fs_presence();
                     this.updateOnIdle()   // <-- new line added
-
                 }
             });
     }
 
-
-    rtdb_and_local_fs_presence() {
+    private rtdb_and_local_fs_presence() {
         var uid = firebase.auth().currentUser.uid;
         var userStatusDatabaseRef = firebase.database().ref('/status/' + uid);
 
@@ -66,8 +64,7 @@ export class AuthServiceStatusService {
         });
     }
 
-
-    get timestamp() {
+    private get timestamp() {
         return firebase.firestore.FieldValue.serverTimestamp();
 
     }
@@ -82,43 +79,37 @@ export class AuthServiceStatusService {
 
     }
 
-
-    /// Helper to perform the update in Firebase
     private updateStatus(status: string) { // working
-        console.log('status =>', status);
         if (!status) return;
         if (!this.userId) return
-        this._angularFirestore.collection('users').doc(this.userId)
-            .update({ status: status, timestamp: this.timestamp });
+        this.__zone.run(() => {
+            this.__afs.collection('users').doc(this.userId)
+                .update({ status: status, timestamp: this.timestamp });
+        });
     }
 
-
     private updateOnConnect() { // working
-        return this.db.object('.info/connected').snapshotChanges()
+        return this.__db.object('.info/connected').snapshotChanges()
             .subscribe(connected => {
                 let status = connected.payload.val ? UserStatus.ONLINE : UserStatus.OFFLINE;
                 this.updateStatus(status)
             });
     }
 
-
     /// Reset the timer
     private resetTimer() {
         if (this.timer) this.timer.unsubscribe()
-
         this.timer = Observable.timer(5000)
             .subscribe(() => {
                 this.updateStatus(UserStatus.DISCONNECT)
             });
-
     }
 
     /// Make sure to close these subscriptions when no longer needed.
-    signOut() {
+    public signOut() {
         this.updateStatus(UserStatus.SIGNOUT);
         this.mouseEvents.unsubscribe();
         this.timer.unsubscribe();
-        this.afAuth.auth.signOut();
+        this.__afAuth.auth.signOut();
     }
-
 }

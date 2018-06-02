@@ -48,7 +48,6 @@ export class SaveUserGeolocationService {
    private getAddress(userId: string,  position: Geoposition) {
         this.__gMapsService.geocodeAddress(position).subscribe((result: AddressUser) => {
             this.__zone.run(() => {
-                console.log('dil', result);
                 if (result) {
                     this.__afs.collection<UserDetails>('users')
                         .doc(userId).set(result, { merge: true })
