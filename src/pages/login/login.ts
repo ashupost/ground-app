@@ -26,28 +26,22 @@ export class LoginPage {
   user: Observable<firebase.User>;
   userInformation: UserDetails = new UserDetails();
 
-  //lat: any;
-
-
-
-  
   constructor(
-    private _storage: Storage,
-    public navCtrl: NavController,
-    private afAuth: AngularFireAuth,
-    private alertCtrl: AlertController,
-    private modalCtrl: ModalController,
+    private __zone: NgZone,
+    private __storage: Storage,
+    private __navCtrl: NavController,
+    private __afAuth: AngularFireAuth,
+    private __alertCtrl: AlertController,
+    private __modalCtrl: ModalController,
     private __utilService: UtilService,
-    private _faceBookLoginService: FaceBookLoginService,
-    private _groundFirebaseStoreService: GroundFirebaseStoreService,
-    private _saveUserGeolocationService: SaveUserGeolocationService,
-    private _googleLoginService: GoogleLoginService,
-    private __zone: NgZone
+    private __faceBookLoginService: FaceBookLoginService,
+    private __groundFirebaseStoreService: GroundFirebaseStoreService,
+    private __saveUserGeolocationService: SaveUserGeolocationService,
+    private __googleLoginService: GoogleLoginService
   ) {
-    this.user = this.afAuth.authState;
-    this.afAuth.authState.subscribe(res => {
+    this.user = this.__afAuth.authState;
+    this.__afAuth.authState.subscribe(res => {
       if (res && res.uid) {
-        // this.userInformation = this.convert(res);
         this.userInformation.uid = res.uid;
         this.userInformation.email = res.email;
         this.userInformation.photoURL = res.photoURL;
@@ -59,10 +53,11 @@ export class LoginPage {
           this.userInformation.name = res.phoneNumber;
         }
 
-        this._groundFirebaseStoreService.addUsers(this.userInformation);
-        this._storage.ready().then(() => {
-          this._storage.get('STORAGE:LOGIN:USERINFO').then((loginUserDetails: UserDetails) => {
-            this._storage.set('STORAGE:LOGIN:USERINFO', this.userInformation);
+        this.__groundFirebaseStoreService.addUsers(this.userInformation);
+
+        this.__storage.ready().then(() => {
+          this.__storage.get('STORAGE:LOGIN:USERINFO').then((loginUserDetails: UserDetails) => {
+            this.__storage.set('STORAGE:LOGIN:USERINFO', this.userInformation);
           });
         });
          this.doLogin();
@@ -72,31 +67,28 @@ export class LoginPage {
 
 
   public phonelogin() {
-    const data = { message: 'hello world' };
-    const modalPage = this.modalCtrl.create('ModalPage', data);
+    const modalPage = this.__modalCtrl.create('ModalPage', { message: 'test' });
     modalPage.present();
   }
-
   ionViewDidLoad() {
-  //  if(this.__utilService.getCurrentUser())
-   // this.doLogin();
   }
-
-
   doLogin() {
-    this._saveUserGeolocationService.setGeoCoordinate(this.userInformation.uid);
-    this.navCtrl.setRoot('MenuPage');
-  }
+    this.__afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        this.__saveUserGeolocationService.setGeoCoordinate(res.uid);
+        this.__navCtrl.setRoot('MenuPage');
+      }
+    });
+ }
 
   facebookLogin() {
-    this._faceBookLoginService.facebookLogin();
+    this.__faceBookLoginService.facebookLogin();
   }
   googlePlusLogin() {
-
-    this._googleLoginService.googlePlusLogin();
+    this.__googleLoginService.googlePlusLogin();
   }
   signOut() {
-    this.afAuth.auth.signOut();
+    this.__afAuth.auth.signOut();
   }
 
 }

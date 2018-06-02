@@ -84,7 +84,7 @@ export class AuthServiceStatusService {
         if (!this.userId) return
         this.__zone.run(() => {
             this.__afs.collection('users').doc(this.userId)
-                .update({ status: status, timestamp: this.timestamp });
+                .set({ status: status, timestamp: this.timestamp }, {merge: true});
         });
     }
 
