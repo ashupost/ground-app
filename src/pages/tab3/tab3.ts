@@ -8,6 +8,7 @@ import { MessagesPage } from '../messages/messages';
 import { GroundStorageService } from '../../app/sources/services/ground-storage.service';
 import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
 import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the Tab3Page page.
@@ -28,26 +29,29 @@ export class Tab3Page  implements OnInit{
   @ViewChild(Nav) nav: Nav;
   items: Observable<UserDetails[]>;
   myId: string = '';
-  //myData: Observable<UserDetails>;
+  myData: Observable<UserDetails>;
 
   constructor(private _app: App,
     public __navCtrl: NavController,
     public __navParams: NavParams,
-    private __storage: Storage,
     private __gas: GroundAuthService,
+    private __afAuth: AngularFireAuth,
     private __groundStorageService: GroundStorageService,
-    public __authServiceStatusService: AuthServiceStatusService,
-    private __groundFirebaseStoreService: GroundFirebaseStoreService) { }
+    private __groundFirebaseStoreService: GroundFirebaseStoreService) {
+    this.__afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        this.myId = res.uid;
+      }
+    });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad1 Tab1Page');
-    //this.myData = this.__gas.currentUserInfo;
-    this.myId = this.__gas.currentUserId;
     this.items = this.__groundFirebaseStoreService.getUsersOnline();
   }
 
   goToMessagePage(toUserDetails: UserDetails) {
-     let data = { user: this.__gas.currentUser, toUserDetails: toUserDetails };
-     this._app.getRootNav().push(MessagesPage, data);
+    let data = { user: this.__gas.currentUser, toUserDetails: toUserDetails };
+    this._app.getRootNav().push(MessagesPage, data);
   }
 }

@@ -8,6 +8,7 @@ import { MessagesPage } from '../messages/messages';
 import { GroundStorageService } from '../../app/sources/services/ground-storage.service';
 import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
 import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -26,28 +27,20 @@ export class Tab1Page implements OnInit {
   constructor(private _app: App,
     public __navCtrl: NavController,
     public __navParams: NavParams,
-    private __storage: Storage,
     private __gas: GroundAuthService,
+    private __afAuth: AngularFireAuth,
     private __groundStorageService: GroundStorageService,
-    private __authServiceStatusService: AuthServiceStatusService,
     private __groundFirebaseStoreService: GroundFirebaseStoreService) {
-
-    //this.myData = this.__groundFirebaseStoreService.getUserByid(this.__gas.currentUserId);
-    this.myId = this.__gas.currentUserId;
-    this.items = this.__groundFirebaseStoreService.getUsers();
-
-  
-
+    this.__afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        this.myId = res.uid;
+      }
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad1 Tab1Page');
-    //this.myData = this.__gas.currentUserInfo;
-    // this.myId = this.__gas.currentUserId;
-    //this.items = this.__groundFirebaseStoreService.getUsers();
-    this.myId = this.__gas.currentUserId;
     this.items = this.__groundFirebaseStoreService.getUsers();
-
   }
 
   goToMessagePage(toUserDetails: UserDetails) {
