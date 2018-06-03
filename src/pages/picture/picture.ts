@@ -137,7 +137,18 @@ export class PicturePage {
   }
 
   removePhoto(uid: string) {
-    this._groundFirebaseStoreService.removePhotoByUID(this.currentUserId, uid);
+    const confirm = this.alertCtrl.create({
+      title: 'Delete Selected Photo?',
+      message: 'Do you agree to delete seleted photo?',
+      buttons: [{ text: 'NO', handler: () => { console.log('Disagree clicked'); } },
+      {
+        text: 'Confirm', handler: () => {
+          this._groundFirebaseStoreService.removePhotoByUID(this.currentUserId, uid);
+          console.log('Agree clicked');
+        }
+      }]
+    });
+    confirm.present();
   }
 
   uploadFile(event) {
