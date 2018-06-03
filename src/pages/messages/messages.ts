@@ -36,6 +36,7 @@ export class MessagesPage {
     private _groundDatabaseStatusService: GroundDatabaseStatusService,
     private _groundFirebaseStoreService: GroundFirebaseStoreService) 
     {
+   
     this.toUserDetails = this._navParams.get('toUserDetails'); // other user
     this._groundDatabaseStatusService.getUserByid(this.toUserDetails.uid);
     this.fromId = this._navParams.get('user').uid; // this myself

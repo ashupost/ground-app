@@ -1,6 +1,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Nav } from 'ionic-angular';
+import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
  
 export interface PageInterface {
   title: string;
@@ -14,6 +15,7 @@ export interface PageInterface {
 @Component({
   selector: 'page-menu',
   templateUrl: 'menu.html',
+  providers: [AuthServiceStatusService]
 })
 export class MenuPage {
   // Basic root for our content view
@@ -37,8 +39,12 @@ export class MenuPage {
    
   ];
   
-  constructor(public navCtrl: NavController) { 
+  constructor(public navCtrl: NavController, public __authService: AuthServiceStatusService) { 
     
+  }
+
+  logout(){
+     this.__authService.signOut();
   }
  
   openPage(page: PageInterface) {

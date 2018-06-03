@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { UserDetails } from '../model/userdetails';
+import { GroundFirebaseStoreService } from './ground-firebasestore.service';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
-export class AuthService {
+export class GroundAuthService {
 
   authState: any = null;
 
-  constructor(private afAuth: AngularFireAuth) {
-            this.afAuth.authState.subscribe((auth) => {
-              this.authState = auth
-            });
-          }
+  constructor(private afAuth: AngularFireAuth, private __gfss: GroundFirebaseStoreService) {
+    this.afAuth.authState.subscribe((auth) => {
+      this.authState = auth
+    });
+  }
 
   // Returns true if user is logged in
   get authenticated(): boolean {
@@ -31,7 +34,7 @@ export class AuthService {
 
   // Returns current user UID
   get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
+    return this.authenticated ? this.authState.uid : null;
   }
 
   // Anonymous User
@@ -46,6 +49,13 @@ export class AuthService {
     else { return this.authState['displayName'] || 'User without a Name' }
   }
 
+  signOut(): void {
+    this.afAuth.auth.signOut();
+  }
 
+  get currentUserInfo(): Observable<UserDetails> {
+    if (!this.currentUserId) return null;
+    return this.__gfss.getUserByid(this.currentUserId);
+   }
 
 }

@@ -37,6 +37,7 @@ import { DirectivesModule } from '../directives/directives.module';
 import { CameraService } from './sources/camera/camera.service';
 import { Camera } from '@ionic-native/camera';
 import { DisplayUserPageModule } from '../pages/display-user/display-user.module';
+import { GroundAuthService } from './sources/services/ground.auth.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8",
@@ -96,7 +97,8 @@ export const firebaseConfig = {
     UtilService,
     GMapsService,
     CameraService,
-    Camera
+    Camera,
+    GroundAuthService
   ]
 })
 export class AppModule { }

@@ -13,13 +13,14 @@ import { GroundFirebaseStoreService } from '../../app/sources/services/ground-fi
 import { SaveUserGeolocationService } from '../../app/sources/services/save-user-geolocation.service';
 import { GMapsWapperService } from '../../app/sources/google/google.map.wapper.service';
 import { UtilService } from '../../app/sources/services/util.service';
+import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
 
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [GoogleLoginService, FaceBookLoginService, UtilService]
+  providers: [GoogleLoginService, FaceBookLoginService, UtilService, GroundAuthService]
 })
 export class LoginPage {
 
@@ -34,11 +35,15 @@ export class LoginPage {
     private __alertCtrl: AlertController,
     private __modalCtrl: ModalController,
     private __utilService: UtilService,
+    private __gas: GroundAuthService,
     private __faceBookLoginService: FaceBookLoginService,
     private __groundFirebaseStoreService: GroundFirebaseStoreService,
     private __saveUserGeolocationService: SaveUserGeolocationService,
     private __googleLoginService: GoogleLoginService
   ) {
+
+    //this.__gas.currentUserId
+
     this.user = this.__afAuth.authState;
     this.__afAuth.authState.subscribe(res => {
       if (res && res.uid) {
@@ -55,11 +60,11 @@ export class LoginPage {
 
         this.__groundFirebaseStoreService.addUsers(this.userInformation);
 
-        this.__storage.ready().then(() => {
-          this.__storage.get('STORAGE:LOGIN:USERINFO').then((loginUserDetails: UserDetails) => {
-            this.__storage.set('STORAGE:LOGIN:USERINFO', this.userInformation);
-          });
-        });
+      //  this.__storage.ready().then(() => {
+       //   this.__storage.get('STORAGE:LOGIN:USERINFO').then((loginUserDetails: UserDetails) => {
+       //     this.__storage.set('STORAGE:LOGIN:USERINFO', this.userInformation);
+       //   });
+      //  });
          this.doLogin();
       }
     });

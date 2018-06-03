@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Nav, App } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
+import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { UserDetails } from '../../app/sources/model/userdetails';
 import { MessagesPage } from '../messages/messages';
-import { Storage } from '@ionic/storage';
-
-import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
-import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
 import { GroundStorageService } from '../../app/sources/services/ground-storage.service';
+import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
+import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
 
 /**
  * Generated class for the Tab3Page page.
@@ -21,38 +21,33 @@ import { GroundStorageService } from '../../app/sources/services/ground-storage.
   selector: 'page-tab3',
   templateUrl: 'tab3.html',
 })
-export class Tab3Page {
+export class Tab3Page  implements OnInit{
+  ngOnInit(): void {
+  }
+
+  @ViewChild(Nav) nav: Nav;
   items: Observable<UserDetails[]>;
   myId: string = '';
-  myData: UserDetails;
-  
+  //myData: Observable<UserDetails>;
 
-  constructor(
-    private _app: App,
-    public _navCtrl: NavController, 
-    public _navParams: NavParams,
-    private _storage: Storage,
-    private _groundStorageService: GroundStorageService,
-    public _authServiceStatusService: AuthServiceStatusService,
-    private _groundFirebaseStoreService: GroundFirebaseStoreService
-  ) {
-    this._groundStorageService.getStorage('STORAGE:LOGIN:USERINFO').then((loginUserDetails: UserDetails) => {
-      this.myData = loginUserDetails;
-      this.myId = loginUserDetails.uid;
-      this.items = this._groundFirebaseStoreService.getUsersOnline();
-    });
-  }
+  constructor(private _app: App,
+    public __navCtrl: NavController,
+    public __navParams: NavParams,
+    private __storage: Storage,
+    private __gas: GroundAuthService,
+    private __groundStorageService: GroundStorageService,
+    public __authServiceStatusService: AuthServiceStatusService,
+    private __groundFirebaseStoreService: GroundFirebaseStoreService) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad1 Tab1Page');
+    //this.myData = this.__gas.currentUserInfo;
+    this.myId = this.__gas.currentUserId;
+    this.items = this.__groundFirebaseStoreService.getUsersOnline();
   }
 
   goToMessagePage(toUserDetails: UserDetails) {
-    this._storage.ready().then(() => {
-      this._storage.get('STORAGE:LOGIN:USERINFO').then((loginUserDetails: UserDetails) => {
-        let data = { user: loginUserDetails, toUserDetails: toUserDetails };
-        this._app.getRootNav().push(MessagesPage, data);
-      });
-    });
+     let data = { user: this.__gas.currentUser, toUserDetails: toUserDetails };
+     this._app.getRootNav().push(MessagesPage, data);
   }
 }
