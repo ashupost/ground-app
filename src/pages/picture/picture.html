@@ -10,39 +10,58 @@
 </ion-header>
 
 <ion-content class="cards-bg">
-  <ion-slides loop="true" pager="true">
-    <ion-slide *ngFor="let photo of photos">
-        {{photos.length}}
-      <ion-card class="adv-map">
-        <div style="position: relative">
-          <img [src]="photo.data"  />
-          <ion-fab right bottom>
-            <button ion-fab color="danger" class="fab-map">
-              <ion-icon name="pin"></ion-icon>
-            </button>
-          </ion-fab>
-          <ion-fab left bottom>
-              <button ion-fab color="primary" class="fab-map">
+
+  <div *ngIf="photos.length > 0">
+    <ion-slides loop="true" pager="true">
+      <ion-slide *ngFor="let photo of photos">
+        <ion-card class="adv-map">
+          <div style="position: relative">
+            <img [src]="photo.data" />
+            <ion-fab left bottom>
+              <button ion-fab color="danger" class="fab-map">
                 <ion-icon name="pin"></ion-icon>
               </button>
             </ion-fab>
-        </div>
-      </ion-card>
-    </ion-slide>
-  
- </ion-slides>
-
-  <!--
-  <ion-slides loop="true" pager="true">
-    <ion-slide *ngFor="let photo of photos">
-      <ion-card>
-        <img [src]="photo.data" />
-        <div class="card-title"></div>
-        <div class="card-subtitle"></div>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
-  -->
+            <ion-fab right bottom>
+              <div *ngIf="isCordova">
+                <button ion-fab color="primary" class="fab-map" (click)="takePhoto()">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </div>
+              <div *ngIf="!isCordova">
+                <label>{{label}}</label>
+                <input type="file" (change)="takePhoto($event)" id="file-input" style="opacity: 0" #fileInp1>
+                <button ion-fab color="primary" class="fab-map" (click)="onClick()">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </div>
+            </ion-fab>
+          </div>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div *ngIf="photos.length === 0">
+    <ion-card class="adv-map">
+      <div style="position: relative">
+        <img src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+        <ion-fab center middle>
+          <div *ngIf="isCordova">
+            <button ion-fab color="danger" class="fab-map" (click)="takePhoto()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </div>
+          <div *ngIf="!isCordova">
+            <label>{{label}}</label>
+            <input type="file" (change)="takePhoto($event)" id="file-input" style="opacity: 0" #fileInp1>
+            <button ion-fab color="danger" class="fab-map" (click)="onClick()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </div>
+        </ion-fab>
+      </div>
+    </ion-card>
+  </div>
 
   <ion-card>
     <ion-card-header>
@@ -131,36 +150,6 @@
         <ion-icon name="beer" item-start></ion-icon>
         <ion-label color="primary" stacked>Education</ion-label>
         <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
-      </ion-item>
-
-      <!--
-    <ion-item>
-      <label>{{label}}</label>
-      <input type="file" (change)="uploadFile($event)" id="file-input" style="opacity: 0" #fileInp1>
-      <button ion-button (click)="onClick()">Upload</button>
-    </ion-item>
-    -->
-
-      <div *ngIf="!isCordova">
-        <ion-item>
-          <ion-icon name="beer" item-start></ion-icon>
-          <label>{{label}}</label>
-          <input type="file" (change)="takePhoto($event)" id="file-input" style="opacity: 0" #fileInp1>
-          <button ion-button color="dark" (click)="onClick()">Upload File</button>
-        </ion-item>
-      </div>
-
-      <div *ngIf="isCordova">
-        <button ion-button color="dark" (click)="takePhoto()">Take Photo</button>
-      </div>
-
-      <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
-        <ion-card *ngIf="base64Image">
-          <img [src]="base64Image" />
-          <div class="card-title">Card Title</div>
-          <div class="card-subtitle">41 Listings</div>
-        </ion-card>
       </ion-item>
 
     </ion-list>

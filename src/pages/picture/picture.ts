@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, DateTime } from 'ionic-angular';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
@@ -39,6 +39,7 @@ export class PicturePage {
   //currentUserPhotoURL: Observable<string | null>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
+    private __zone: NgZone,
     public alertCtrl: AlertController,
     private __cameraService: CameraService,
     private __utilService: UtilService,
@@ -103,6 +104,7 @@ export class PicturePage {
   }
 
   takePhoto($event: any | null) {
+    this.__zone.run(() => {
     if (this.isCordova) {
       this.__cameraService.takePhoto().then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
@@ -125,6 +127,7 @@ export class PicturePage {
         this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
       });
     }
+  });
   }
 
 
