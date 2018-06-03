@@ -10,7 +10,7 @@ import { GroundFirebaseStoreService } from '../../app/sources/services/ground-fi
 export class DisplayUserPage {
   userUID: string;
   photos: any = [];
-
+  userInfo: any = [];
 
   constructor(public navCtrl: NavController,
     public _navParams: NavParams,
@@ -25,6 +25,9 @@ export class DisplayUserPage {
     console.log('ionViewDidLoad DisplayUserPage');
     this._groundFirebaseStoreService.getPhotoUserData(this.userUID).subscribe(data => {
       this.photos = data;
+    });
+    this._groundFirebaseStoreService.getUserByid(this.userUID).subscribe(data => {
+      this.userInfo = data;
     });
 
   }

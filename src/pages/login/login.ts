@@ -56,7 +56,7 @@ export class LoginPage {
         if (this.userInformation.accountType === 'phone') {
           this.userInformation.name = res.phoneNumber;
         }
-        this.__groundFirebaseStoreService.addUsers(this.userInformation);
+       
         this.doLogin();
       }
     });
@@ -72,6 +72,7 @@ export class LoginPage {
   doLogin() {
     this.__afAuth.authState.subscribe(res => {
       if (res && res.uid) {
+        this.__groundFirebaseStoreService.addUsers(this.userInformation);
         this.__saveUserGeolocationService.setGeoCoordinate(res.uid);
         this.__navCtrl.setRoot('MenuPage');
       }

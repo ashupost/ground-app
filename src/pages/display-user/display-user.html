@@ -1,11 +1,12 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>{{userUID}}</ion-title>
+    <ion-title>{{userInfo.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+ <div *ngIf="photos.length > 0"> 
    <ion-slides loop="true" pager="true">
     <ion-slide *ngFor="let photo of photos">
       <ion-card>
@@ -15,6 +16,23 @@
       </ion-card>
     </ion-slide>
 </ion-slides>
+</div>
 
+<div *ngIf="photos.length === 0">
+    <ion-card>
+        <img [src]="userInfo.photoURL" />
+    </ion-card>
+</div>
+
+<ion-grid>
+  <ion-row><ion-col>Name</ion-col><ion-col>{{userInfo.name}}</ion-col></ion-row>
+  <ion-row><ion-col>Address</ion-col><ion-col>{{userInfo.formatted_address}}</ion-col></ion-row>
+  <ion-row><ion-col>Last Login Time</ion-col><ion-col>{{userInfo.timestamp}}</ion-col></ion-row>
+  <ion-row><ion-col>Email</ion-col><ion-col>{{userInfo.email}}</ion-col></ion-row>
+</ion-grid>
+
+<!--
+{{userInfo |  json}}
+-->
 
 </ion-content>
