@@ -35,6 +35,13 @@ export class GroundFirebaseStoreService {
                     });
                 }));
     }
+    removePhotoByUID(userId: string, uid: string) {
+        this.__zone.run(() => {
+            this.__afs.collection<PictureDetail>('photos')
+                .doc(userId).collection('photo').doc(uid).delete();
+        });
+    }
+
 
     setPhotoUserData(userId: string, value: PictureDetail) {
         this.__zone.run(() => {

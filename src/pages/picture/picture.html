@@ -18,8 +18,8 @@
           <div style="position: relative">
             <img [src]="photo.data" />
             <ion-fab left bottom>
-              <button ion-fab color="danger" class="fab-map">
-                <ion-icon name="pin"></ion-icon>
+              <button ion-fab color="danger" class="fab-map" (click)="removePhoto(photo.uid)">
+                <ion-icon name="close"></ion-icon>
               </button>
             </ion-fab>
             <ion-fab right bottom>

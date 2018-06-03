@@ -34,7 +34,7 @@ export class PicturePage {
   isCordova: boolean;
   // photos: Observable<any[]>;
   photos: any = [];
-  
+
 
   @ViewChild('changeTime') changeDateTime: DateTime;
   //currentUserPhotoURL: Observable<string | null>;
@@ -97,13 +97,13 @@ export class PicturePage {
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
         this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
-            this.photos = data;
+          this.photos = data;
         });
 
         this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(data => {
           this.name = data.name;
           this.gender = data.gender;
-      });
+        });
 
       }
     });
@@ -111,31 +111,34 @@ export class PicturePage {
 
   takePhoto($event: any | null) {
     this.__zone.run(() => {
-    if (this.isCordova) {
-      this.__cameraService.takePhoto().then((imageData) => {
-        // imageData is either a base64 encoded string or a file URI
-        // If it's base64:
-        this.base64Image = 'data:image/jpeg;base64,' + imageData;
-        let value = new PictureDetail();
-        value.data = this.base64Image;
-        value.dataType = 'string';
-        value.photoType = PhotoStatus.MAIN;
-        this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
+      if (this.isCordova) {
+        this.__cameraService.takePhoto().then((imageData) => {
+          // imageData is either a base64 encoded string or a file URI
+          // If it's base64:
+          this.base64Image = 'data:image/jpeg;base64,' + imageData;
+          let value = new PictureDetail();
+          value.data = this.base64Image;
+          value.dataType = 'string';
+          value.photoType = PhotoStatus.MAIN;
+          this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
 
-      }, (err) => { console.log(err); });
-    } else {
-      this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
-        this.base64Image = data;
-        let value = new PictureDetail();
-        value.data = data;
-        value.dataType = 'string';
-        value.photoType = PhotoStatus.MAIN;
-        this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
-      });
-    }
-  });
+        }, (err) => { console.log(err); });
+      } else {
+        this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
+          this.base64Image = data;
+          let value = new PictureDetail();
+          value.data = data;
+          value.dataType = 'string';
+          value.photoType = PhotoStatus.MAIN;
+          this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
+        });
+      }
+    });
   }
 
+  removePhoto(uid: string) {
+    this._groundFirebaseStoreService.removePhotoByUID(this.currentUserId, uid);
+  }
 
   uploadFile(event) {
     const file = event.target.files[0];
