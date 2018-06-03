@@ -21,7 +21,7 @@ export class Tab1Page implements OnInit {
   @ViewChild(Nav) nav: Nav;
   items: Observable<UserDetails[]>;
   myId: string = '';
-  //myData: Observable<UserDetails>;
+  myData: Observable<UserDetails>;
 
   constructor(private _app: App,
     public __navCtrl: NavController,
@@ -29,18 +29,29 @@ export class Tab1Page implements OnInit {
     private __storage: Storage,
     private __gas: GroundAuthService,
     private __groundStorageService: GroundStorageService,
-    public __authServiceStatusService: AuthServiceStatusService,
-    private __groundFirebaseStoreService: GroundFirebaseStoreService) { }
+    private __authServiceStatusService: AuthServiceStatusService,
+    private __groundFirebaseStoreService: GroundFirebaseStoreService) {
+
+    //this.myData = this.__groundFirebaseStoreService.getUserByid(this.__gas.currentUserId);
+    this.myId = this.__gas.currentUserId;
+    this.items = this.__groundFirebaseStoreService.getUsers();
+
+  
+
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad1 Tab1Page');
     //this.myData = this.__gas.currentUserInfo;
+    // this.myId = this.__gas.currentUserId;
+    //this.items = this.__groundFirebaseStoreService.getUsers();
     this.myId = this.__gas.currentUserId;
     this.items = this.__groundFirebaseStoreService.getUsers();
+
   }
 
   goToMessagePage(toUserDetails: UserDetails) {
-     let data = { user: this.__gas.currentUser, toUserDetails: toUserDetails };
-     this._app.getRootNav().push(MessagesPage, data);
+    let data = { user: this.__gas.currentUser, toUserDetails: toUserDetails };
+    this._app.getRootNav().push(MessagesPage, data);
   }
 }

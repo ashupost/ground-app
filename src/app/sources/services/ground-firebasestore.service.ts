@@ -194,7 +194,7 @@ export class GroundFirebaseStoreService {
             let query: firebase.firestore.Query = ref;
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
-        }).snapshotChanges(['added', 'removed', 'modified'])
+        }).snapshotChanges()
             .pipe()
             .map(actions => actions.map(a => {
                 const data = a.payload.doc.data() as UserDetails;

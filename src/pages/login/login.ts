@@ -53,19 +53,11 @@ export class LoginPage {
         this.userInformation.name = res.displayName;
         this.userInformation.status = UserStatus.SIGNOUT;
         this.userInformation.accountType = res.providerData[0].providerId;
-
         if (this.userInformation.accountType === 'phone') {
           this.userInformation.name = res.phoneNumber;
         }
-
         this.__groundFirebaseStoreService.addUsers(this.userInformation);
-
-      //  this.__storage.ready().then(() => {
-       //   this.__storage.get('STORAGE:LOGIN:USERINFO').then((loginUserDetails: UserDetails) => {
-       //     this.__storage.set('STORAGE:LOGIN:USERINFO', this.userInformation);
-       //   });
-      //  });
-         this.doLogin();
+       //  this.doLogin();
       }
     });
   }
