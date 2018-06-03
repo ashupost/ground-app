@@ -27,13 +27,14 @@ export class PicturePage {
   user: Observable<firebase.User>;
   currentUserId: string;
   name: string;
+  gender: string;
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
   base64Image: any;
   isCordova: boolean;
   // photos: Observable<any[]>;
   photos: any = [];
-
+  
 
   @ViewChild('changeTime') changeDateTime: DateTime;
   //currentUserPhotoURL: Observable<string | null>;
@@ -47,12 +48,11 @@ export class PicturePage {
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
     this.isCordova = this.__utilService.isCordova();
-    this.user = this.afAuth.authState;
 
+    this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
         this.currentUserId = res.uid;
-
       }
     });
 
@@ -98,7 +98,13 @@ export class PicturePage {
       if (res && res.uid) {
         this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
             this.photos = data;
-          });
+        });
+
+        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(data => {
+          this.name = data.name;
+          this.gender = data.gender;
+      });
+
       }
     });
   }

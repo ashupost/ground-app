@@ -64,32 +64,23 @@
   </div>
 
   <ion-card>
-    <ion-card-header>
-      Explore Nearby
-    </ion-card-header>
+    <ion-item>
+      <ion-icon name="cart" item-end></ion-icon>
+      <ion-label color="primary" stacked>Display Name</ion-label>
+      <ion-input placeholder="Change Display Name" [(ngModel)]="name" disabled></ion-input>
+    </ion-item>
+  </ion-card>
 
+  <ion-card>
+    <ion-item>
+      <ion-icon name="cart" item-end></ion-icon>
+      <ion-label color="primary" stacked>Gender</ion-label>
+      <ion-input placeholder="Change Display Name" [(ngModel)]="gender" disabled></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
     <ion-list>
-      <ion-item>
-        <ion-icon name="wine" item-left large></ion-icon>
-        <h2>Institute of Fine Cocktails</h2>
-        <p>14 S. Hop Avenue, Madison, WI 53703</p>
-      </ion-item>
-
-      <ion-item>
-        <span item-left>18 min</span>
-        <span item-left>(2.6 mi)</span>
-        <button ion-button icon-left clear item-end>
-          <ion-icon name="navigate"></ion-icon>
-          Start
-        </button>
-      </ion-item>
-
-      <ion-item>
-        <ion-icon name="cart" item-start></ion-icon>
-        <ion-label color="primary" stacked>Display Name</ion-label>
-        <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
-      </ion-item>
-
       <ion-item>
         <ion-icon name="paw" item-start></ion-icon>
         <ion-label color="primary" stacked>Gender</ion-label>
