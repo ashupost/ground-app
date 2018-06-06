@@ -111,32 +111,9 @@ export class PicturePage {
   }
 
   takePhoto($event: any | null) {
-    this.__app.getRootNav().push(CaptureImagePage);
-   /* 
-    this.__zone.run(() => {
-      if (this.isCordova) {
-        this.__cameraService.selectImageFromGallary().then((imageData) => {
-          this.base64Image = imageData;
-          let value = new PictureDetail();
-          value.data = this.base64Image;
-          value.dataType = 'string';
-          value.photoType = PhotoStatus.MAIN;
-          this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
-
-        }, (err) => { console.log(err); });
-      } else {
-        this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
-          this.base64Image = data;
-          let value = new PictureDetail();
-          value.data = data;
-          value.dataType = 'string';
-          value.photoType = PhotoStatus.MAIN;
-          this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
-        });
-      }
-    });
-    */
-  }
+    let data = { event: $event};
+    this.__app.getRootNav().push(CaptureImagePage, data);
+   }
 
   removePhoto(uid: string) {
     const confirm = this.alertCtrl.create({

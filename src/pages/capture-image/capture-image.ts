@@ -29,6 +29,7 @@ export class CaptureImagePage {
   public croppedHeight: Number;
   public data: any;
   public canSave: boolean = false;
+  $event: any;
 
   constructor(public navCtrl: NavController, 
     private __utilService: UtilService,
@@ -39,7 +40,7 @@ export class CaptureImagePage {
    
     private afAuth: AngularFireAuth,
    
-    public navParams: NavParams) {
+    public _navParams: NavParams) {
       this.isCordova = this.__utilService.isCordova();
       this.user = this.afAuth.authState;
       this.afAuth.authState.subscribe(res => {
@@ -47,13 +48,15 @@ export class CaptureImagePage {
           this.currentUserId = res.uid;
         }
       });
-
       this.cropperSettings = new CropperSettings();
       this.cropperSettings.croppedWidth = 100;
       this.cropperSettings.croppedHeight = 100;
       this.cropperSettings.dynamicSizing = true;
-      this.cropperSettings.noFileInput = true;
+      this.cropperSettings.noFileInput = false;
       this.data = {};
+      this.$event = this._navParams.get('event'); // my user
+      this.fileChangeListener(this.$event);    
+     
   }
 
   cropped(bounds: Bounds) {

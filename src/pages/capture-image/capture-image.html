@@ -15,10 +15,11 @@
 
 <ion-content padding>
 
-    <div class="file-upload">
-        <span class="text">upload</span>
+    <div class="file-upload" *ngIf="!isCordova">
+        <span class="text">upload No cordova</span>
         <input id="custom-input" type="file" (change)="fileChangeListener($event)">
     </div>
+  
     
       <!-- Select image from device photolibrary -->
       <button
