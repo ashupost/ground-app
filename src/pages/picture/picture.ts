@@ -112,10 +112,8 @@ export class PicturePage {
   takePhoto($event: any | null) {
     this.__zone.run(() => {
       if (this.isCordova) {
-        this.__cameraService.takePhoto().then((imageData) => {
-          // imageData is either a base64 encoded string or a file URI
-          // If it's base64:
-          this.base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.__cameraService.selectImageFromCamera().then((imageData) => {
+          this.base64Image = imageData;
           let value = new PictureDetail();
           value.data = this.base64Image;
           value.dataType = 'string';

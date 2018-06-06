@@ -18,6 +18,24 @@ export class CameraService {
        return  this.__camera.getPicture(options);
     }
 
+    selectImageFromCamera() : Promise<any>
+    {
+       return new Promise(resolve =>
+       {
+          let cameraOptions : CameraOptions = {
+              destinationType    : this.__camera.DestinationType.DATA_URL,
+              quality            : 100,
+              encodingType       : this.__camera.EncodingType.JPEG,
+              mediaType:           this.__camera.MediaType.PICTURE
+          };
+          this.__camera.getPicture(cameraOptions)
+          .then((data) => {
+             resolve("data:image/jpeg;base64," + data);
+          });
+       });
+    }
+ 
+
     getFileBase64(file) : Promise<{}>{
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
