@@ -15,4 +15,54 @@
 
 <ion-content padding>
 
+    <div class="file-upload">
+        <span class="text">upload</span>
+        <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+    </div>
+    
+      <!-- Select image from device photolibrary -->
+      <button
+         ion-button
+         block
+         color="primary"
+         (click)="selectImage()">Select an Image</button>
+    
+    
+    
+      <!-- Declare image cropper with following aspects:
+    
+           1. Template reference variable to allow component
+              class to 'hook' into the cropper tool in DOM
+           2. Set image from the component class's data object
+           3. Apply settings from the component class's
+              cropperSettings object
+           4. Call the handleCropping method in the image
+              cropper's onCrop event
+       -->
+    
+      <img-cropper
+         #cropper
+         [image]="data"
+         width="100%"
+         [settings]="cropperSettings"
+         id="profileImage"
+         (onCrop)="cropped($event)"></img-cropper>
+       
+    
+      <!-- Display the cropped image -->
+      <div *ngIf="data.image" >
+          <img
+             [src]="data.image"
+             [width]="cropperSettings.croppedWidth"
+             [height]="cropperSettings.croppedHeight">
+      </div>
+    
+      <button
+         *ngIf="canSave"
+         ion-button
+         block
+         color="secondary"
+         (click)="saveImage()">Save Image</button>
+    
+
 </ion-content>

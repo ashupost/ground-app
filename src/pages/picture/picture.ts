@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, DateTime } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, DateTime, App } from 'ionic-angular';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { CameraService } from '../../app/sources/camera/camera.service';
 import { UtilService } from '../../app/sources/services/util.service';
+import { CaptureImagePage } from '../capture-image/capture-image';
 
 
 
@@ -40,9 +41,9 @@ export class PicturePage {
   //currentUserPhotoURL: Observable<string | null>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
+    private __app: App,
     private __zone: NgZone,
     public alertCtrl: AlertController,
-    private __cameraService: CameraService,
     private __utilService: UtilService,
     private afAuth: AngularFireAuth,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
@@ -110,6 +111,8 @@ export class PicturePage {
   }
 
   takePhoto($event: any | null) {
+    this.__app.getRootNav().push(CaptureImagePage);
+   /* 
     this.__zone.run(() => {
       if (this.isCordova) {
         this.__cameraService.selectImageFromGallary().then((imageData) => {
@@ -132,6 +135,7 @@ export class PicturePage {
         });
       }
     });
+    */
   }
 
   removePhoto(uid: string) {
