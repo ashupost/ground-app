@@ -1,4 +1,4 @@
-import { Component, NgZone, ViewChild } from '@angular/core';
+import { Component, NgZone, ViewChild, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CameraService } from '../../app/sources/camera/camera.service';
@@ -17,7 +17,27 @@ import { ImageCropperComponent, CropperSettings, Bounds, CropPosition } from "ng
   selector: 'page-capture-image',
   templateUrl: 'capture-image.html',
 })
-export class CaptureImagePage {
+export class CaptureImagePage implements OnInit {
+
+  ngOnInit() {
+    this.cropperSettings = new CropperSettings();
+    this.cropperSettings.width = 50;
+    this.cropperSettings.height = 50;
+    this.cropperSettings.croppedWidth = 100;
+    this.cropperSettings.croppedHeight = 100;
+    this.cropperSettings.minWidth = 100;
+    this.cropperSettings.minHeight = 100;
+    this.cropperSettings.cropOnResize = true;
+    this.cropperSettings.dynamicSizing = true;
+    this.cropperSettings.noFileInput = true;
+    this.cropperSettings._rounded = false;
+    this.cropperSettings.touchRadius = 30;
+    this.cropperSettings.centerTouchRadius = 40;
+    this.cropperSettings.markerSizeMultiplier = 2;
+    this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255, 0, 0, 1)';
+    this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
+    this.data = {};
+  }
 
   isCordova: boolean;
   base64Image: any;
@@ -29,60 +49,36 @@ export class CaptureImagePage {
   public croppedHeight: Number;
   public data: any;
   public canSave: boolean = true;
- // $event: any;
+  // $event: any;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     private __utilService: UtilService,
     private __zone: NgZone,
     private __cameraService: CameraService,
-   
+
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
-   
+
     private afAuth: AngularFireAuth,
-   
+
     public _navParams: NavParams) {
-      this.isCordova = this.__utilService.isCordova();
-      this.user = this.afAuth.authState;
-      this.afAuth.authState.subscribe(res => {
-        if (res && res.uid) {
-          this.currentUserId = res.uid;
-        }
-      });
-      this.cropperSettings = new CropperSettings();
-      this.cropperSettings.width = 50;
-    this.cropperSettings.height = 50;
-    this.cropperSettings.croppedWidth = 100;
-    this.cropperSettings.croppedHeight = 100;
-  //  this.cropperSettings.canvasWidth = 400;
-   // this.cropperSettings.canvasHeight = 300;
-   this.cropperSettings.cropOnResize = true;
- 
-   
-
-      this.cropperSettings.dynamicSizing = true;
-      this.cropperSettings.noFileInput = true;
-      this.cropperSettings._rounded = false;
-     // this.cropperSettings.touchRadius = 10;
-     this.cropperSettings.markerSizeMultiplier = 2;
-     this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(55,55,255,1)';
-     this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
-
-      
-      this.data = {};
-     // this.$event = this._navParams.get('event'); // my user
-      //this.fileChangeListener(this.$event);  
-      
-      
-     
+    this.isCordova = this.__utilService.isCordova();
+    this.user = this.afAuth.authState;
+    this.afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        this.currentUserId = res.uid;
+      }
+    });
+    // this.$event = this._navParams.get('event'); // my user
+    //this.fileChangeListener(this.$event);  
   }
   cropPosition: CropPosition;
-/*
-  cropped(bounds: Bounds) {
-    this.croppedHeight = bounds.bottom - bounds.top;
-    this.croppedWidth = bounds.right - bounds.left;
-    this.canSave = false;
-  }
-  */
+  /*
+    cropped(bounds: Bounds) {
+      this.croppedHeight = bounds.bottom - bounds.top;
+      this.croppedWidth = bounds.right - bounds.left;
+      this.canSave = false;
+    }
+    */
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaptureImagePage');
@@ -103,7 +99,7 @@ export class CaptureImagePage {
         console.dir(error);
       });
   }
-  onClick(){
+  onClick() {
 
   }
   saveImage() {
@@ -147,7 +143,7 @@ export class CaptureImagePage {
         });
       }
     });
-    
+
   }
 
 
