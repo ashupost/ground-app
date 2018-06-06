@@ -11,8 +11,7 @@ import { DatePipe } from '@angular/common';
 import { CameraService } from '../../app/sources/camera/camera.service';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CaptureImagePage } from '../capture-image/capture-image';
-
-
+import {  Subscription } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -31,7 +30,6 @@ export class PicturePage {
   gender: string;
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
-  base64Image: any;
   isCordova: boolean;
   // photos: Observable<any[]>;
   photos: any = [];
@@ -72,7 +70,6 @@ export class PicturePage {
   setSettingAgeRange() {
     this._groundFirebaseStoreService.setSettingData(this.currentUserId, this.structure.lower, 'age_lower');
     this._groundFirebaseStoreService.setSettingData(this.currentUserId, this.structure.upper, 'age_upper');
-
   }
 
   setSettingData($event: any, param: string) {
@@ -82,7 +79,6 @@ export class PicturePage {
 
 
   setUserDataName() {
-
     this._groundFirebaseStoreService.setUserData(this.currentUserId, this.name, 'name');
   }
 
@@ -92,27 +88,33 @@ export class PicturePage {
     this._groundFirebaseStoreService.setUserData(this.currentUserId, $event, param);
   }
 
+  private messagesLoader1: Subscription;
+  private messagesLoader2: Subscription;
+ 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PicturePage');
     this.changeDateTime.updateText = () => { };
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
-        this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
+      this.messagesLoader1= this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
           this.photos = data;
         });
 
-        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(data => {
+        this.messagesLoader2 = this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(data => {
           this.name = data.name;
           this.gender = data.gender;
         });
-
       }
     });
   }
+  ionViewDidLeave(){
+    this.messagesLoader1.unsubscribe();
+    this.messagesLoader2.unsubscribe();
 
-  takePhoto($event: any | null) {
-    let data = { event: $event};
-    this.__app.getRootNav().push(CaptureImagePage, data);
+  }
+
+  takePhoto() {
+      this.__app.getRootNav().push(CaptureImagePage);
    }
 
   removePhoto(uid: string) {

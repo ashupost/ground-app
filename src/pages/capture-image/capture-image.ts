@@ -7,7 +7,7 @@ import { GroundFirebaseStoreService } from '../../app/sources/services/ground-fi
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
-import { ImageCropperComponent, CropperSettings, Bounds } from "ngx-img-cropper";
+import { ImageCropperComponent, CropperSettings, Bounds, CropPosition } from "ngx-img-cropper";
 
 
 
@@ -28,8 +28,8 @@ export class CaptureImagePage {
   public croppedWidth: Number;
   public croppedHeight: Number;
   public data: any;
-  public canSave: boolean = false;
-  $event: any;
+  public canSave: boolean = true;
+ // $event: any;
 
   constructor(public navCtrl: NavController, 
     private __utilService: UtilService,
@@ -49,21 +49,40 @@ export class CaptureImagePage {
         }
       });
       this.cropperSettings = new CropperSettings();
-      this.cropperSettings.croppedWidth = 100;
-      this.cropperSettings.croppedHeight = 100;
+      this.cropperSettings.width = 50;
+    this.cropperSettings.height = 50;
+    this.cropperSettings.croppedWidth = 100;
+    this.cropperSettings.croppedHeight = 100;
+  //  this.cropperSettings.canvasWidth = 400;
+   // this.cropperSettings.canvasHeight = 300;
+   this.cropperSettings.cropOnResize = true;
+ 
+   
+
       this.cropperSettings.dynamicSizing = true;
-      this.cropperSettings.noFileInput = false;
+      this.cropperSettings.noFileInput = true;
+      this.cropperSettings._rounded = false;
+     // this.cropperSettings.touchRadius = 10;
+     this.cropperSettings.markerSizeMultiplier = 2;
+     this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(55,55,255,1)';
+     this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
+
+      
       this.data = {};
-      this.$event = this._navParams.get('event'); // my user
-      this.fileChangeListener(this.$event);    
+     // this.$event = this._navParams.get('event'); // my user
+      //this.fileChangeListener(this.$event);  
+      
+      
      
   }
-
+  cropPosition: CropPosition;
+/*
   cropped(bounds: Bounds) {
     this.croppedHeight = bounds.bottom - bounds.top;
     this.croppedWidth = bounds.right - bounds.left;
-    this.canSave = true;
+    this.canSave = false;
   }
+  */
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaptureImagePage');
@@ -84,7 +103,9 @@ export class CaptureImagePage {
         console.dir(error);
       });
   }
+  onClick(){
 
+  }
   saveImage() {
     console.dir(this.data.image);
   }
@@ -104,7 +125,6 @@ export class CaptureImagePage {
 
 
   takePhoto($event: any | null) {
-    
     this.__zone.run(() => {
       if (this.isCordova) {
         this.__cameraService.selectImageFromGallary().then((imageData) => {

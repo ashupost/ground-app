@@ -13,57 +13,29 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-item *ngIf="!isCordova">
+      <ion-label id="profile_image" color="primary" stacked>Select Image</ion-label>
+      <ion-input type="file" accept="image/*" (change)="fileChangeListener($event)"></ion-input>
+  </ion-item>
 
-    <div class="file-upload" *ngIf="!isCordova">
-        <span class="text">upload No cordova</span>
-        <input id="custom-input" type="file" (change)="fileChangeListener($event)">
-    </div>
-  
-    
-      <!-- Select image from device photolibrary -->
-      <button
-         ion-button
-         block
-         color="primary"
-         (click)="selectImage()">Select an Image</button>
-    
-    
-    
-      <!-- Declare image cropper with following aspects:
-    
-           1. Template reference variable to allow component
-              class to 'hook' into the cropper tool in DOM
-           2. Set image from the component class's data object
-           3. Apply settings from the component class's
-              cropperSettings object
-           4. Call the handleCropping method in the image
-              cropper's onCrop event
-       -->
-    
-      <img-cropper
-         #cropper
-         [image]="data"
-         width="100%"
-         [settings]="cropperSettings"
-         id="profileImage"
-         (onCrop)="cropped($event)"></img-cropper>
+  <!-- Select image from device photolibrary -->
+  <button *ngIf="isCordova" ion-button block color="primary" (click)="selectImage()">Select an Image</button>
+
+  <img-cropper *ngIf="data" #cropper [image]="data" 
+  [settings]="cropperSettings"
+
+       id="profileImage">
+  </img-cropper>
        
-    
-      <!-- Display the cropped image -->
-      <div *ngIf="data.image" >
-          <img
-             [src]="data.image"
-             [width]="cropperSettings.croppedWidth"
-             [height]="cropperSettings.croppedHeight">
-      </div>
-    
-      <button
-         *ngIf="canSave"
-         ion-button
-         block
-         color="secondary"
-         (click)="saveImage()">Save Image</button>
-    
+  
+  <!-- Display the cropped image -->
+  <div *ngIf="data.image && data">
+    <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+  </div>
+
+  <button ion-button block color="secondary" (click)="saveImage()">Save Image</button>
+
 
 </ion-content>
+
