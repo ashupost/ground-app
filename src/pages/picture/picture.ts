@@ -112,7 +112,7 @@ export class PicturePage {
   takePhoto($event: any | null) {
     this.__zone.run(() => {
       if (this.isCordova) {
-        this.__cameraService.selectImageFromCamera().then((imageData) => {
+        this.__cameraService.selectImageFromGallary().then((imageData) => {
           this.base64Image = imageData;
           let value = new PictureDetail();
           value.data = this.base64Image;

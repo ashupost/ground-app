@@ -34,6 +34,25 @@ export class CameraService {
           });
        });
     }
+
+    selectImageFromGallary() : Promise<any>
+    {
+       return new Promise(resolve =>
+       {
+          let cameraOptions : CameraOptions = {
+              sourceType         : this.__camera.PictureSourceType.PHOTOLIBRARY,
+              destinationType    : this.__camera.DestinationType.DATA_URL,
+              quality            : 100,
+              encodingType       : this.__camera.EncodingType.JPEG,
+              mediaType:           this.__camera.MediaType.PICTURE,
+              correctOrientation : true
+          };
+          this.__camera.getPicture(cameraOptions)
+          .then((data) => {
+             resolve("data:image/jpeg;base64," + data);
+          });
+       });
+    }
  
 
     getFileBase64(file) : Promise<{}>{
