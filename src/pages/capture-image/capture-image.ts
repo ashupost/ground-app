@@ -20,11 +20,12 @@ import { ImageCropperComponent, CropperSettings, Bounds, CropPosition } from "ng
 export class CaptureImagePage implements OnInit {
 
   ngOnInit() {
+    
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 50;
     this.cropperSettings.height = 50;
-    this.cropperSettings.croppedWidth = 100;
-    this.cropperSettings.croppedHeight = 100;
+    this.cropperSettings.croppedWidth = 512;
+    this.cropperSettings.croppedHeight = 512;
     this.cropperSettings.minWidth = 100;
     this.cropperSettings.minHeight = 100;
     this.cropperSettings.cropOnResize = true;
@@ -88,11 +89,8 @@ export class CaptureImagePage implements OnInit {
     this.canSave = false;
     this.__cameraService.selectImageFromCamera()
       .then((data: any) => {
-        // Create an Image object, assign retrieved base64 image from
-        // the device photo library
         let image: any = new Image();
         image.src = data;
-        // Assign the Image object to the ImageCropper component
         this.ImageCropper.setImage(image);
       })
       .catch((error: any) => {
@@ -100,23 +98,23 @@ export class CaptureImagePage implements OnInit {
       });
   }
   onClick() {
-
+ 
   }
   saveImage() {
     console.dir(this.data.image);
+    let value = new PictureDetail();
+    value.data = this.data.image;
+    value.dataType = 'string';
+    value.photoType = PhotoStatus.MAIN;
+    this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
   }
 
   fileChangeListener($event) {
-    let image: any = new Image();
-    let file: File = $event.target.files[0];
-    let myReader: FileReader = new FileReader();
-    let that = this;
-    myReader.onload = function (loadEvent: any) {
-      image.src = loadEvent.target.result;
-      that.ImageCropper.setImage(image);
-
-    };
-    myReader.readAsDataURL(file);
+    this.__cameraService.getFileBase64($event.target.files[0]).then(loadEvent => {
+      let image: any = new Image();
+      image.src = loadEvent;
+      this.ImageCropper.setImage(image);
+    });
   }
 
 
