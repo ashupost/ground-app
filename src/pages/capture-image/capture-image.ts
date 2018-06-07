@@ -85,7 +85,7 @@ export class CaptureImagePage implements OnInit {
     console.log('ionViewDidLoad CaptureImagePage');
   }
 
-  selectImage() {
+  selectImageFromCamera() {
     this.canSave = false;
     this.__cameraService.selectImageFromCamera()
       .then((data: any) => {
@@ -97,9 +97,20 @@ export class CaptureImagePage implements OnInit {
         console.dir(error);
       });
   }
-  onClick() {
- 
+  selectImageFromGallary() {
+    this.canSave = false;
+    this.__cameraService.selectImageFromGallary()
+      .then((data: any) => {
+        let image: any = new Image();
+        image.src = data;
+        this.ImageCropper.setImage(image);
+      })
+      .catch((error: any) => {
+        console.dir(error);
+      });
   }
+ 
+  
   saveImage() {
     console.dir(this.data.image);
     let value = new PictureDetail();
