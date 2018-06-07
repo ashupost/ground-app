@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Platform } from 'ionic-angular';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CameraService } from '../../app/sources/camera/camera.service';
 import { PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
@@ -60,9 +60,19 @@ export class CaptureImagePage implements OnInit {
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
 
     private afAuth: AngularFireAuth,
-
+    private __platform: Platform,
     public _navParams: NavParams) {
-    this.isCordova = this.__utilService.isCordova();
+
+   // this.isCordova = this.__utilService.isCordova;
+
+      this.__platform.ready().then(() => {
+     if (this.__platform.is('cordova')) this.isCordova= true;
+    else this.isCordova= false;
+     });
+
+
+
+
     this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {

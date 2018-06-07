@@ -5,7 +5,15 @@ import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class UtilService {
-  constructor(private __platform: Platform) { }
+ // public isCordova: boolean;
+  constructor(private __platform: Platform) { 
+
+   // this.__platform.ready().then(() => {
+    //  if (this.__platform.is('cordova')) this.isCordova= true;
+    //  else this.isCordova= false;
+    //  });
+
+  }
 
   firebaseConneted() {
     var connectedRef = firebase.database().ref(".info/connected");
@@ -22,9 +30,6 @@ export class UtilService {
     return firebase.auth().currentUser
   }
 
-  isCordova() {
-    if (this.__platform.is('cordova')) return true;
-    else false;
-  }
+ 
 }
 

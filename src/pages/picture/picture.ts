@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, DateTime, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, DateTime, App, Platform } from 'ionic-angular';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
@@ -44,9 +44,16 @@ export class PicturePage {
     public alertCtrl: AlertController,
     private __utilService: UtilService,
     private afAuth: AngularFireAuth,
+    private __platform: Platform,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
-    this.isCordova = this.__utilService.isCordova();
+   // this.isCordova = this.__utilService.isCordova;
+
+    this.__platform.ready().then(() => {
+    if (this.__platform.is('cordova')) this.isCordova= true;
+  else this.isCordova= false;
+  });
+
 
     this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(res => {
