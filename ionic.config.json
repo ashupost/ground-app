@@ -1,6 +1,6 @@
 {
   "name": "ground-app",
-  "app_id": "",
+  "app_id": "03ed27fd",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
