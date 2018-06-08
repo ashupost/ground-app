@@ -7,12 +7,12 @@
 
 <ion-content padding>
  <div *ngIf="photos.length > 0"> 
-   <ion-slides loop="true" pager="true">
+   <ion-slides pager="true">
     <ion-slide *ngFor="let photo of photos">
       <ion-card>
         <img [src]="photo.data" />
-        <div class="card-title"></div>
-        <div class="card-subtitle"></div>
+        <div class="card-title">My Title</div>
+        <div class="card-subtitle">My Subtitle</div>
       </ion-card>
     </ion-slide>
 </ion-slides>

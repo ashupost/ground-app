@@ -85,6 +85,11 @@ export class CaptureImagePage implements OnInit {
       .then((data: any) => {
         let image: any = new Image();
         image.src = data;
+        //////////////////
+
+
+
+        //////////////////////
         this.ImageCropper.setImage(image);
       })
       .catch((error: any) => {
@@ -108,14 +113,17 @@ export class CaptureImagePage implements OnInit {
   saveImage() {
     console.dir(this.data.image);
     let value = new PictureDetail();
-    value.data = this.data.image;
+    value.data = this.data.image; // This is base64 image string to store in db.
     value.dataType = 'string';
     value.photoType = PhotoStatus.MAIN;
+
     this.__zone.run(() => {
       this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
       this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, this.data.image);
     });
   }
+
+  
 
   fileChangeListener($event) {
     this.__cameraService.getFileBase64($event.target.files[0]).then(loadEvent => {
