@@ -89,7 +89,7 @@ export class SettingsPage {
 
 
   setUserData($event: any, param: string) {
-    console.log('$event', $event);
+//    console.log('$event', $event);
     this._groundFirebaseStoreService.setUserData(this.currentUserId, $event, param);
   }
 
