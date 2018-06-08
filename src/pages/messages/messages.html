@@ -1,20 +1,24 @@
 <ion-header>
   <ion-navbar color="secondary">
     <ion-title>
+      <img *ngIf="user.photoURL" class="user-img-header" [src]="user.photoURL" height="40">
+      <img *ngIf="!user.photoURL" class="user-img-header" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+    
       <ion-icon ios="ios-disc" [color]="toUserDetails.status" md="md-disc"></ion-icon>
+       
       <span>
         <ion-icon ios="ios-plane" md="md-plane"></ion-icon>{{distance | number }}KM</span>
       <span>
         <ion-icon ios="ios-time" md="md-time"> {{otherTimestamp | date:'dd.MM hh:mm:ss'}}</ion-icon>
       </span>
       {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }}
+    
     </ion-title>
 
-    
     <ion-buttons end>
-        <button ion-button icon-only color="royal" (click)= "moveToOtherUserdetails()">
-          <ion-icon name="more"></ion-icon>
-        </button>
+      <button ion-button icon-only color="royal" (click)="moveToOtherUserdetails()">
+        <ion-icon name="more"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -25,27 +29,21 @@
 -->
 
   <div class="message-wrap">
-
     <div *ngFor="let msg of messages" class="message" [class.left]="msg.fromId !== fromId " [class.right]="msg.fromId === fromId">
-      <img class="user-img" [src]="msg.fromId === fromId ? user.photoURL : toUserDetails.photoURL" 
-      alt="" src="">
+      <img class="user-img" [src]="msg.fromId === fromId ? user.photoURL : toUserDetails.photoURL" alt="" src="">
       <ion-spinner name="dots" *ngIf="!msg.timestamp"></ion-spinner>
       <div class="msg-detail">
         <div class="msg-info">
           <p>{{msg.timestamp | relativeTimePipe}}</p>
-
         </div>
         <div class="msg-content">
           <span class="triangle"></span>
           <p class="line-breaker ">{{msg.message}}</p>
         </div>
       </div>
-    
     </div>
   </div>
-
 </ion-content>
-
 
 <ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
   <div class="input-wrap">
@@ -53,9 +51,7 @@
       <ion-icon name="md-happy"></ion-icon>
     </button>
     <textarea #chat_input placeholder="Text Input" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" (focusin)="onFocus()">
-
-          </textarea>
-
+    </textarea>
     <button ion-button clear icon-only item-right color="primary" (click)="sendMessage()" [disabled]="newMessage === ''">
       <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
     </button>
