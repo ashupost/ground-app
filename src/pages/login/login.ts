@@ -61,7 +61,6 @@ export class LoginPage {
     });
   }
 
-
   public phonelogin() {
     const modalPage = this.__modalCtrl.create('ModalPage', { message: 'test' });
     modalPage.present();
