@@ -1,13 +1,11 @@
 <ion-menu [content]="content">
-  <ion-header>
-      <ion-navbar color="primary">
+<ion-header>
+  <ion-navbar color="primary">
     <ion-toolbar>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
-    </ion-navbar>
-  </ion-header>
- 
-
+  </ion-navbar>
+</ion-header>
    <ion-content>
       <ion-item>
           <ion-avatar item-start>
@@ -18,20 +16,16 @@
           <p><span *ngIf="user.email">{{user.email}}</span></p>
           <p><span *ngIf="user.uid">{{user.uid}}</span></p>
       </ion-item>
-
     <ion-list>
-      <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
-           <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+      <button ion-item menuClose *ngFor="let page of pages" (click)="openPage(page)">
+           <ion-icon item-start [name]="page.icon" [color]="isActive(page)"></ion-icon>
           {{ p.title }}
         </button>
     </ion-list>
     <ion-item>
         <button ion-button (click)="logout()">LOGOUT</button>
     </ion-item>
-
-
   </ion-content>
 </ion-menu>
- 
 <!-- main navigation -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
