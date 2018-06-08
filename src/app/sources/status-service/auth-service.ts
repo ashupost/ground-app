@@ -74,7 +74,7 @@ export class AuthServiceStatusService {
             .map(event => event)
             .debounceTime(2000)
             .distinctUntilChanged()
-           // .throttleTime(2000)
+            .throttleTime(2000)
             .subscribe(() => {
                 this.updateStatus(UserStatus.ONLINE);
                 this.resetTimer()
