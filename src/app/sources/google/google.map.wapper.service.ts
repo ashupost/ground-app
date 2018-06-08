@@ -5,6 +5,7 @@ import { Observable, Observer } from 'rxjs';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { filter, catchError, tap, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+
 declare var google: any;
 
 @Injectable()
@@ -14,9 +15,7 @@ export class GMapsWapperService extends GoogleMapsAPIWrapper {
         super(__loader, __zone);
     }
     private geocoder: any;
-
     private initGeocoder() {
-        console.log('Init geocoder!');
         this.geocoder = new google.maps.Geocoder();
     }
 
@@ -31,18 +30,12 @@ export class GMapsWapperService extends GoogleMapsAPIWrapper {
 
     getLatLan() : Observable<any>{
         let address = 'Amsterdam';
-  
-
-        console.log('Getting Address - ', address);
-        // let geocoder = new google.maps.Geocoder();
-
         return this.waitForMapsToLoad().pipe(
             // filter(loaded => loaded),
             switchMap(() => {
                 return Observable.create(observer => {
                     this.geocoder.geocode({ 'address': address }, function (results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
-                            console.log('MK2 done');
                             observer.next(results[0].geometry.location);
                             observer.complete();
                         } else {
