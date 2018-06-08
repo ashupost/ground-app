@@ -10,13 +10,10 @@ export class DistanceService {
 
     getDistanceByGeoCordinate(x: GeoCordinate, y: GeoCordinate): number {
         if (!x) {
-            x = new GeoCordinate();
-            y = new GeoCordinate();
+            return 0;
         }
         if (!y) {
-            x = new GeoCordinate();
-            y = new GeoCordinate();
-
+            return 0;
         }
         const x1: number = x.latitude;
         const x2: number = y.latitude;
