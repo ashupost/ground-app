@@ -55,12 +55,14 @@ export class MenuPage {
   constructor(public navCtrl: NavController, 
     public __authService: AuthServiceStatusService,
     private afAuth: AngularFireAuth,
+    
     private _groundFirebaseStoreService: GroundFirebaseStoreService) { 
  
   }
 
   logout(){
      this.__authService.signOut();
+     this.navCtrl.setRoot('LoginPage');
   }
  
   openPage(page: PageInterface) {

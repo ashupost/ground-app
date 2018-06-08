@@ -83,10 +83,10 @@ export class AuthServiceStatusService {
         if (!status) return;
         if (!this.userId) return
         this.__zone.run(() => {
-            try{
-            this.__afs.collection('users').doc(this.userId)
-                .update({ status: status, timestamp: this.timestamp });
-            }catch(error){}
+            try {
+                this.__afs.collection('users').doc(this.userId)
+                    .update({ status: status, timestamp: this.timestamp });
+            } catch (error) { }
         });
     }
 
@@ -109,11 +109,9 @@ export class AuthServiceStatusService {
 
     /// Make sure to close these subscriptions when no longer needed.
     public signOut() {
-        alert('delet');
         this.__afAuth.auth.signOut();
         this.updateStatus(UserStatus.SIGNOUT);
-      if(this.mouseEvents)  this.mouseEvents.unsubscribe();
-      if(this.timer) this.timer.unsubscribe();
-      
+        if (this.mouseEvents) this.mouseEvents.unsubscribe();
+        if (this.timer) this.timer.unsubscribe();
     }
 }

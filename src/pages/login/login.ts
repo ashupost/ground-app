@@ -56,8 +56,7 @@ export class LoginPage {
         if (this.userInformation.accountType === 'phone') {
           this.userInformation.name = res.phoneNumber;
         }
-       
-       // this.doLogin();
+        this.doLogin();
       }
     });
   }
