@@ -5,22 +5,20 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
-import { UserDetails, UserStatus, AddressUser } from '../../app/sources/model/userdetails';
+import { UserDetails, UserStatus } from '../../app/sources/model/userdetails';
 import { GoogleLoginService } from '../../app/sources/services/google-login.service';
 import { FaceBookLoginService } from '../../app/sources/services/facebook-login.service';
-import { StoreKey } from '../../app/sources/model/store-key.enum';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { SaveUserGeolocationService } from '../../app/sources/services/save-user-geolocation.service';
 import { GMapsWapperService } from '../../app/sources/google/google.map.wapper.service';
 import { UtilService } from '../../app/sources/services/util.service';
-import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
 
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [GoogleLoginService, FaceBookLoginService, UtilService, GroundAuthService]
+  providers: [GoogleLoginService, FaceBookLoginService, UtilService]
 })
 export class LoginPage {
 
@@ -35,7 +33,6 @@ export class LoginPage {
     private __alertCtrl: AlertController,
     private __modalCtrl: ModalController,
     private __utilService: UtilService,
-    private __gas: GroundAuthService,
     private __faceBookLoginService: FaceBookLoginService,
     private __groundFirebaseStoreService: GroundFirebaseStoreService,
     private __saveUserGeolocationService: SaveUserGeolocationService,

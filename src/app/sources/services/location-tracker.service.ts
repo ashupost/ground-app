@@ -3,7 +3,6 @@ import 'rxjs/add/operator/map';
 import { NgZone } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import 'rxjs/add/operator/filter';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class LocationTrackerService {

@@ -4,7 +4,6 @@ import { IonicPage, NavController, Nav } from 'ionic-angular';
 import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { LoginPage } from '../login/login';
 import { PageInterface } from '../../app/sources/model/userdetails';
  
 @IonicPage()
