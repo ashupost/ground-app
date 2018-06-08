@@ -64,8 +64,6 @@ export class SettingsPage {
 
     let datePipe = new DatePipe('en-US');
     this.changeDate = datePipe.transform(new Date(), 'yyyy-MM-dd');
-
-
   }
 
   handleChangeDate(changeDate: string) {

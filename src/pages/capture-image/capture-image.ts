@@ -115,6 +115,7 @@ export class CaptureImagePage implements OnInit {
     value.dataType = 'string';
     value.photoType = PhotoStatus.MAIN;
     this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
+    this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, this.data.image);
   }
 
   fileChangeListener($event) {

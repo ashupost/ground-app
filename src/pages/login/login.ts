@@ -57,7 +57,7 @@ export class LoginPage {
           this.userInformation.name = res.phoneNumber;
         }
        
-        this.doLogin();
+       // this.doLogin();
       }
     });
   }

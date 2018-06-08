@@ -2,6 +2,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Nav } from 'ionic-angular';
 import { AuthServiceStatusService } from '../../app/sources/status-service/auth-service';
+import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
+import { AngularFireAuth } from 'angularfire2/auth';
  
 export interface PageInterface {
   title: string;
@@ -23,7 +25,8 @@ export class MenuPage {
  
   // Reference to the app's root nav
   @ViewChild(Nav) nav: Nav;
- 
+  user: any = {};
+  
   pages: PageInterface[] = [
     { title: 'Global User', pageName: 'TabsPage', tabComponent: 'Tab1Page', index: 0, icon: 'people' },
     { title: 'Tab 2', pageName: 'TabsPage', tabComponent: 'Tab2Page', index: 1, icon: 'chatbubbles' },
@@ -38,9 +41,23 @@ export class MenuPage {
    
    
   ];
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad CaptureImagePage');
+    this.afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(data =>{
+          this.user = data;
+        });
+      }
+    });
+  }
+
   
-  constructor(public navCtrl: NavController, public __authService: AuthServiceStatusService) { 
-    
+  constructor(public navCtrl: NavController, 
+    public __authService: AuthServiceStatusService,
+    private afAuth: AngularFireAuth,
+    private _groundFirebaseStoreService: GroundFirebaseStoreService) { 
+ 
   }
 
   logout(){

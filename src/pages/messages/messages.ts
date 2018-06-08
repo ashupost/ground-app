@@ -38,9 +38,11 @@ export class MessagesPage {
     {
    
     this.toUserDetails = this._navParams.get('toUserDetails'); // other user
-    this._groundDatabaseStatusService.getUserByid(this.toUserDetails.uid);
     this.fromId = this._navParams.get('user').uid; // this myself
-    this.user = this._navParams.get('user'); // my user
+    
+   // this.user = this._navParams.get('user'); // my user
+
+  
 
     this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.fromId).subscribe(mydata => {
       const point1: GeoCordinate = mydata[0];
@@ -57,6 +59,11 @@ export class MessagesPage {
   }
 
   ionViewWillLoad() {
+    this._groundFirebaseStoreService.getUserByid(this.fromId).subscribe(data =>{
+      this.user = data;
+    });
+  
+
     this._groundFirebaseStoreService.getMessages(this.fromId, this.toUserDetails.uid)
       .subscribe(res => {
         this.messages = res;

@@ -6,15 +6,17 @@
     </ion-toolbar>
     </ion-navbar>
   </ion-header>
-
+ 
 
    <ion-content>
       <ion-item>
           <ion-avatar item-start>
-            <img src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+            <img  *ngIf="user.photoURL" [src]="user.photoURL">
+            <img  *ngIf="!user.photoURL" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
           </ion-avatar>
-          <h2>Mritunjay Kumar</h2>
-          <p>www.m-kumar.in</p>
+          <h2><span *ngIf="user.name">{{user.name}}</span></h2>
+          <p><span *ngIf="user.email">{{user.email}}</span></p>
+          <p><span *ngIf="user.uid">{{user.uid}}</span></p>
       </ion-item>
 
     <ion-list>

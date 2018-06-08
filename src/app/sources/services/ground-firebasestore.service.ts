@@ -101,10 +101,10 @@ export class GroundFirebaseStoreService {
         this.__zone.run(() => {
             this.__afs.collection<UserDetails>('users')
                 .doc(userId)
-                .update({
+                .set({
                     photoURL: value,
                     timestamp: timestamp
-                });
+                }, {merge: true});
         });
     }
 

@@ -27,7 +27,8 @@
   <div class="message-wrap">
 
     <div *ngFor="let msg of messages" class="message" [class.left]="msg.fromId !== fromId " [class.right]="msg.fromId === fromId">
-      <img class="user-img" [src]="msg.fromId === fromId ? user.photoURL : toUserDetails.photoURL" alt="" src="">
+      <img class="user-img" [src]="msg.fromId === fromId ? user.photoURL : toUserDetails.photoURL" 
+      alt="" src="">
       <ion-spinner name="dots" *ngIf="!msg.timestamp"></ion-spinner>
       <div class="msg-detail">
         <div class="msg-info">
@@ -39,6 +40,7 @@
           <p class="line-breaker ">{{msg.message}}</p>
         </div>
       </div>
+    
     </div>
   </div>
 
