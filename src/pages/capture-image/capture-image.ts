@@ -67,13 +67,6 @@ export class CaptureImagePage implements OnInit {
       }
     });
   }
-  /*
-    cropped(bounds: Bounds) {
-      this.croppedHeight = bounds.bottom - bounds.top;
-      this.croppedWidth = bounds.right - bounds.left;
-      this.canSave = false;
-    }
-    */
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaptureImagePage');
@@ -85,11 +78,6 @@ export class CaptureImagePage implements OnInit {
       .then((data: any) => {
         let image: any = new Image();
         image.src = data;
-        //////////////////
-
-
-
-        //////////////////////
         this.ImageCropper.setImage(image);
       })
       .catch((error: any) => {
