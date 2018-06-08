@@ -19,7 +19,7 @@
     <ion-list>
       <button ion-item menuClose *ngFor="let page of pages" (click)="openPage(page)">
            <ion-icon item-start [name]="page.icon" [color]="isActive(page)"></ion-icon>
-          {{ p.title }}
+          {{ page.title }}
         </button>
     </ion-list>
     <ion-item>

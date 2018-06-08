@@ -9,9 +9,6 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
 import { ImageCropperComponent, CropperSettings, Bounds, CropPosition } from "ngx-img-cropper";
 
-
-
-
 @IonicPage()
 @Component({
   selector: 'page-capture-image',
@@ -40,10 +37,11 @@ export class CaptureImagePage implements OnInit {
   }
 
   isCordova: boolean;
-  base64Image: any;
+  //base64Image: any;
   user: Observable<firebase.User>;
   currentUserId: string;
   @ViewChild('cropper', undefined) ImageCropper: ImageCropperComponent;
+
   public cropperSettings;
   public croppedWidth: Number;
   public croppedHeight: Number;
@@ -69,7 +67,6 @@ export class CaptureImagePage implements OnInit {
       }
     });
   }
-  cropPosition: CropPosition;
   /*
     cropped(bounds: Bounds) {
       this.croppedHeight = bounds.bottom - bounds.top;
@@ -114,8 +111,10 @@ export class CaptureImagePage implements OnInit {
     value.data = this.data.image;
     value.dataType = 'string';
     value.photoType = PhotoStatus.MAIN;
-    this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
-    this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, this.data.image);
+    this.__zone.run(() => {
+      this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
+      this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, this.data.image);
+    });
   }
 
   fileChangeListener($event) {
@@ -125,32 +124,4 @@ export class CaptureImagePage implements OnInit {
       this.ImageCropper.setImage(image);
     });
   }
-
-
-  takePhoto($event: any | null) {
-    this.__zone.run(() => {
-      if (this.isCordova) {
-        this.__cameraService.selectImageFromGallary().then((imageData) => {
-          this.base64Image = imageData;
-          let value = new PictureDetail();
-          value.data = this.base64Image;
-          value.dataType = 'string';
-          value.photoType = PhotoStatus.MAIN;
-          this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
-
-        }, (err) => { console.log(err); });
-      } else {
-        this.__cameraService.getFileBase64($event.target.files[0]).then(data => {
-          this.base64Image = data;
-          let value = new PictureDetail();
-          value.data = data;
-          value.dataType = 'string';
-          value.photoType = PhotoStatus.MAIN;
-          this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
-        });
-      }
-    });
-  }
-
-
 }
