@@ -32,10 +32,8 @@ export class MenuPage {
     { title: 'Global User', pageName: 'TabsPage', tabComponent: 'Tab1Page', index: 0, icon: 'people' },
     { title: 'Online User', pageName: 'TabsPage', tabComponent: 'Tab3Page', index: 1, icon: 'contact' },
   
-    { title: 'Special', pageName: 'SpecialPage', icon: 'shuffle' },
-    { title: 'ContactPage', pageName: 'ContactPage', icon: 'image' },
     { title: 'Users', pageName: 'UsersPage', icon: 'man' },
-    { title: 'SettingsPage', pageName: 'SettingsPage', icon: 'settings' },
+    { title: 'Profile', pageName: 'SettingsPage', icon: 'settings' },
     { title: 'AboutPage', pageName: 'AboutPage', icon: 'image' },
     { title: 'PersonalPage', pageName: 'PersonalPage', icon: 'image' }
    
