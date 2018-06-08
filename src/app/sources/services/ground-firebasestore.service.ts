@@ -15,7 +15,7 @@ export class GroundFirebaseStoreService {
         private __afs: AngularFirestore
     ) { }
 
-    getPhotoUserData(userId: string): Observable<any[]> {
+    getPhotoUserData(userId: string): Observable<PictureDetail[]> {
         let timestamp$ = new BehaviorSubject(null);
         return Observable.combineLatest(
             timestamp$
@@ -29,7 +29,7 @@ export class GroundFirebaseStoreService {
                 })
                 .snapshotChanges().map(actions => {
                     return actions.map(a => {
-                        const data = a.payload.doc.data();
+                        const data = a.payload.doc.data() as PictureDetail;
                         data.uid = a.payload.doc.id;
                         return { ...data };
                     });

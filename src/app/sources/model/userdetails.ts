@@ -15,6 +15,7 @@ export class PictureDetail {
     dataType: string;
     data: any;
     timestamp: firebase.firestore.FieldValue;
+    uid: string;
     
 }
 

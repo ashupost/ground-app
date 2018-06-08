@@ -31,8 +31,8 @@ export class SettingsPage {
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
   isCordova: boolean;
-  // photos: Observable<any[]>;
-  photos: any = [];
+  // photos: Observable<PictureDetail[]>;
+   photos: PictureDetail[] = [];
 
 
   @ViewChild('changeTime') changeDateTime: DateTime;
@@ -93,29 +93,22 @@ export class SettingsPage {
     this._groundFirebaseStoreService.setUserData(this.currentUserId, $event, param);
   }
 
-  private messagesLoader1: Subscription;
-  private messagesLoader2: Subscription;
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PicturePage');
     this.changeDateTime.updateText = () => { };
-    this.afAuth.authState.subscribe(res => {
-      if (res && res.uid) {
-        this.messagesLoader1 = this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
-          this.photos = data;
-        });
 
-        this.messagesLoader2 = this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(data => {
-          this.name = data.name;
-          this.gender = data.gender;
-        });
-      }
+    this.afAuth.authState.switchMap((firebaseUser: firebase.User) => {
+      return this._groundFirebaseStoreService.getUserByid(firebaseUser.uid);
+    }).switchMap((res) => {
+      this.name = res.name;
+      this.gender = res.gender;
+      return this._groundFirebaseStoreService.getPhotoUserData(res.uid);
+    }).subscribe((data: PictureDetail[]) => {
+      this.photos = data;
     });
   }
-  ionViewDidLeave() {
-    this.messagesLoader1.unsubscribe();
-    this.messagesLoader2.unsubscribe();
 
+  ionViewDidLeave() {
   }
 
   takePhoto() {

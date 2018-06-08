@@ -42,7 +42,7 @@ export class MessagesPage {
     
    // this.user = this._navParams.get('user'); // my user
 
-  
+   
 
     this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.fromId).subscribe(mydata => {
       const point1: GeoCordinate = mydata[0];
@@ -56,6 +56,7 @@ export class MessagesPage {
           this.distance = this._distanceService.getDistanceByGeoCordinate(point1, point2);
         });
     });
+
   }
 
   ionViewWillLoad() {
