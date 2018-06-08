@@ -29,8 +29,7 @@ export class MenuPage {
   
   pages: PageInterface[] = [
     { title: 'Global User', pageName: 'TabsPage', tabComponent: 'Tab1Page', index: 0, icon: 'people' },
-    { title: 'Tab 2', pageName: 'TabsPage', tabComponent: 'Tab2Page', index: 1, icon: 'chatbubbles' },
-    { title: 'Online User', pageName: 'TabsPage', tabComponent: 'Tab3Page', index: 2, icon: 'contact' },
+    { title: 'Online User', pageName: 'TabsPage', tabComponent: 'Tab3Page', index: 1, icon: 'contact' },
   
     { title: 'Special', pageName: 'SpecialPage', icon: 'shuffle' },
     { title: 'ContactPage', pageName: 'ContactPage', icon: 'image' },
