@@ -11,8 +11,7 @@
     <ion-slide *ngFor="let photo of photos">
       <ion-card>
         <img [src]="photo.data" />
-        <div class="card-title">My Title</div>
-        <div class="card-subtitle">My Subtitle</div>
+        <div class="card-subtitle">{{userInfo.name}}</div>
       </ion-card>
     </ion-slide>
 </ion-slides>
