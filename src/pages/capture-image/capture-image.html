@@ -33,7 +33,7 @@
   </div>
   -->
 
-  <button ion-button block color="secondary" (click)="saveImage()">Save Image</button>
+  <button ion-button block color="secondary" *ngIf="data.image && data" (click)="saveImage()">Save Image</button>
 
 
 </ion-content>
