@@ -32,7 +32,7 @@ export class MenuPage {
     { title: 'Special', pageName: 'SpecialPage', icon: 'shuffle' },
     { title: 'ContactPage', pageName: 'ContactPage', icon: 'image' },
     { title: 'Users', pageName: 'UsersPage', icon: 'man' },
-    { title: 'PicturePage', pageName: 'PicturePage', icon: 'settings' },
+    { title: 'SettingsPage', pageName: 'SettingsPage', icon: 'settings' },
     { title: 'AboutPage', pageName: 'AboutPage', icon: 'image' },
     { title: 'PersonalPage', pageName: 'PersonalPage', icon: 'image' }
    

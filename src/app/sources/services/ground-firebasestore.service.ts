@@ -24,7 +24,7 @@ export class GroundFirebaseStoreService {
                 .doc(userId)
                 .collection('photo', ref => {
                     let query: firebase.firestore.Query = ref;
-                    query = query.orderBy('timestamp', 'asc');
+                    query = query.orderBy('timestamp', 'desc');
                     return query;
                 })
                 .snapshotChanges().map(actions => {

@@ -15,10 +15,10 @@ import {  Subscription } from 'rxjs';
 
 @IonicPage()
 @Component({
-  selector: 'page-picture',
-  templateUrl: 'picture.html'
+  selector: 'page-settings',
+  templateUrl: 'settings.html'
 })
-export class PicturePage {
+export class SettingsPage {
 
   uploadPercent: Observable<number>;
   downloadURL: Observable<string | null>;
