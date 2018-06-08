@@ -75,8 +75,6 @@ private  getaddress(results: any): AddressUser {
   }
  
   geocodeAddress(position: Geoposition): Observable<any> {
-    let location = 'Amsterdam';
-    console.log('Start geocoding!');
     return this.waitForMapsToLoad().pipe(
       switchMap(() => {
         return new Observable(observer => {
@@ -94,6 +92,4 @@ private  getaddress(results: any): AddressUser {
       })
     )
   }
-
-
 }
