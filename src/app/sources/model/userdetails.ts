@@ -1,6 +1,14 @@
 
 import firebase from 'firebase';
 
+export interface PageInterface {
+    title: string;
+    pageName: string;
+    tabComponent?: any;
+    index?: number;
+    icon: string;
+  }
+  
 
 export class PictureDetail {
     photoType: PhotoStatus;

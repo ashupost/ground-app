@@ -5,14 +5,7 @@ import { AuthServiceStatusService } from '../../app/sources/status-service/auth-
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
- 
-export interface PageInterface {
-  title: string;
-  pageName: string;
-  tabComponent?: any;
-  index?: number;
-  icon: string;
-}
+import { PageInterface } from '../../app/sources/model/userdetails';
  
 @IonicPage()
 @Component({
