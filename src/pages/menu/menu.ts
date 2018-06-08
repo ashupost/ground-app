@@ -63,7 +63,7 @@ export class MenuPage {
 
   logout(){
      this.__authService.signOut();
-     this.navCtrl.setRoot(LoginPage);
+     this.navCtrl.setRoot('LoginPage');
   }
  
   openPage(page: PageInterface) {

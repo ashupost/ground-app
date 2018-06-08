@@ -109,8 +109,8 @@ export class AuthServiceStatusService {
 
     /// Make sure to close these subscriptions when no longer needed.
     public signOut() {
-        this.__afAuth.auth.signOut();
         this.updateStatus(UserStatus.SIGNOUT);
+           this.__afAuth.auth.signOut();
         if (this.mouseEvents) this.mouseEvents.unsubscribe();
         if (this.timer) this.timer.unsubscribe();
     }

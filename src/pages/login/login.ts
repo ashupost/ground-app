@@ -75,7 +75,7 @@ export class LoginPage {
         this.__navCtrl.setRoot('MenuPage');
       }
     });
- }
+  }
 
   facebookLogin() {
     this.__faceBookLoginService.facebookLogin();
