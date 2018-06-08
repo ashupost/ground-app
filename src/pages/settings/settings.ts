@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 import { CameraService } from '../../app/sources/camera/camera.service';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CaptureImagePage } from '../capture-image/capture-image';
-import {  Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -47,12 +47,12 @@ export class SettingsPage {
     private __platform: Platform,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
-   // this.isCordova = this.__utilService.isCordova;
+    // this.isCordova = this.__utilService.isCordova;
 
     this.__platform.ready().then(() => {
-    if (this.__platform.is('cordova')) this.isCordova= true;
-  else this.isCordova= false;
-  });
+      if (this.__platform.is('cordova')) this.isCordova = true;
+      else this.isCordova = false;
+    });
 
 
     this.user = this.afAuth.authState;
@@ -97,13 +97,13 @@ export class SettingsPage {
 
   private messagesLoader1: Subscription;
   private messagesLoader2: Subscription;
- 
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad PicturePage');
     this.changeDateTime.updateText = () => { };
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
-      this.messagesLoader1= this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
+        this.messagesLoader1 = this._groundFirebaseStoreService.getPhotoUserData(res.uid).subscribe(data => {
           this.photos = data;
         });
 
@@ -114,15 +114,15 @@ export class SettingsPage {
       }
     });
   }
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     this.messagesLoader1.unsubscribe();
     this.messagesLoader2.unsubscribe();
 
   }
 
   takePhoto() {
-      this.__app.getRootNav().push(CaptureImagePage);
-   }
+    this.__app.getRootNav().push(CaptureImagePage);
+  }
 
   removePhoto(uid: string) {
     const confirm = this.alertCtrl.create({

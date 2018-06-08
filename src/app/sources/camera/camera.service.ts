@@ -48,7 +48,6 @@ export class CameraService {
         });
     }
 
-
     getFileBase64(file): Promise<{}> {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();

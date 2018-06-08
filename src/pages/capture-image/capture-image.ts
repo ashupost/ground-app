@@ -20,7 +20,6 @@ import { ImageCropperComponent, CropperSettings, Bounds, CropPosition } from "ng
 export class CaptureImagePage implements OnInit {
 
   ngOnInit() {
-    
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 50;
     this.cropperSettings.height = 50;
@@ -50,37 +49,25 @@ export class CaptureImagePage implements OnInit {
   public croppedHeight: Number;
   public data: any;
   public canSave: boolean = true;
-  // $event: any;
 
   constructor(public navCtrl: NavController,
     private __utilService: UtilService,
     private __zone: NgZone,
     private __cameraService: CameraService,
-
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
-
     private afAuth: AngularFireAuth,
     private __platform: Platform,
     public _navParams: NavParams) {
-
-   // this.isCordova = this.__utilService.isCordova;
-
-      this.__platform.ready().then(() => {
-     if (this.__platform.is('cordova')) this.isCordova= true;
-    else this.isCordova= false;
-     });
-
-
-
-
+    this.__platform.ready().then(() => {
+      if (this.__platform.is('cordova')) this.isCordova = true;
+      else this.isCordova = false;
+    });
     this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
         this.currentUserId = res.uid;
       }
     });
-    // this.$event = this._navParams.get('event'); // my user
-    //this.fileChangeListener(this.$event);  
   }
   cropPosition: CropPosition;
   /*
@@ -119,8 +106,8 @@ export class CaptureImagePage implements OnInit {
         console.dir(error);
       });
   }
- 
-  
+
+
   saveImage() {
     console.dir(this.data.image);
     let value = new PictureDetail();
@@ -162,7 +149,6 @@ export class CaptureImagePage implements OnInit {
         });
       }
     });
-
   }
 
 
