@@ -71,7 +71,8 @@ export class AuthServiceStatusService {
 
     private updateOnIdle() {
         this.mouseEvents = Observable.fromEvent(document, 'mousemove')
-            .debounceTime(5000)
+            .map(event => event)
+            .debounceTime(2000)
             .distinctUntilChanged()
            // .throttleTime(2000)
             .subscribe(() => {
