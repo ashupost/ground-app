@@ -9,7 +9,6 @@
             <path url="/__/auth/callback" />
         </host>
     </universal-links>
-    <content original-src="index.html" src="http://192.168.1.70:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -117,5 +116,6 @@
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
-    <engine name="android" spec="7.0.0" />
+    <content original-src="index.html" src="http://192.168.1.70:8100" />
+    <engine name="android" spec="^7.0.0" />
 </widget>

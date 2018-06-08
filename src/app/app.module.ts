@@ -41,7 +41,6 @@ import { GroundAuthService } from './sources/services/ground.auth.service';
 import { CaptureImagePageModule } from '../pages/capture-image/capture-image.module';
 import { ImageCropperModule } from  "ngx-img-cropper";
 
-
 export const firebaseConfig = {
   apiKey: "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8",
   authDomain: "ground-firebase.firebaseapp.com",
