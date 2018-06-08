@@ -111,7 +111,7 @@ export class CaptureImagePage implements OnInit {
 
 
   saveImage() {
-    console.dir(this.data.image);
+   // console.dir(this.data.image);
     let value = new PictureDetail();
     value.data = this.data.image; // This is base64 image string to store in db.
     value.dataType = 'string';
