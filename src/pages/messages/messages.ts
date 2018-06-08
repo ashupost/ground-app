@@ -34,36 +34,51 @@ export class MessagesPage {
     public _navCtrl: NavController,
     private _distanceService: DistanceService,
     private _groundDatabaseStatusService: GroundDatabaseStatusService,
-    private _groundFirebaseStoreService: GroundFirebaseStoreService) 
-    {
-   
+    private _groundFirebaseStoreService: GroundFirebaseStoreService) {
+
     this.toUserDetails = this._navParams.get('toUserDetails'); // other user
     this.fromId = this._navParams.get('user').uid; // this myself
-    
-   // this.user = this._navParams.get('user'); // my user
 
-   
+    // this.user = this._navParams.get('user'); // my user
 
-    this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.fromId).subscribe(mydata => {
-      const point1: GeoCordinate = mydata[0];
-      this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.toUserDetails.uid)
-        .subscribe(otherdata => {
+    /////////////////////////////
+    let ob1 = this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.fromId);
+    ob1.mergeMap((mydata) => {
+      return this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.toUserDetails.uid)
+        .map((otherdata) => {
+          const point1: GeoCordinate = mydata[0];
           let point2: GeoCordinate = otherdata[0];
           if (!point2) {
             point2 = new GeoCordinate();
           }
           this.otherTimestamp = point2.timestamp;
           this.distance = this._distanceService.getDistanceByGeoCordinate(point1, point2);
-        });
+        })
     });
+
+    ///////////////////////////
+    /*
+        this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.fromId).subscribe(mydata => {
+          const point1: GeoCordinate = mydata[0];
+          this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.toUserDetails.uid)
+            .subscribe(otherdata => {
+              let point2: GeoCordinate = otherdata[0];
+              if (!point2) {
+                point2 = new GeoCordinate();
+              }
+              this.otherTimestamp = point2.timestamp;
+              this.distance = this._distanceService.getDistanceByGeoCordinate(point1, point2);
+            });
+        });
+    */
 
   }
 
   ionViewWillLoad() {
-    this._groundFirebaseStoreService.getUserByid(this.fromId).subscribe(data =>{
+    this._groundFirebaseStoreService.getUserByid(this.fromId).subscribe(data => {
       this.user = data;
     });
-  
+
 
     this._groundFirebaseStoreService.getMessages(this.fromId, this.toUserDetails.uid)
       .subscribe(res => {
