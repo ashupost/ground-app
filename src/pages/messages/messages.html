@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar color="secondary">
     <ion-title>
-      <img *ngIf="user.photoURL" class="user-img-header" [src]="toUserDetails.photoURL" height="40">
-      <img *ngIf="!user.photoURL" class="user-img-header" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+      <img *ngIf="toUserDetails.photoURL" class="user-img-header" [src]="toUserDetails.photoURL" height="40">
+      <img *ngIf="!toUserDetails.photoURL" class="user-img-header" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
     
       <ion-icon ios="ios-disc" [color]="toUserDetails.status" md="md-disc"></ion-icon>
        
@@ -14,7 +14,6 @@
       {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }}
     
     </ion-title>
-
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="moveToOtherUserdetails()">
         <ion-icon name="more"></ion-icon>
