@@ -26,7 +26,7 @@ export class ModalPage {
     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
   }
 
-  signInPhone1(number: number) {
+  signInPhone(number: number) {
     this._phoneLoginService.signInPhone(number, this.recaptchaVerifier);
   }
 
