@@ -20,7 +20,7 @@ export class MovieService {
             let query: firebase.firestore.Query = ref;
             query = query.orderBy('uid');
             if (lastKey) query = query.startAfter(lastKey)
-            query = query.limit(2);
+            query = query.limit(batch);
             return query;
         }).valueChanges();
     }
