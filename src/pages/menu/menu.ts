@@ -30,7 +30,9 @@ export class MenuPage {
     { title: 'Users', pageName: 'UsersPage', icon: 'man' },
     { title: 'Profile', pageName: 'SettingsPage', icon: 'settings' },
     { title: 'AboutPage', pageName: 'AboutPage', icon: 'image' },
-    { title: 'PersonalPage', pageName: 'PersonalPage', icon: 'image' }
+    { title: 'PersonalPage', pageName: 'PersonalPage', icon: 'image' },
+    { title: 'ScrollPage', pageName: 'ScrollPage', icon: 'image' }
+
   ];
 
   ionViewDidLoad() {
