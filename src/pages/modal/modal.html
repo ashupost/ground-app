@@ -12,8 +12,9 @@
 <ion-content padding>
   <div id="recaptcha-container"></div>
   <ion-item>
-    <ion-label color="primary" stacked>Phone Number [Don't add +] ISD and Mobile Number</ion-label>
-    <ion-input type="number" [(ngModel)]="phoneNumber" placeholder="Enter Phone Number  Ex : 919922385632"></ion-input>
+    <ion-label color="primary" floating>Enter Phone Number [Don't add +] ISD and Mobile Number</ion-label>
+    <ion-input type="number" [(ngModel)]="phoneNumber"></ion-input>
   </ion-item>
   <button ion-button id="sign-in-button" (click)="signInPhone1(phoneNumber)">Sign In Phone</button>
 </ion-content>
+
