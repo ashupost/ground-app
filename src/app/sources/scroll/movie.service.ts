@@ -19,7 +19,7 @@ export class MovieService {
         return this.__afs.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
             query = query.orderBy('uid');
-            if (lastKey) query = query.startAfter(lastKey)
+            if (lastKey) query = query.startAt(lastKey)
             query = query.limit(batch);
             return query;
         }).valueChanges();

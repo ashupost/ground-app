@@ -11,7 +11,7 @@
 
 
 <ion-content padding>
-
+  <!--
   <div *ngIf="items$ | async; let items; else loading">
     <ul>
       <li *ngFor="let item of items">
@@ -21,5 +21,33 @@
     </ul>
     <div *ngIf="items.length === 0">No results, try clearing filters</div>
   </div>
+-->
+
+  <h1>Movies</h1>
+
+  <div *ngFor="let movie of movies | async">
+    <h2>{{ movie?.uid }}</h2>
+    <p>Released in {{ movie?.name }}</p>
+
+    <img [src]="movie?.photoURL" width="120px">
+    <img [src]="movie?.photoURL" width="120px">
+    <img [src]="movie?.photoURL" width="120px">
+    <img [src]="movie?.photoURL" width="120px">
+  </div>
+
+  <div infiniteScroll [infiniteScrollDistance]="2" 
+  [infiniteScrollThrottle]="1000" 
+  (scrolled)="onScroll()">
+  </div>
+
+  <div *ngIf="!finished">
+    Loading more movies...
+  </div>
+
+
+  <div *ngIf="finished">
+    End of database... That's all folks!
+  </div>
+
 </ion-content>
 
