@@ -17,7 +17,7 @@ export class MovieService {
     }
     public getUsers(batch, lastKey?): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
-            let query: firebase.firestore.Query = ref;
+            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
             query = query.orderBy('uid');
             if (lastKey) query = query.startAt(lastKey)
             query = query.limit(batch);
@@ -28,7 +28,7 @@ export class MovieService {
     public getUsers1(): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
-            query = query.orderBy('uid');
+            query = query.orderBy('timestamp', 'desc');
             return query;
         }).valueChanges();
     }

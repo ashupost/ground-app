@@ -23,7 +23,7 @@ export class ScrollPage implements OnInit {
   items$: Observable<UserDetails[]>;
   movies = new BehaviorSubject([]);
 
-  batch = 2        // size of each query
+  batch = 3        // size of each query
   lastKey = ''      // key to offset next query from
   finished = false  // boolean when end of database is reached
 
