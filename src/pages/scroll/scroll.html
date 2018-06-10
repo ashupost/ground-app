@@ -18,25 +18,25 @@
     <p>{{item.uid}}</p>
   </div>
 
-  <div *ngFor="let movie of movies | async">
-    <h2>{{ movie?.uid }}</h2>
-    <p>Released in {{ movie?.name }}</p>
+  <ion-list>
+    <ion-item *ngFor="let movie of movies | async">
+        <h2>{{ movie?.uid }}</h2>
+        <p>Released in {{ movie?.name }}</p>
+    
+        <img [src]="movie?.photoURL" width="520px">
+        <img [src]="movie?.photoURL" width="520px">
+        <img [src]="movie?.photoURL" width="520px">
+        <img [src]="movie?.photoURL" width="520px">
+    </ion-item>
+  </ion-list>
 
-    <img [src]="movie?.photoURL" width="520px">
-    <img [src]="movie?.photoURL" width="520px">
-    <img [src]="movie?.photoURL" width="520px">
-    <img [src]="movie?.photoURL" width="520px">
-  </div>
-
-
-  <div class="search-results"
-             infiniteScroll
-            [infiniteScrollDistance]="2"
-            [infiniteScrollThrottle]="50"
-            [scrollWindow]="false"
-            (scrolled)="onScroll()">
-  </div>
-
+  
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <div *ngIf="!finished">
     Loading more movies...
@@ -46,6 +46,5 @@
   <div *ngIf="finished">
     End of database... That's all folks!
   </div>
-
 </ion-content>
 

@@ -211,6 +211,17 @@ export class GroundFirebaseStoreService {
             }));
     }
 
+    public getUsersScrollPagination(batch, lastKey?): Observable<UserDetails[]> {
+        return this.__afs.collection<UserDetails>('users', ref => {
+            let query: firebase.firestore.Query = ref;
+            query = query.orderBy('uid');
+            if (lastKey) query = query.startAt(lastKey)
+            query = query.limit(batch);
+            return query;
+        }).valueChanges();
+    }
+
+
     public getUsersOnline(): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
