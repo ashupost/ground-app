@@ -8,10 +8,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
 import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
-import { CameraService } from '../../app/sources/camera/camera.service';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CaptureImagePage } from '../capture-image/capture-image';
-import { Subscription } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -31,13 +29,11 @@ export class SettingsPage {
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
   isCordova: boolean;
-  // photos: Observable<PictureDetail[]>;
   photos: PictureDetail[] = [];
 
 
   @ViewChild('changeTime') changeDateTime: DateTime;
-  //currentUserPhotoURL: Observable<string | null>;
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private __app: App,
     private __zone: NgZone,
@@ -47,8 +43,7 @@ export class SettingsPage {
     private __platform: Platform,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
-    // this.isCordova = this.__utilService.isCordova;
-
+  
     this.__platform.ready().then(() => {
       if (this.__platform.is('cordova')) this.isCordova = true;
       else this.isCordova = false;
