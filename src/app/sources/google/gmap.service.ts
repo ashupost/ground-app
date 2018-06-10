@@ -50,7 +50,7 @@ export class GMapsService {
     )
   }
 
-private  getaddress(results: any): AddressUser {
+  private getaddress(results: any): AddressUser {
     let storableLocation: any = {};
     for (let ac = 0; ac < results[0].address_components.length; ac++) {
       let component = results[0].address_components[ac];
@@ -73,7 +73,7 @@ private  getaddress(results: any): AddressUser {
     };
     return storableLocation
   }
- 
+
   geocodeAddress(position: Geoposition): Observable<any> {
     return this.waitForMapsToLoad().pipe(
       switchMap(() => {

@@ -39,7 +39,7 @@ import { Camera } from '@ionic-native/camera';
 import { DisplayUserPageModule } from '../pages/display-user/display-user.module';
 import { GroundAuthService } from './sources/services/ground.auth.service';
 import { CaptureImagePageModule } from '../pages/capture-image/capture-image.module';
-import { ImageCropperModule } from  "ngx-img-cropper";
+import { ImageCropperModule } from "ngx-img-cropper";
 import { MovieService } from './sources/scroll/movie.service';
 
 export const firebaseConfig = {
