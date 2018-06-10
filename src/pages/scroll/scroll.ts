@@ -62,6 +62,7 @@ export class ScrollPage implements OnInit {
           this.finished = true
         }
         /// Concatenate new movies to current movies
+       // this.movies.next(newMovies);
         this.movies.next(_.concat(currentMovies, newMovies));
       })
       .take(1)
