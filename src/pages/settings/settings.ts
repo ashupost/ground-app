@@ -32,7 +32,7 @@ export class SettingsPage {
   changeDate = '';
   isCordova: boolean;
   // photos: Observable<PictureDetail[]>;
-   photos: PictureDetail[] = [];
+  photos: PictureDetail[] = [];
 
 
   @ViewChild('changeTime') changeDateTime: DateTime;
@@ -78,7 +78,7 @@ export class SettingsPage {
   }
 
   setSettingData($event: any, param: string) {
-   // console.log('$event', $event);
+    // console.log('$event', $event);
     this._groundFirebaseStoreService.setSettingData(this.currentUserId, $event, param);
   }
 
@@ -89,7 +89,7 @@ export class SettingsPage {
 
 
   setUserData($event: any, param: string) {
-//    console.log('$event', $event);
+    //    console.log('$event', $event);
     this._groundFirebaseStoreService.setUserData(this.currentUserId, $event, param);
   }
 
@@ -97,14 +97,21 @@ export class SettingsPage {
   ionViewDidLoad() {
     this.changeDateTime.updateText = () => { };
 
-    this.afAuth.authState.switchMap((firebaseUser: firebase.User) => {
-      return this._groundFirebaseStoreService.getUserByid(firebaseUser.uid);
-    }).switchMap((res) => {
-      this.name = res.name;
-      this.gender = res.gender;
-      return this._groundFirebaseStoreService.getPhotoUserData(res.uid);
-    }).subscribe((data: PictureDetail[]) => {
-      this.photos = data;
+    this.afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+
+        this._groundFirebaseStoreService.getPhotoUserData(res.uid)
+        .subscribe((data: PictureDetail[]) => {
+          this.photos = data;
+        });
+
+
+        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(res => {
+          this.name = res.name;
+          this.gender = res.gender;
+        });
+
+      }
     });
   }
 
