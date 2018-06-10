@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ground" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ground-app</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <description>Dating app by Ground Team.</description>
+    <author email="mritunjayemail@gmail.com" href="http://m-kumar.in/">Dating app by Ground Team</author>
     <universal-links>
         <host name="https://anhv3.app.goo.gl" scheme="https" />
         <host name="ground-firebase.firebaseapp.com " scheme="https">
