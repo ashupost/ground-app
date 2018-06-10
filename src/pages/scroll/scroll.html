@@ -22,16 +22,12 @@
     <ion-item *ngFor="let movie of movies | async">
         <h2>{{ movie?.uid }}</h2>
         <p>Released in {{ movie?.name }}</p>
-    
-        <img [src]="movie?.photoURL" width="520px">
-        <img [src]="movie?.photoURL" width="520px">
-        <img [src]="movie?.photoURL" width="520px">
         <img [src]="movie?.photoURL" width="520px">
     </ion-item>
   </ion-list>
 
   
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
     <ion-infinite-scroll-content
     loadingSpinner="bubbles"
     loadingText="Loading more data...">
