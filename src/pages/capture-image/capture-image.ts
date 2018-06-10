@@ -20,8 +20,8 @@ export class CaptureImagePage implements OnInit {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 50;
     this.cropperSettings.height = 50;
-    this.cropperSettings.croppedWidth = 512;
-    this.cropperSettings.croppedHeight = 512;
+    this.cropperSettings.croppedWidth = 4096;
+    this.cropperSettings.croppedHeight = 4096;
     this.cropperSettings.minWidth = 100;
     this.cropperSettings.minHeight = 100;
     this.cropperSettings.cropOnResize = true;
