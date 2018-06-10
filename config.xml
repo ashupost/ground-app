@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.groundframework.kumar" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.groundframework.kumar" version="2.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ground-app</name>
     <description>Dating app by Ground Team.</description>
     <author email="mritunjayemail@gmail.com" href="http://m-kumar.in/">Dating app by Ground Team</author>
@@ -116,6 +116,6 @@
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.70:8100" />
     <engine name="android" spec="7.0.0" />
 </widget>
