@@ -1,6 +1,6 @@
 {
   "name": "ground-app",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "author": "Mritunjay Kumar",
   "homepage": "http://m-kumar.in/",
   "private": true,
@@ -95,8 +95,6 @@
       },
       "cordova-plugin-camera": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

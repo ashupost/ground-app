@@ -8,26 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:329915457638:android:792981a293793b13",
+        "mobilesdk_app_id": "1:329915457638:android:a0e36d4833a658ca",
         "android_client_info": {
-          "package_name": "com.ground"
+          "package_name": "com.groundframework.kumar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "329915457638-0h2kbt0587l6g6elciafag5bujvnru7c.apps.googleusercontent.com",
+          "client_id": "329915457638-doqfsqcfn11vqu363be82p17i0p08ngt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ground",
+            "package_name": "com.groundframework.kumar",
             "certificate_hash": "6598dbf2e5015f9902fe59b7406d6ff1e6476512"
-          }
-        },
-        {
-          "client_id": "329915457638-r7d4bfd6rv21acur3cpdmtmobavumuud.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ground",
-            "certificate_hash": "71ef6eeb08dd9f0988c216a9138c1dc00e1f4cb6"
           }
         },
         {
@@ -56,10 +48,10 @@
               "client_type": 3
             },
             {
-              "client_id": "329915457638-em64c9hnmai6ncargrme9pjau9ph8phr.apps.googleusercontent.com",
+              "client_id": "329915457638-k29q78aq01c99gt3kth3fcic6r76dggu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ground"
+                "bundle_id": "com.groundframework.kumar"
               }
             }
           ]
