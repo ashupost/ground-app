@@ -20,6 +20,8 @@ export class GoogleLoginService {
         }
     }
     private async nativeGoogleLogin(): Promise<void> {
+        // GCP console: https://console.developers.google.com/apis/credentials?project=ground-firebase&folder&organizationId
+        
         try {
             const gplusUser = await this.__googlePlus.login({
                 'webClientId': '329915457638-vu7ves3ibu2sc8f1da0rimv0r7e7m59r.apps.googleusercontent.com',
