@@ -22,7 +22,7 @@ export class GoogleLoginService {
     private async nativeGoogleLogin(): Promise<void> {
         try {
             const gplusUser = await this.__googlePlus.login({
-                'webClientId': '329915457638-4648vo7u1kukboqe1e35te5u2e15hhpo.apps.googleusercontent.com',
+                'webClientId': '329915457638-vu7ves3ibu2sc8f1da0rimv0r7e7m59r.apps.googleusercontent.com',
                 'offline': true,
                 'scopes': 'profile email'
             });

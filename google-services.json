@@ -8,6 +8,61 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:329915457638:android:0459d13726220351",
+        "android_client_info": {
+          "package_name": "com.ground.dating"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329915457638-1f1lm33nh67i0a6ldf0lncffj1mnol37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ground.dating",
+            "certificate_hash": "6598dbf2e5015f9902fe59b7406d6ff1e6476512"
+          }
+        },
+        {
+          "client_id": "329915457638-4648vo7u1kukboqe1e35te5u2e15hhpo.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "329915457638-vu7ves3ibu2sc8f1da0rimv0r7e7m59r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcYCFXhkqvYLH5dN0IIlT7HylAwSOCbqg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329915457638-4648vo7u1kukboqe1e35te5u2e15hhpo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "329915457638-k29q78aq01c99gt3kth3fcic6r76dggu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.groundframework.kumar"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:329915457638:android:a0e36d4833a658ca",
         "android_client_info": {
           "package_name": "com.groundframework.kumar"
@@ -27,7 +82,7 @@
           "client_type": 3
         },
         {
-          "client_id": "329915457638-4648vo7u1kukboqe1e35te5u2e15hhpo.apps.googleusercontent.com",
+          "client_id": "329915457638-vu7ves3ibu2sc8f1da0rimv0r7e7m59r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
