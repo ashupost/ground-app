@@ -41,23 +41,6 @@ export class MessagesPage {
 
     // this.user = this._navParams.get('user'); // my user
 
-    /////////////////////////////
-    let ob1 = this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.fromId);
-    ob1.mergeMap((mydata) => {
-      return this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.toUserDetails.uid)
-        .map((otherdata) => {
-          const point1: GeoCordinate = mydata[0];
-          let point2: GeoCordinate = otherdata[0];
-          if (!point2) {
-            point2 = new GeoCordinate();
-          }
-          this.otherTimestamp = point2.timestamp;
-          this.distance = this._distanceService.getDistanceByGeoCordinate(point1, point2);
-        })
-    });
-
-    ///////////////////////////
-    /*
         this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.fromId).subscribe(mydata => {
           const point1: GeoCordinate = mydata[0];
           this._groundFirebaseStoreService.getLatestGeoCordinidateByUsers(this.toUserDetails.uid)
@@ -70,8 +53,7 @@ export class MessagesPage {
               this.distance = this._distanceService.getDistanceByGeoCordinate(point1, point2);
             });
         });
-    */
-
+   
   }
 
   ionViewWillLoad() {

@@ -9,7 +9,7 @@ export class RelativeTimePipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, args) {
-    if(!value) return 'NO_TIME';
+    if(!value) return '';
     return this.timeDifference(new Date(), new Date(value));
   }
 
