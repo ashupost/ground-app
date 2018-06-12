@@ -10,37 +10,61 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="cards-bg social-cards">
+   
 
-  <h1>Movies</h1>
+  <div *ngFor="let movie of movies | async">
 
-  <div *ngFor="let item of items$ | async">
-    <p>{{item.uid}}</p>
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-start>
+          <img [src]="movie?.photoURL">
+        </ion-avatar>
+        <h2>{{movie?.name}}</h2>
+        <p>{{movie?.email}}</p>
+      </ion-item>
+
+      <img [src]="movie?.photoURL">
+
+      <ion-card-content>
+        <p>
+          {{movie?.timestamp}}
+        </p>
+      </ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>{{movie?.status}}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>{{movie?.accountType}}</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            {{movie?.status}}
+          </ion-note>
+        </ion-col>
+      </ion-row>
+    </ion-card>
   </div>
 
-  <ion-list>
-    <ion-item *ngFor="let movie of movies | async">
-        <h2>{{ movie?.uid }}</h2>
-        <p>Name: {{ movie?.name }}</p>
-        <img [src]="movie?.photoURL" width="520px">
-    </ion-item>
-  </ion-list>
-
-  
   <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
-    <ion-infinite-scroll-content
-    loadingSpinner="bubbles"
-    loadingText="Loading more data...">
-  </ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
   <div *ngIf="!finished">
-    Loading more movies...
-  </div>
-
+      Loading more movies...
+    </div>
+  
 
   <div *ngIf="finished">
     That's all folks!
   </div>
 </ion-content>
-
