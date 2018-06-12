@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { UserDetails } from '../model/userdetails';
 import { GroundFirebaseStoreService } from './ground-firebasestore.service';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs';
 
 
 @Injectable()
@@ -16,6 +17,16 @@ export class GroundAuthService {
       this.authState = auth
     });
   }
+
+ async isLoogedIn(): Promise<any> {
+    return await new Promise((resolve, reject) => {
+      this.afAuth.authState.subscribe((auth) => {
+        if (auth && auth.uid) resolve(auth.uid);
+        else reject();
+      });
+    });
+  }
+
 
   // Returns true if user is logged in
   get authenticated(): boolean {
@@ -56,6 +67,6 @@ export class GroundAuthService {
   get currentUserInfo(): Observable<UserDetails> {
     if (!this.currentUserId) return null;
     return this.__gfss.getUserByid(this.currentUserId);
-   }
+  }
 
 }

@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
-import { AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
@@ -10,15 +10,15 @@ import { GoogleLoginService } from '../../app/sources/services/google-login.serv
 import { FaceBookLoginService } from '../../app/sources/services/facebook-login.service';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { SaveUserGeolocationService } from '../../app/sources/services/save-user-geolocation.service';
-import { GMapsWapperService } from '../../app/sources/google/google.map.wapper.service';
 import { UtilService } from '../../app/sources/services/util.service';
+import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
 
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [GoogleLoginService, FaceBookLoginService, UtilService]
+  providers: [GoogleLoginService, FaceBookLoginService, UtilService, GroundAuthService]
 })
 export class LoginPage {
 
@@ -26,18 +26,14 @@ export class LoginPage {
   userInformation: UserDetails = new UserDetails();
 
   constructor(
-    private __zone: NgZone,
-    private __storage: Storage,
     private __navCtrl: NavController,
     private __afAuth: AngularFireAuth,
-    private __alertCtrl: AlertController,
     private __modalCtrl: ModalController,
-    private __utilService: UtilService,
     private __faceBookLoginService: FaceBookLoginService,
+    private __groundAuthService: GroundAuthService,
     private __groundFirebaseStoreService: GroundFirebaseStoreService,
     private __saveUserGeolocationService: SaveUserGeolocationService,
-    private __googleLoginService: GoogleLoginService
-  ) {
+    private __googleLoginService: GoogleLoginService) {
 
     //this.__gas.currentUserId
 
@@ -56,6 +52,7 @@ export class LoginPage {
         this.doLogin();
       }
     });
+    
   }
 
   public phonelogin() {
@@ -65,14 +62,14 @@ export class LoginPage {
   ionViewDidLoad() {
   }
   doLogin() {
-    this.__afAuth.authState.subscribe(res => {
-      if (res && res.uid) {
+    this.__groundAuthService.isLoogedInUID().then((uid) => {
+      if (uid) {
         this.__groundFirebaseStoreService.addUsers(this.userInformation);
-        this.__saveUserGeolocationService.setGeoCoordinate(res.uid);
+        this.__saveUserGeolocationService.setGeoCoordinate(uid);
         this.__navCtrl.setRoot('MenuPage');
       }
     });
-  }
+ }
 
   facebookLogin() {
     this.__faceBookLoginService.facebookLogin();
