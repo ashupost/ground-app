@@ -23,9 +23,9 @@ export class ScrollPage implements OnInit {
   items$: Observable<UserDetails[]>;
   movies = new BehaviorSubject([]);
 
-  batch = 3        // size of each query
-  lastKey = ''      // key to offset next query from
-  finished = false  // boolean when end of database is reached
+  private batch = 3        // size of each query
+  private lastKey = ''      // key to offset next query from
+  private finished = false  // boolean when end of database is reached
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private movieService: MovieService) { }
 
@@ -34,7 +34,7 @@ export class ScrollPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ScrollPage');
+    console.log('ionViewDidLoad ScrollPage ');
     this.items$ = this.movieService.getUsers1();
   }
 
