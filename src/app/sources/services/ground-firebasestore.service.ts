@@ -110,7 +110,7 @@ export class GroundFirebaseStoreService {
 
 
     getLatestGeoCordinidateByUsers(userid: string): Observable<GeoCordinate[]> {
-        return this.__afs.collection<any>('users')
+        return this.__afs.collection<UserDetails>('users')
             .doc(userid).collection<GeoCordinate>('geolocation', ref => {
                 let query: firebase.firestore.Query = ref;
                 query = query.orderBy('timestamp', 'desc').limit(1);
