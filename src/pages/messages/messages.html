@@ -3,15 +3,16 @@
   <ion-navbar color="primary">
     
     <ion-title>
-      <img *ngIf="toUserDetails.photoURL" class="user-img-header" [src]="toUserDetails.photoURL" height="40">
-      <img *ngIf="!toUserDetails.photoURL" class="user-img-header" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
-      <ion-icon ios="ios-disc" [color]="toUserDetails.status" md="md-disc"></ion-icon>
-      <span>
-        <ion-icon ios="ios-plane" md="md-plane"></ion-icon>{{distance | number }}KM</span>
-      <span>
-        <ion-icon ios="ios-time" md="md-time"> {{otherTimestamp | date:'dd.MM hh:mm:ss'}}</ion-icon>
-      </span>
-      {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }}
+      
+      <img *ngIf="toUserDetails.photoURL" [src]="toUserDetails.photoURL" style="border-radius: 10px;" height="30px">
+      <img *ngIf="!toUserDetails.photoURL" style="border-radius: 10px;" height="30px" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+  
+      <sub class="build_version" stacked ion-text [color]="toUserDetails.status">
+        {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }}
+        {{otherTimestamp | date:'dd.MM hh:mm:ss'}}
+        {{distance | number }}
+      </sub> 
+    
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="moveToOtherUserdetails()">

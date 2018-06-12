@@ -119,11 +119,12 @@ page-messages {
       }
     }
   }
-  .user-img-header {
-    position: relative;
-    border-radius: 10px;
-    width: 40px;
-    height: 40px;
-    margin-top: 8px;
+  .build_version {
+    position: absolute;
+    font-size: xx-small;
+    line-height: 0;
+    vertical-align: baseline;
+    left: 0px;
+    bottom: 0px;
   }
 }
