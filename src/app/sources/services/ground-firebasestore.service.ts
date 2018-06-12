@@ -110,20 +110,12 @@ export class GroundFirebaseStoreService {
 
 
     getLatestGeoCordinidateByUsers(userid: string): Observable<GeoCordinate[]> {
-        return this.__afs.collection<UserDetails>('users')
-            .doc(userid).collection('geolocation', ref => {
+        return this.__afs.collection<any>('users')
+            .doc(userid).collection<GeoCordinate>('geolocation', ref => {
                 let query: firebase.firestore.Query = ref;
                 query = query.orderBy('timestamp', 'desc').limit(1);
                 return query;
-
-            }).snapshotChanges().map(actions => {
-                return actions.map(a => {
-                    const data = a.payload.doc.data() as GeoCordinate;
-                    //const id = a.payload.doc.id; // this is firebase generated id.
-                    data.docId = a.payload.doc.id;
-                    return { ...data };
-                });
-            });
+            }).valueChanges();
     }
 
     getMessages(myId: string, otherId: string): Observable<any[]> {

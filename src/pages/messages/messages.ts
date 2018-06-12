@@ -49,7 +49,7 @@ export class MessagesPage {
               if (!point2) {
                 point2 = new GeoCordinate();
               }
-              this.otherTimestamp = point2.timestamp;
+              this.otherTimestamp = this.toUserDetails.timestamp;
               this.distance = this._distanceService.getDistanceByGeoCordinate(point1, point2);
             });
         });
