@@ -9,16 +9,14 @@ export class DistanceService {
     }
 
     getDistanceByGeoCordinate(x: GeoCordinate, y: GeoCordinate): number {
-        if (!x) {
-            return 0;
-        }
-        if (!y) {
-            return 0;
-        }
         const x1: number = x.latitude;
         const x2: number = y.latitude;
         const y1: number = x.longitude;
         const y2: number = y.longitude;
+
+        if (x1 === 0 || x2 === 0 || y1 === 0 || y2 === 0) {
+            return null;
+        }
         return Math.sqrt((Math.pow((x1 - x2), 2)) + (Math.pow((y1 - y2), 2))) * 113;
     }
 }
