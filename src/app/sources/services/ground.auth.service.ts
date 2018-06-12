@@ -18,11 +18,11 @@ export class GroundAuthService {
     });
   }
 
- async isLoogedIn(): Promise<any> {
+ async isLoogedInUID(): Promise<any> {
     return await new Promise((resolve, reject) => {
       this.afAuth.authState.subscribe((auth) => {
         if (auth && auth.uid) resolve(auth.uid);
-        else reject();
+        else reject(null);
       });
     });
   }
