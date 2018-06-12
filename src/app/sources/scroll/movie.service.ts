@@ -28,7 +28,7 @@ export class MovieService {
     public getUsers1(): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
             let query: firebase.firestore.Query = ref;
-            query = query.orderBy('timestamp', 'desc');
+            query = query.orderBy('uid');
             return query;
         }).valueChanges();
     }

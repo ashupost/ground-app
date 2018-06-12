@@ -35,7 +35,7 @@ export class ScrollPage implements OnInit {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScrollPage');
-    //this.items$ = this.movieService.getUsers1();
+    this.items$ = this.movieService.getUsers1();
   }
 
   doInfinite(): Promise<any> {

@@ -11,7 +11,11 @@
 
 
 <ion-content class="cards-bg social-cards">
-   
+  
+    <div *ngFor="let i of items$ | async">
+      <p>{{i.uid}}</p>
+      </div>
+
 
   <div *ngFor="let movie of movies | async">
 
@@ -21,7 +25,7 @@
           <img [src]="movie?.photoURL">
         </ion-avatar>
         <h2>{{movie?.name}}</h2>
-        <p>{{movie?.email}}</p>
+        <p>{{movie?.uid}}</p>
       </ion-item>
 
       <img [src]="movie?.photoURL">
