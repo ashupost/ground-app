@@ -114,10 +114,12 @@ export class CaptureImagePage implements OnInit {
   
 
   fileChangeListener($event) {
+
     this.__cameraService.getFileBase64($event.target.files[0]).then(loadEvent => {
       let image: any = new Image();
       image.src = loadEvent;
       this.ImageCropper.setImage(image);
     });
+    
   }
 }
