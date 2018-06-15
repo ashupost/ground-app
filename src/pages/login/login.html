@@ -2,35 +2,34 @@
   <ion-navbar>
     <ion-buttons start>
       <div *ngIf="(user | async) || {} as user">
-          <button ion-button icon-only *ngIf="!user.uid">
-              <ion-icon  ios="ios-lock" md="md-lock"></ion-icon>
-          </button>
-          <button ion-button icon-only *ngIf="user.uid" (click)="signOut()">
-              <ion-icon  ios="ios-log-out" md="md-log-out"></ion-icon>
-          </button>
-    </div>
+        <button ion-button icon-only *ngIf="!user.uid">
+          <ion-icon ios="ios-lock" md="md-lock"></ion-icon>
+        </button>
+        <button ion-button icon-only *ngIf="user.uid" (click)="signOut()">
+          <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+        </button>
+      </div>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-
-
-
-
-  <p><button ion-button icon-start round full (click)="googlePlusLogin()">
+  <p>
+    <button ion-button icon-start round full (click)="googlePlusLogin()">
       <ion-icon name='logo-google'></ion-icon>
-    Login with Google</button></p>
-  <p><button ion-button icon-start round color="secondary" full (click)="facebookLogin()">
+      Login with Google</button>
+  </p>
+  <p>
+    <button ion-button icon-start round color="secondary" full (click)="facebookLogin()">
       <ion-icon name='logo-facebook'></ion-icon>
-    Login with Facebook</button></p>
-  <p><button ion-button icon-start round full (click)="phonelogin()">
+      Login with Facebook</button>
+  </p>
+  <p>
+    <button ion-button icon-start round full (click)="phonelogin()">
       <ion-icon name='phone-portrait'></ion-icon>
-    Phone Login</button></p>
- 
+      Phone Login</button>
+  </p>
 
- 
-<!--
+  <!--
   <p><button *ngIf="!user.uid" ion-button full (click)="doLogin()">Login</button></p>
   <div *ngIf="(user | async) || {} as user"> 
  
