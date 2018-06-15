@@ -13,10 +13,10 @@ import { CaptureImagePage } from '../capture-image/capture-image';
 
 @IonicPage()
 @Component({
-  selector: 'page-settings',
-  templateUrl: 'settings.html'
+  selector: 'page-profile',
+  templateUrl: 'profile.html'
 })
-export class SettingsPage {
+export class ProfilePage {
 
   uploadPercent: Observable<number>;
   downloadURL: Observable<string | null>;

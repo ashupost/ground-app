@@ -28,7 +28,7 @@ export class MenuPage {
     { title: 'Online User', pageName: 'TabsPage', tabComponent: 'Tab3Page', index: 1, icon: 'contact' },
 
     { title: 'Users', pageName: 'UsersPage', icon: 'man' },
-    { title: 'Profile', pageName: 'SettingsPage', icon: 'settings' },
+    { title: 'Profile', pageName: 'ProfilePage', icon: 'settings' },
     { title: 'AboutPage', pageName: 'AboutPage', icon: 'image' },
     { title: 'PersonalPage', pageName: 'PersonalPage', icon: 'image' },
     { title: 'ScrollPage', pageName: 'ScrollPage', icon: 'image' }
