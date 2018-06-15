@@ -28,15 +28,6 @@
                   <ion-icon name="add"></ion-icon>
                 </button>
               </div>
-              <!--
-              <div *ngIf="!isCordova">
-                <label>{{label}}</label>
-                <input type="file" (change)="takePhoto($event)" id="file-input" style="opacity: 0" #fileInp1>
-                <button ion-fab color="primary" class="fab-map" (click)="onClick()">
-                  <ion-icon name="add"></ion-icon>
-                </button>
-              </div>
-              -->
             </ion-fab>
           </div>
         </ion-card>
@@ -53,15 +44,6 @@
               <ion-icon name="add"></ion-icon>
             </button>
           </div>
-          <!--
-          <div *ngIf="!isCordova">
-            <label>{{label}}</label>
-            <input type="file" (change)="takePhoto($event)" id="file-input" style="opacity: 0" #fileInp1>
-            <button ion-fab color="danger" class="fab-map" (click)="onClick()">
-              <ion-icon name="add"></ion-icon>
-            </button>
-          </div>
-          -->
         </ion-fab>
       </div>
     </ion-card>
@@ -69,7 +51,7 @@
 
   <ion-card>
     <ion-item>
-      <ion-icon name="cart" item-end></ion-icon>
+      <ion-icon name="person" item-end></ion-icon>
       <ion-label color="primary" stacked>Display Name</ion-label>
       <ion-input placeholder="Change Display Name" [(ngModel)]="name" disabled></ion-input>
     </ion-item>
@@ -77,7 +59,7 @@
 
   <ion-card>
     <ion-item>
-      <ion-icon name="cart" item-end></ion-icon>
+      <ion-icon name="people" item-end></ion-icon>
       <ion-label color="primary" stacked>Gender</ion-label>
       <ion-input placeholder="Change Display Name" [(ngModel)]="gender" disabled></ion-input>
     </ion-item>
@@ -96,14 +78,14 @@
       </ion-item>
 
       <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
+        <ion-icon name="calendar" item-start></ion-icon>
         <ion-label color="primary" stacked>Date of Birth</ion-label>
         <ion-datetime placeholder="Change Display Name" #changeTime displayFormat="MMM DD YYYY" [(ngModel)]="changeDate" (ionChange)="handleChangeDate(changeDate)">
         </ion-datetime>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
+        <ion-icon name="contact" item-start></ion-icon>
         <ion-label color="primary" stacked>Interest In</ion-label>
         <ion-select placeholder="Change Display Name" (ionChange)="setSettingData($event,'interest_in')">
           <ion-option value="Male">Male</ion-option>
@@ -124,25 +106,25 @@
       </ion-item>
 
       <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
+        <ion-icon name="create" item-start></ion-icon>
         <ion-label color="primary" stacked>About me</ion-label>
         <ion-textarea placeholder="Enter a description"></ion-textarea>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
+        <ion-icon name="call" item-start></ion-icon>
         <ion-label color="primary" stacked>Phone Number</ion-label>
         <ion-input placeholder="Phone Number" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
+        <ion-icon name="mail" item-start></ion-icon>
         <ion-label color="primary" stacked>Email</ion-label>
         <ion-input placeholder="Email" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
+        <ion-icon name="school" item-start></ion-icon>
         <ion-label color="primary" stacked>Education</ion-label>
         <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
       </ion-item>
