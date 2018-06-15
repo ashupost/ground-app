@@ -29,9 +29,10 @@ export class MenuPage {
 
     { title: 'Users', pageName: 'UsersPage', icon: 'man' },
     { title: 'Profile', pageName: 'ProfilePage', icon: 'settings' },
-    { title: 'AboutPage', pageName: 'AboutPage', icon: 'image' },
-    { title: 'PersonalPage', pageName: 'PersonalPage', icon: 'image' },
-    { title: 'ScrollPage', pageName: 'ScrollPage', icon: 'image' }
+    { title: 'Personal', pageName: 'PersonalPage', icon: 'image' },
+    { title: 'Scroll', pageName: 'ScrollPage', icon: 'image' },
+    { title: 'About', pageName: 'AboutPage', icon: 'image' }
+   
 
   ];
 
