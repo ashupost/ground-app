@@ -14,7 +14,9 @@
           </ion-avatar>
           <h2><span *ngIf="(user | async)?.name">{{(user | async)?.name}}</span></h2>
           <p><span *ngIf="(user | async)?.email">{{(user | async)?.email}}</span></p>
+         <!-- 
           <p><span *ngIf="(user | async)?.uid">{{(user | async)?.uid}}</span></p>
+         -->
       </ion-item>
     <ion-list>
       <button ion-item menuClose *ngFor="let page of pages" (click)="openPage(page)">
