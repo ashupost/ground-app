@@ -10,7 +10,7 @@
    <ion-slides pager="true">
     <ion-slide *ngFor="let photo of photos">
       <ion-card>
-        <img [src]="photo.data" />
+        <img [src]="photo.data" id="img2"/>
         <div class="card-subtitle">{{userInfo.name}}</div>
       </ion-card>
     </ion-slide>
@@ -19,7 +19,7 @@
 
 <div *ngIf="photos.length === 0">
     <ion-card>
-        <img [src]="userInfo.photoURL" />
+        <img [src]="userInfo.photoURL" id="img2" />
     </ion-card>
 </div>
 
