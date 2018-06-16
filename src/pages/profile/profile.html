@@ -80,7 +80,9 @@
       <ion-item>
         <ion-icon name="calendar" item-start></ion-icon>
         <ion-label color="primary" stacked>Date of Birth</ion-label>
-        <ion-datetime placeholder="Change Display Name" #changeTime displayFormat="MMM DD YYYY" [(ngModel)]="changeDate" (ionChange)="handleChangeDate(changeDate)">
+        <ion-datetime placeholder="Select Date of Birth" #changeTime 
+        displayFormat="MMM DD YYYY" [(ngModel)]="changeDate" 
+        (ionChange)="handleChangeDate(changeDate)">
         </ion-datetime>
       </ion-item>
 
