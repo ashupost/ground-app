@@ -10,6 +10,11 @@
 </ion-header>
 
 <ion-content class="cards-bg social-cards">
+ 
+  <div *ngFor="let i of items$ | async">
+      {{i.uid}}
+  </div>
+
   <div *ngIf="movies | async; let movies; else loading">
     <div *ngFor="let movie of movies">
       <ion-card>
