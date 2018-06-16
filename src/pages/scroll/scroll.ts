@@ -6,6 +6,7 @@ import { MovieService } from '../../app/sources/scroll/movie.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import * as _ from 'lodash'
 
+
 /**
  * Generated class for the ScrollPage page.
  *
@@ -55,6 +56,8 @@ export class ScrollPage implements OnInit, OnDestroy {
   private getMovies(key?) {
     if (this.finished) return
     this.movieService.getUsers(this.batch+1, this.lastKey)
+    .publishReplay()
+    .refCount()
       .do(movies => {
         /// set the lastKey in preparation for next query
         this.lastKey = _.last(movies).uid;
