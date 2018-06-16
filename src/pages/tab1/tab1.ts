@@ -36,7 +36,7 @@ export class Tab1Page implements OnInit {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad1 Tab1Page');
-    this.items = this.__groundFirebaseStoreService.getUsers();
+    this.items = this.__groundFirebaseStoreService.getUsers().publishReplay().refCount();
   }
 
   goToMessagePage(toUserDetails: UserDetails) {
