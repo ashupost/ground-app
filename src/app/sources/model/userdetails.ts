@@ -40,6 +40,7 @@ export class UserDetails {
     longitude: number;
     status: string;
     address: AddressUser;
+    phoneNumber: string;
 }
 
 export class GeoCordinate {

@@ -116,19 +116,23 @@
       <ion-item>
         <ion-icon name="call" item-start></ion-icon>
         <ion-label color="primary" stacked>Phone Number</ion-label>
-        <ion-input placeholder="Phone Number" [(ngModel)]="phoneNumber" (ionChange)="setUserDataName()"></ion-input>
+        <ion-input placeholder="Phone Number" [(ngModel)]="phoneNumber" 
+        
+        (ionChange)="setUserData($event,'phoneNumber')"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-icon name="mail" item-start></ion-icon>
         <ion-label color="primary" stacked>Email</ion-label>
-        <ion-input placeholder="Email" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
+        <ion-input placeholder="Email" [(ngModel)]="email"  
+        (ionChange)="setUserData($event,'email')"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-icon name="school" item-start></ion-icon>
         <ion-label color="primary" stacked>Education</ion-label>
-        <ion-input placeholder="Change Display Name" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
+        <ion-input placeholder="Change Display Name" [(ngModel)]="education" 
+        (ionChange)="setSettingData($event,'education')"></ion-input>
       </ion-item>
 
     </ion-list>

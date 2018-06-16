@@ -65,6 +65,9 @@ export class GroundFirebaseStoreService {
             case 'age_upper':
                 data = { age_upper: value, timestamp: timestamp };
                 break;
+            case 'education':
+                data = { education: value, timestamp: timestamp };
+                break;
             default:
                 data = { param: value, timestamp: timestamp };
         }
@@ -87,6 +90,12 @@ export class GroundFirebaseStoreService {
             case 'name':
                 data = { name: value, timestamp: timestamp };
                 break;
+            case 'phoneNumber':
+                data = { phoneNumber: value, timestamp: timestamp };
+                break;
+            case 'email':
+                data = { email: value, timestamp: timestamp };
+                break;
 
             default:
                 data = { param: value, timestamp: timestamp };
@@ -104,7 +113,7 @@ export class GroundFirebaseStoreService {
                 .set({
                     photoURL: value,
                     timestamp: timestamp
-                }, {merge: true});
+                }, { merge: true });
         });
     }
 
