@@ -18,7 +18,7 @@
             <img [src]="movie?.photoURL">
           </ion-avatar>
           <ion-icon item-end ios="ios-disc" [color]="movie?.status" md="md-disc"></ion-icon>
-          <h2>{{movie?.name}}</h2>
+          <h2>{{movie?.name}}<span *ngIf="movie.dob">, {{movie?.dob | agePipe}}</span></h2>
           <p>{{movie?.uid}}</p>
         </ion-item>
         <img [src]="movie?.photoURL">

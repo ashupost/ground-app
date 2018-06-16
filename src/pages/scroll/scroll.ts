@@ -30,12 +30,13 @@ export class ScrollPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, private movieService: MovieService) { }
 
   ngOnInit() {
-    this.getMovies();
+   // this.getMovies();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScrollPage ');
-    this.items$ = this.movieService.getUsers1();
+   // this.items$ = this.movieService.getUsers1();
+   this.getMovies();
   }
 
   doInfinite(): Promise<any> {
