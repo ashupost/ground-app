@@ -141,9 +141,6 @@ export class GroundFirebaseStoreService {
                 }));
     }
 
-
-
-
     sendMessage(toId: string, fromId: string, newMessage: string) {
         this.__zone.run(() => {
             // const merge: firebase.firestore.SetOptions = { merge: false };
