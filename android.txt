@@ -1,3 +1,45 @@
 export ANDROID_HOME=/c/mkumar/software/android-sdk-windows
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools
+export PATH=$PATH:/c/mkumar/install/gradle-4.7/bin:/c/mkumar/software/android-sdk-windows/build-tools/27.0.3
+
 ionic cordova platform add android
+
+
+ionic cordova run android -lc -- -d --device
+$ ionic cordova run android --address=192.168.1.68 --port 9090 -lc -- -d --device
+[Run on device]
+========================================================================
+Remove platform:
+$ ionic cordova platform rm android
+
+Add
+$ ionic cordova platform add android
+
+ionic cordova build android
+
+===============================================================
+
+ionic cordova plugin add cordova-plugin-geolocation --variable GEOLOCATION_USAGE_DESCRIPTION="To locate you"
+npm install --save @ionic-native/geolocation
+
+https://github.com/anicetkeric/ionic-relative-date
+
+
+alt- 52.3064338
+lon- 4.9776968
+==================================================
+keytool -exportcert -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+password: android
+==============================
+
+ionic cordova plugin add cordova-plugin-googlemaps \
+  --variable API_KEY_FOR_ANDROID="AIzaSyDcYCFXhkqvYLH5dN0IIlT7HylAwSOCbqg" \
+  --variable API_KEY_FOR_IOS="AIzaSyAEMrY5RB2VeTsYPGFCvsEsUSlPYeVv-T4"
+===================================================
+ionic cordova plugin add cordova-plugin-accountkit --save \
+   --variable APP_ID="1615301125234452" \
+   --variable APP_NAME="Jack's first app" \
+   --variable CLIENT_TOKEN="0b7dabbc610da26b7951a5bcc1ebc17a" \
+   --variable API_VERSION="v1.1"
+====================================================================
+ionic cordova build android --prod --release
