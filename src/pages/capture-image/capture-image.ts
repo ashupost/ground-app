@@ -56,10 +56,10 @@ export class CaptureImagePage implements OnInit {
     private afAuth: AngularFireAuth,
     private __platform: Platform,
     public _navParams: NavParams) {
-    this.__platform.ready().then(() => {
-      if (this.__platform.is('cordova')) this.isCordova = true;
-      else this.isCordova = false;
-    });
+      this.__utilService.isCordova().then(value=>{
+        this.isCordova = value;
+      });
+   
     this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
