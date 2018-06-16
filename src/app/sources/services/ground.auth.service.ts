@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
-import { UserDetails } from '../model/userdetails';
-import { GroundFirebaseStoreService } from './ground-firebasestore.service';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs';
 
 
 @Injectable()
@@ -12,13 +7,13 @@ export class GroundAuthService {
 
   authState: any = null;
 
-  constructor(private afAuth: AngularFireAuth, private __gfss: GroundFirebaseStoreService) {
+  constructor(private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
     });
   }
 
- async isLoogedInUID(): Promise<any> {
+  async isLoogedInUID(): Promise<any> {
     return await new Promise((resolve, reject) => {
       this.afAuth.authState.subscribe((auth) => {
         if (auth && auth.uid) resolve(auth.uid);
