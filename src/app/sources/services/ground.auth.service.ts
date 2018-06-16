@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import { UserDetails } from '../model/userdetails';
+import { GroundFirebaseStoreService } from './ground-firebasestore.service';
 
 
 @Injectable()
@@ -7,7 +10,8 @@ export class GroundAuthService {
 
   authState: any = null;
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth,
+    private __gfss: GroundFirebaseStoreService) {
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
     });
