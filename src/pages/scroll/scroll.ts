@@ -38,7 +38,6 @@ export class ScrollPage implements OnInit, OnDestroy {
   }
 
   ionViewDidLoad() {
-    this.lastKey='';
     console.log('ionViewDidLoad ScrollPage ');
     this.items$ = this.movieService.getUsers1();
   }
