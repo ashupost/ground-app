@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content class="cards-bg social-cards">
- 
+
   <div *ngFor="let i of items$ | async">
-      {{i.uid}}
+    {{i.uid}}
   </div>
 
   <div *ngIf="movies | async; let movies; else loading">
@@ -23,7 +23,9 @@
             <img [src]="movie?.photoURL">
           </ion-avatar>
           <ion-icon item-end ios="ios-disc" [color]="movie?.status" md="md-disc"></ion-icon>
-          <h2>{{movie?.name}}<span *ngIf="movie.dob">, {{movie?.dob | agePipe}}</span></h2>
+          <h2>{{movie?.name}}
+            <span *ngIf="movie.dob">, {{movie?.dob | agePipe}}</span>
+          </h2>
           <p>{{movie?.uid}}</p>
         </ion-item>
         <img [src]="movie?.photoURL">
