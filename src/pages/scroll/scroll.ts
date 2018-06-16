@@ -30,13 +30,12 @@ export class ScrollPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, private movieService: MovieService) { }
 
   ngOnInit() {
-   // this.getMovies();
+    this.getMovies();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScrollPage ');
-   // this.items$ = this.movieService.getUsers1();
-   this.getMovies();
+    this.items$ = this.movieService.getUsers1();
   }
 
   doInfinite(): Promise<any> {
@@ -45,7 +44,7 @@ export class ScrollPage implements OnInit {
       setTimeout(() => {
         console.log('Async operation has ended');
         resolve(this.getMovies());
-      }, 1000);
+      }, 500);
     })
   }
 
