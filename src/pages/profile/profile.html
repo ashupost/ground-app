@@ -89,7 +89,7 @@
       <ion-item>
         <ion-icon name="contact" item-start></ion-icon>
         <ion-label color="primary" stacked>Interest In</ion-label>
-        <ion-select placeholder="Change Display Name" (ionChange)="setSettingData($event,'interest_in')">
+        <ion-select placeholder="Select Interest In" (ionChange)="setSettingData($event,'interest_in')">
           <ion-option value="Male">Male</ion-option>
           <ion-option value="Female">Female</ion-option>
           <ion-option value="Other">Other</ion-option>
@@ -110,13 +110,13 @@
       <ion-item>
         <ion-icon name="create" item-start></ion-icon>
         <ion-label color="primary" stacked>About me</ion-label>
-        <ion-textarea placeholder="Enter a description"></ion-textarea>
+        <ion-textarea placeholder="Write About yourself"></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-icon name="call" item-start></ion-icon>
         <ion-label color="primary" stacked>Phone Number</ion-label>
-        <ion-input placeholder="Phone Number" [(ngModel)]="name" (ionChange)="setUserDataName()"></ion-input>
+        <ion-input placeholder="Phone Number" [(ngModel)]="phoneNumber" (ionChange)="setUserDataName()"></ion-input>
       </ion-item>
 
       <ion-item>
