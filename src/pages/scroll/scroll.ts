@@ -31,11 +31,11 @@ export class ScrollPage implements OnInit, OnDestroy {
   constructor(public navCtrl: NavController, public navParams: NavParams, private movieService: MovieService) { }
 
   ngOnInit() {
-   
+
     this.getMovies();
   }
-  ngOnDestroy(){
-    this.lastKey='';
+  ngOnDestroy() {
+    this.lastKey = '';
   }
 
   ionViewDidLoad() {
@@ -55,9 +55,9 @@ export class ScrollPage implements OnInit, OnDestroy {
 
   private getMovies(key?) {
     if (this.finished) return
-    this.movieService.getUsers(this.batch+1, this.lastKey)
-    .publishReplay()
-    .refCount()
+    this.movieService.getUsers(this.batch + 1, this.lastKey)
+      .publishReplay()
+      .refCount()
       .do(movies => {
         /// set the lastKey in preparation for next query
         this.lastKey = _.last(movies).uid;
@@ -69,7 +69,7 @@ export class ScrollPage implements OnInit, OnDestroy {
           this.finished = true
         }
         /// Concatenate new movies to current movies
-       // this.movies.next(newMovies);
+        // this.movies.next(newMovies);
         this.movies.next(_.concat(currentMovies, newMovies));
       })
       .take(1)
