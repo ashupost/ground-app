@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CaptureImagePage } from '../capture-image/capture-image';
+import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
 
 @IonicPage()
 @Component({
@@ -33,7 +34,7 @@ export class ProfilePage {
 
 
   @ViewChild('changeTime') changeDateTime: DateTime;
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private __app: App,
     private __zone: NgZone,
@@ -41,20 +42,17 @@ export class ProfilePage {
     private __utilService: UtilService,
     private afAuth: AngularFireAuth,
     private __platform: Platform,
+    private __groundAuthService: GroundAuthService,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private storage: AngularFireStorage) {
-  
-    this.__platform.ready().then(() => {
-      if (this.__platform.is('cordova')) this.isCordova = true;
-      else this.isCordova = false;
+
+    this.__utilService.isCordova().then(value => {
+      this.isCordova = value;
     });
 
-
     this.user = this.afAuth.authState;
-    this.afAuth.authState.subscribe(res => {
-      if (res && res.uid) {
-        this.currentUserId = res.uid;
-      }
+    this.__groundAuthService.isLoogedInUID().then(value => {
+      this.currentUserId = value;
     });
 
     let datePipe = new DatePipe('en-US');
@@ -96,9 +94,9 @@ export class ProfilePage {
       if (res && res.uid) {
 
         this._groundFirebaseStoreService.getPhotoUserData(res.uid)
-        .subscribe((data: PictureDetail[]) => {
-          this.photos = data;
-        });
+          .subscribe((data: PictureDetail[]) => {
+            this.photos = data;
+          });
 
 
         this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(res => {
