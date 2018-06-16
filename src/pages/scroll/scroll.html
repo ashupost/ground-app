@@ -9,53 +9,45 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content class="cards-bg social-cards">
-  
-    <div *ngFor="let i of items$ | async">
-      <p>{{i.uid}}</p>
-      </div>
-
-
-  <div *ngFor="let movie of movies | async">
-
-    <ion-card>
-      <ion-item>
-        <ion-avatar item-start>
-          <img [src]="movie?.photoURL">
-        </ion-avatar>
-        <h2>{{movie?.name}}</h2>
-        <p>{{movie?.uid}}</p>
-      </ion-item>
-
-      <img [src]="movie?.photoURL">
-
-      <ion-card-content>
-        <p>
-          {{movie?.timestamp}}
-        </p>
-      </ion-card-content>
-
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>{{movie?.status}}</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="text"></ion-icon>
-            <div>{{movie?.accountType}}</div>
-          </button>
-        </ion-col>
-        <ion-col center text-center>
-          <ion-note>
-            {{movie?.status}}
-          </ion-note>
-        </ion-col>
-      </ion-row>
-    </ion-card>
+  <div *ngIf="movies | async; let movies; else loading">
+    <div *ngFor="let movie of movies">
+      <ion-card>
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="movie?.photoURL">
+          </ion-avatar>
+          <ion-icon item-end ios="ios-disc" [color]="movie?.status" md="md-disc"></ion-icon>
+          <h2>{{movie?.name}}</h2>
+          <p>{{movie?.uid}}</p>
+        </ion-item>
+        <img [src]="movie?.photoURL">
+        <ion-card-content>
+          <p>
+            {{movie?.timestamp}}
+          </p>
+        </ion-card-content>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>{{movie?.status}}</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div>{{movie?.accountType}}</div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <ion-note>
+              {{movie?.status}}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
   </div>
 
   <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
@@ -63,10 +55,9 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-  <div *ngIf="!finished">
-      Loading more movies...
-    </div>
-  
+  <ng-template *ngIf="!finished">
+    <ion-spinner color="primary" name="ios"></ion-spinner>
+  </ng-template>
 
   <div *ngIf="finished">
     That's all folks!

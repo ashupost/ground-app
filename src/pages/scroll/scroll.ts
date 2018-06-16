@@ -44,7 +44,7 @@ export class ScrollPage implements OnInit {
       setTimeout(() => {
         console.log('Async operation has ended');
         resolve(this.getMovies());
-      }, 500);
+      }, 1000);
     })
   }
 
