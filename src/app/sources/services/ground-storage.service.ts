@@ -8,8 +8,8 @@ export class GroundStorageService {
     }
 
     async getStorage(key: string) {
-        return this._storage.ready().then(() => {
-            return this._storage.get(key);
+        return await this._storage.ready().then(async () => {
+            return await this._storage.get(key);
         });
     }
 
