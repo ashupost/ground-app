@@ -50,7 +50,7 @@ export class ScrollPage implements OnInit {
 
   private getMovies(key?) {
     if (this.finished) return
-    this.movieService.getUsers(this.batch + 1, this.lastKey)
+    this.movieService.getUsers(this.batch+1, this.lastKey)
       .do(movies => {
         /// set the lastKey in preparation for next query
         this.lastKey = _.last(movies).uid;
