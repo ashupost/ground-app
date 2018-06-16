@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserDetails } from '../../app/sources/model/userdetails';
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +19,7 @@ import * as _ from 'lodash'
   templateUrl: 'scroll.html',
 
 })
-export class ScrollPage implements OnInit {
+export class ScrollPage implements OnInit, OnDestroy {
   items$: Observable<UserDetails[]>;
   movies = new BehaviorSubject([]);
 
@@ -30,10 +30,15 @@ export class ScrollPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, private movieService: MovieService) { }
 
   ngOnInit() {
+   
     this.getMovies();
+  }
+  ngOnDestroy(){
+    this.lastKey='';
   }
 
   ionViewDidLoad() {
+    this.lastKey='';
     console.log('ionViewDidLoad ScrollPage ');
     this.items$ = this.movieService.getUsers1();
   }
