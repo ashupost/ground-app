@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
@@ -8,12 +8,18 @@ export class PhoneLoginService {
 
   constructor(
     private alertCtrl: AlertController,
+   // private __navCtrl: NavController,
     private afAuth: AngularFireAuth) {
 
   }
 
 
   signInPhone(phoneNumber: number, recaptchaVerifier: firebase.auth.RecaptchaVerifier) {
+    const alertPrompt = this.alertCtrl.create({
+      title: 'Invalid Confirmation Code!',
+      subTitle: 'The SMS verification code used is invalid. Please resend the verification code sms and be sure use the verification code provided by you.',
+      buttons: ['OK']
+    });
     const phoneNumberString = "+" + phoneNumber;
     this.afAuth.auth.signInWithPhoneNumber(phoneNumberString, recaptchaVerifier)
       .then(confirmationResult => {
@@ -30,13 +36,18 @@ export class PhoneLoginService {
             {
               text: 'Send',
               handler: data => {
-                confirmationResult.confirm(data.confirmationCode)
-                  .then(function (result) {
+                confirmationResult.confirm(data.confirmationCode).then(function (result) {
                     console.log(result.user);
+                    alert(result.user);
+                   // prompt.dismiss();
+                  // this.dismiss();
+                    //this.__navCtrl.pop(); // close this page
                     // User signed in successfully.
-                  }).catch(function (error) {
+                  }).catch((error) => {
                     // User couldn't sign in (bad verification code?)
-                    alert('Invalied code');
+                    alertPrompt.present();
+                    console.log(error);
+                   // alert('Invalied code=>'+ error);
                   });
               }
             }

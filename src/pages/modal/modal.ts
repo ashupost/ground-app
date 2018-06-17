@@ -16,6 +16,7 @@ export class ModalPage {
 
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
+    private __navCtrl: NavController,
     private _phoneLoginService: PhoneLoginService,
     public navParams: NavParams) {
   }
@@ -27,7 +28,7 @@ export class ModalPage {
   }
 
   signInPhone(number: number) {
-    this._phoneLoginService.signInPhone(number, this.recaptchaVerifier);
+   this._phoneLoginService.signInPhone(number, this.recaptchaVerifier);
   }
 
   public closeModal() {
