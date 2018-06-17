@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Platform, LoadingController } from 'ionic-angular';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CameraService } from '../../app/sources/camera/camera.service';
 import { PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
@@ -48,12 +48,13 @@ export class CaptureImagePage implements OnInit {
   public data: any;
   public canSave: boolean = true;
 
-  constructor(public navCtrl: NavController,
+  constructor(private __navCtrl: NavController,
     private __utilService: UtilService,
     private __zone: NgZone,
     private __cameraService: CameraService,
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private afAuth: AngularFireAuth,
+    private __loadingCtrl: LoadingController,
     private __platform: Platform,
     public _navParams: NavParams) {
       this.__utilService.isCordova().then(value=>{
@@ -100,6 +101,8 @@ export class CaptureImagePage implements OnInit {
 
   saveImage() {
    // console.dir(this.data.image);
+   let loading = this.__loadingCtrl.create({ content: 'Please wait saving...'  });
+   loading.present();
     let value = new PictureDetail();
     value.data = this.data.image; // This is base64 image string to store in db.
     value.dataType = 'string';
@@ -109,6 +112,11 @@ export class CaptureImagePage implements OnInit {
       this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
       this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, this.data.image);
     });
+    setTimeout(() => { 
+      loading.dismiss(); 
+      this.__navCtrl.pop(); // close this page
+    }, 5000);
+    
   }
 
   
