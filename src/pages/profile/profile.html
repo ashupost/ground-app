@@ -89,7 +89,9 @@
       <ion-item>
         <ion-icon name="contact" item-start></ion-icon>
         <ion-label color="primary" stacked>Interest In</ion-label>
-        <ion-select placeholder="Select Interest In" (ionChange)="setSettingData($event,'interest_in')">
+        <ion-select placeholder="Select Interest In" 
+        [(ngModel)]="interest_in"
+        (ionChange)="setSettingData($event,'interest_in')">
           <ion-option value="Male">Male</ion-option>
           <ion-option value="Female">Female</ion-option>
           <ion-option value="Other">Other</ion-option>
