@@ -31,8 +31,6 @@ export interface SettingUser {
     education: string
 }
 
-
-
 export class UserDetails {
     docId: string;
     uid: string;
