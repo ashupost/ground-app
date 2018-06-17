@@ -13,13 +13,14 @@ export class PersonalPage implements OnInit, OnDestroy {
   zoom: number = 8;
   lat: number;
   lng: number;
+  
   ngOnInit(): void {
     console.log('ngOnInit');
     this.getUserLocation();
 
   }
-  private getUserLocation() {
 
+  private getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
@@ -40,7 +41,10 @@ export class PersonalPage implements OnInit, OnDestroy {
 
   }
 
-
+  markerDragEnd(m: marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+  
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
