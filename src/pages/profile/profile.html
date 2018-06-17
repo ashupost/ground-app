@@ -102,7 +102,8 @@
       <ion-item>
         <ion-icon name="beer" item-start></ion-icon>
         <ion-label color="primary" stacked>Set Range in Year {{ structure | json}}</ion-label>
-        <ion-range dualKnobs="true" pin="true" (ionChange)="setSettingAgeRange()" placeholder="Change Display Name" [(ngModel)]="structure"
+        <ion-range dualKnobs="true" pin="true" (ionChange)="setSettingAgeRange()"
+         placeholder="Change Display Name" [(ngModel)]="structure"
           color="dark">
           <ion-icon range-left  name="remove-circle"></ion-icon>
           <ion-icon range-right name="add-circle"></ion-icon>
