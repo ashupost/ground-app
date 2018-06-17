@@ -1,5 +1,5 @@
-<<ion-header>
-  <ion-navbar>
+<ion-header>
+  <ion-navbar color="primary">
     <ion-buttons start>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -11,38 +11,25 @@
 
 
 <ion-content>
-  
-    
-<agm-map 
-[latitude]="lat"
-[longitude]="lng"
-[zoom]="zoom"
-[disableDefaultUI]="false"
-[zoomControl]="false"
-(mapClick)="mapClicked($event)">
 
-<agm-marker 
-    *ngFor="let m of markers; let i = index"
-    (markerClick)="clickedMarker(m.label, i)"
-    [latitude]="m.lat"
+
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" 
+  [zoomControl]="false" (mapClick)="mapClicked($event)">
+    <agm-marker *ngFor="let m of markers; let i = index" 
+    (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" 
     [longitude]="m.lng"
-    [label]="m.label"
-    [markerDraggable]="m.draggable"
-    (dragEnd)="markerDragEnd(m, $event)">
-    
-  <agm-info-window>
-    <strong>InfoWindow content</strong>
-  </agm-info-window>
-  
-</agm-marker>
+      [label]="m.label" [markerDraggable]="m.draggable" 
+      (dragEnd)="markerDragEnd(m, $event)">
+      <agm-info-window>
+        <strong>InfoWindow content</strong>
+      </agm-info-window>
+    </agm-marker>
 
-<agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
-    [radius]="50000"
-    [fillColor]="'red'"
-    [circleDraggable]="true"
-    [editable]="true">
-</agm-circle>
+    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+    [radius]="50000" [fillColor]="'red'" 
+    [circleDraggable]="true" [editable]="true">
+    </agm-circle>
 
-</agm-map>
-      
+  </agm-map>
+
 </ion-content>
