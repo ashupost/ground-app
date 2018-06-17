@@ -70,7 +70,7 @@
       <ion-item>
         <ion-icon name="paw" item-start></ion-icon>
         <ion-label color="primary" stacked>Gender</ion-label>
-        <ion-select placeholder="Change Display Name" (ionChange)="setUserData($event,'gender')">
+        <ion-select placeholder="Change Display Name" [(ngModel)]="gender" (ionChange)="setUserData($event,'gender')">
           <ion-option value="Male">Male</ion-option>
           <ion-option value="Female">Female</ion-option>
           <ion-option value="Other">Other</ion-option>

@@ -24,6 +24,13 @@ export enum PhotoStatus {
     NOT_MAIN = "NOT_MAIN",
 }
 
+export interface SettingUser {
+    interest_in: string,
+    age_lower: number,
+    age_upper: number,
+    education: string
+}
+
 
 
 export class UserDetails {

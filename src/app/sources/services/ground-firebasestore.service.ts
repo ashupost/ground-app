@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { UserDetails, GeoCordinate, UserStatus, PictureDetail } from '../model/userdetails';
+import { UserDetails, GeoCordinate, UserStatus, PictureDetail, SettingUser } from '../model/userdetails';
 import { AngularFirestore, Action } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
@@ -52,6 +52,11 @@ export class GroundFirebaseStoreService {
         });
     }
 
+    getSettingByid(id: string): Observable<SettingUser> {
+        return this.__afs.collection<any>('settings')
+            .doc<any>(id).valueChanges();
+    }
+
     setSettingData(userId: string, value: string, param: string) {
         let data = {};
         let timestamp = firebase.firestore.FieldValue.serverTimestamp();
@@ -72,7 +77,7 @@ export class GroundFirebaseStoreService {
                 data = { param: value, timestamp: timestamp };
         }
         this.__zone.run(() => {
-            this.__afs.collection<UserDetails>('settings').doc(userId).set(data, { merge: true });
+            this.__afs.collection<any>('settings').doc(userId).set(data, { merge: true });
         });
     }
 
@@ -178,6 +183,9 @@ export class GroundFirebaseStoreService {
             .doc<UserDetails>(id).valueChanges();
 
     }
+
+  
+
 
     addUsers(userDetails: UserDetails) {
         this.__zone.run(() => {

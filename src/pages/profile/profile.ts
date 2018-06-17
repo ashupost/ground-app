@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
+import { PictureDetail, PhotoStatus, UserDetails } from '../../app/sources/model/userdetails';
 import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { UtilService } from '../../app/sources/services/util.service';
@@ -31,7 +31,9 @@ export class ProfilePage {
   changeDate = '';
   isCordova: boolean;
   photos: PictureDetail[] = [];
-
+  interest_in: string;
+  education: string;
+  phoneNumber: string;
 
   @ViewChild('changeTime') changeDateTime: DateTime;
 
@@ -99,16 +101,24 @@ export class ProfilePage {
           });
 
 
-        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe(res => {
+        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe((res: UserDetails) => {
           this.name = res.name;
           this.gender = res.gender;
+          this.changeDate = "1980-12-12";
         });
 
+        this._groundFirebaseStoreService.getSettingByid(res.uid).subscribe(res => {
+          this.interest_in = res.interest_in;
+          this.structure.lower = res.age_lower;
+          this.structure.upper = res.age_upper;
+          this.education = res.education;
+        });
       }
     });
   }
 
   ionViewDidLeave() {
+
   }
 
   takePhoto() {
