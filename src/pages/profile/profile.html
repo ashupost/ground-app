@@ -166,7 +166,7 @@
       <ion-item>
         
         <ion-label color="primary" stacked>Education</ion-label>
-        <ion-input placeholder="Change Display Name" [(ngModel)]="education"></ion-input>
+        <ion-input placeholder="Change Display Name" required [(ngModel)]="education"></ion-input>
         <button ion-button color="danger" outline icon-start item-end (click)="setSettingData('MKKKK','education')">
           <ion-icon name='school' is-active="false"></ion-icon>
           Save
