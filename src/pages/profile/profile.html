@@ -51,43 +51,55 @@
 
   <ion-card>
     <ion-item>
-      <ion-icon name="person" item-end></ion-icon>
       <ion-label color="primary" stacked>Display Name</ion-label>
       <ion-input placeholder="Change Display Name" [(ngModel)]="name"></ion-input>
+      <button ion-button color="danger" outline icon-start item-end>
+        <ion-icon name='checkmark-circle' is-active="false"></ion-icon>
+        Save
+      </button>
     </ion-item>
   </ion-card>
 
   <ion-card>
     <ion-item>
-      <ion-icon name="people" item-end></ion-icon>
       <ion-label color="primary" stacked>Gender</ion-label>
       <ion-input placeholder="Change Display Name" [(ngModel)]="gender" disabled></ion-input>
+      <button ion-button color="danger" outline icon-start item-end>
+        <ion-icon name='checkmark-circle' is-active="false"></ion-icon>
+        Save
+      </button>
     </ion-item>
   </ion-card>
 
   <ion-card>
     <ion-list>
       <ion-item>
-        <ion-icon name="paw" item-start></ion-icon>
         <ion-label color="primary" stacked>Gender</ion-label>
         <ion-select placeholder="Change Display Name" [(ngModel)]="gender" (ionChange)="setUserData($event,'gender')">
           <ion-option value="Male">Male</ion-option>
           <ion-option value="Female">Female</ion-option>
           <ion-option value="Other">Other</ion-option>
         </ion-select>
+        <button ion-button color="danger" outline icon-start item-end>
+          <ion-icon name='checkmark-circle' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="calendar" item-start></ion-icon>
         <ion-label color="primary" stacked>Date of Birth</ion-label>
         <ion-datetime placeholder="Select Date of Birth" #changeTime 
         displayFormat="MMM DD YYYY" [(ngModel)]="changeDate" 
         (ionChange)="handleChangeDate(changeDate)">
         </ion-datetime>
+        <button ion-button color="danger" outline icon-start item-end>
+          <ion-icon name='checkmark-circle' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="contact" item-start></ion-icon>
+       
         <ion-label color="primary" stacked>Interest In</ion-label>
         <ion-select placeholder="Select Interest In" 
         [(ngModel)]="interest_in"
@@ -96,11 +108,15 @@
           <ion-option value="Female">Female</ion-option>
           <ion-option value="Other">Other</ion-option>
         </ion-select>
+        <button ion-button color="danger" outline icon-start item-end>
+          <ion-icon name='contact' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
 
       <ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
+     
         <ion-label color="primary" stacked>Set Range in Year {{ structure | json}}</ion-label>
         <ion-range dualKnobs="true" pin="true" (ionChange)="setSettingAgeRange()"
          placeholder="Change Display Name" [(ngModel)]="structure"
@@ -108,34 +124,53 @@
           <ion-icon range-left  name="remove-circle"></ion-icon>
           <ion-icon range-right name="add-circle"></ion-icon>
         </ion-range>
+        <button ion-button color="danger" outline icon-start item-end>
+          <ion-icon name='beer' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="create" item-start></ion-icon>
+        
         <ion-label color="primary" stacked>About me</ion-label>
         <ion-textarea placeholder="Write About yourself"></ion-textarea>
+        <button ion-button color="danger" outline icon-start item-end>
+          <ion-icon name='create' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="call" item-start></ion-icon>
-        <ion-label color="primary" stacked>Phone Number</ion-label>
+        
+       <ion-label color="primary" stacked>Phone Number</ion-label>
         <ion-input placeholder="Phone Number" [(ngModel)]="phoneNumber" 
         
         (ionChange)="setUserData($event,'phoneNumber')"></ion-input>
+        <button ion-button color="danger" outline icon-start item-end>
+          <ion-icon name='call' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="mail" item-start></ion-icon>
+       
         <ion-label color="primary" stacked>Email</ion-label>
         <ion-input placeholder="Email" [(ngModel)]="email"  
         (ionChange)="setUserData($event,'email')"></ion-input>
+        <button ion-button color="danger" outline icon-start item-end>
+          <ion-icon name='mail' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
       <ion-item>
-        <ion-icon name="school" item-start></ion-icon>
+        
         <ion-label color="primary" stacked>Education</ion-label>
-        <ion-input placeholder="Change Display Name" [(ngModel)]="education" 
-        (ionChange)="setSettingData($event,'education')"></ion-input>
+        <ion-input placeholder="Change Display Name" [(ngModel)]="education"></ion-input>
+        <button ion-button color="danger" outline icon-start item-end (click)="setSettingData('MKKKK','education')">
+          <ion-icon name='school' is-active="false"></ion-icon>
+          Save
+        </button>
       </ion-item>
 
     </ion-list>
