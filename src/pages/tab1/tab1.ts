@@ -43,4 +43,8 @@ export class Tab1Page implements OnInit {
     let data = { user: this.__gas.currentUser, toUserDetails: toUserDetails };
     this._app.getRootNav().push(MessagesPage, data);
   }
+
+  ionViewWillLeave(){
+    console.log('ionViewWillLeave => Tab1Page');
+  }
 }

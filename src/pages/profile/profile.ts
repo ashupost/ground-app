@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CaptureImagePage } from '../capture-image/capture-image';
 import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
+import { Subscription } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -34,7 +35,8 @@ export class ProfilePage {
   interest_in: string;
   education: string;
   phoneNumber: string;
-
+  private unsub1: Subscription;
+  
   @ViewChild('changeTime') changeDateTime: DateTime;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -89,25 +91,30 @@ export class ProfilePage {
   }
 
 
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave => Tab1Page');
+    this.unsub1.unsubscribe();
+  
+  }
+
   ionViewDidLoad() {
     this.changeDateTime.updateText = () => { };
 
-    this.afAuth.authState.subscribe(res => {
+    this.unsub1= this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
 
-        this._groundFirebaseStoreService.getPhotoUserData(res.uid)
+       this._groundFirebaseStoreService.getPhotoUserData(res.uid)
           .subscribe((data: PictureDetail[]) => {
             this.photos = data;
-          });
+        });
 
-
-        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe((res: UserDetails) => {
+       this._groundFirebaseStoreService.getUserByid(res.uid).subscribe((res: UserDetails) => {
           this.name = res.name;
           this.gender = res.gender;
           this.changeDate = "1980-12-12";
         });
 
-        this._groundFirebaseStoreService.getSettingByid(res.uid).subscribe(res => {
+      this._groundFirebaseStoreService.getSettingByid(res.uid).subscribe(res => {
           this.interest_in = res.interest_in;
           this.structure.lower = res.age_lower;
           this.structure.upper = res.age_upper;
