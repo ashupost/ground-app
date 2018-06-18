@@ -27,6 +27,7 @@ export class ProfilePage {
   user: Observable<firebase.User>;
   currentUserId: string;
   name: string;
+  email: string;
   gender: string;
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
@@ -110,6 +111,7 @@ export class ProfilePage {
 
        this._groundFirebaseStoreService.getUserByid(res.uid).subscribe((res: UserDetails) => {
           this.name = res.name;
+          this.email = res.email;
           this.gender = res.gender;
           this.changeDate = "1980-12-12";
         });

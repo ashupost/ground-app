@@ -155,9 +155,10 @@
       <ion-item>
        
         <ion-label color="primary" stacked>Email</ion-label>
-        <ion-input placeholder="Email" [(ngModel)]="email"  
-        (ionChange)="setUserData($event,'email')"></ion-input>
-        <button ion-button color="danger" outline icon-start item-end>
+        <ion-input placeholder="Email" #emailData [(ngModel)]="email"  
+        ></ion-input>
+        <button ion-button color="danger" outline icon-start item-end 
+               (click)="setUserData(emailData.value,'email')">
           <ion-icon name='mail' is-active="false"></ion-icon>
           Save
         </button>
@@ -166,8 +167,9 @@
       <ion-item>
         
         <ion-label color="primary" stacked>Education</ion-label>
-        <ion-input placeholder="Change Display Name" required [(ngModel)]="education"></ion-input>
-        <button ion-button color="danger" outline icon-start item-end (click)="setSettingData('MKKKK','education')">
+        <ion-input placeholder="Change Display Name" #box [(ngModel)]="education"></ion-input>
+        <button ion-button color="danger" outline icon-start item-end 
+                 (click)="setSettingData(box.value,'education')">
           <ion-icon name='school' is-active="false"></ion-icon>
           Save
         </button>
