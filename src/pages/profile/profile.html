@@ -143,10 +143,11 @@
       <ion-item>
         
        <ion-label color="primary" stacked>Phone Number</ion-label>
-        <ion-input placeholder="Phone Number" [(ngModel)]="phoneNumber" 
+        <ion-input placeholder="Phone Number" #phone [(ngModel)]="phoneNumber" 
         
-        (ionChange)="setUserData($event,'phoneNumber')"></ion-input>
-        <button ion-button color="danger" outline icon-start item-end>
+        ></ion-input>
+        <button ion-button color="danger" outline icon-start item-end
+        (click)="setUserData(phone.value,'phoneNumber')">
           <ion-icon name='call' is-active="false"></ion-icon>
           Save
         </button>

@@ -28,6 +28,7 @@ export class ProfilePage {
   currentUserId: string;
   name: string;
   email: string;
+  
   gender: string;
   structure: any = { lower: 33, upper: 60 };
   changeDate = '';
@@ -113,6 +114,7 @@ export class ProfilePage {
           this.name = res.name;
           this.email = res.email;
           this.gender = res.gender;
+          this.phoneNumber=res.phoneNumber;
           this.changeDate = "1980-12-12";
         });
 
