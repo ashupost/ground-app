@@ -18,13 +18,13 @@
           <div style="position: relative">
             <img [src]="photo.data" id="img2" />
             <ion-fab left bottom>
-              <button ion-fab color="danger" class="fab-map" (click)="removePhoto(photo.uid)">
+              <button ion-fab mini color="danger" class="fab-map" (click)="removePhoto(photo.uid)">
                 <ion-icon name="close"></ion-icon>
               </button>
             </ion-fab>
             <ion-fab right bottom>
               <div>
-                <button ion-fab color="primary" class="fab-map" (click)="takePhoto()">
+                <button ion-fab mini color="primary" class="fab-map" (click)="takePhoto()">
                   <ion-icon name="add"></ion-icon>
                 </button>
               </div>
@@ -40,7 +40,7 @@
         <img src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
         <ion-fab center middle>
           <div>
-            <button ion-fab color="danger" class="fab-map" (click)="takePhoto()">
+            <button ion-fab mini color="danger" class="fab-map" (click)="takePhoto()">
               <ion-icon name="add"></ion-icon>
             </button>
           </div>
