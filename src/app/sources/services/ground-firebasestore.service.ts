@@ -144,17 +144,32 @@ export class GroundFirebaseStoreService {
                     let query: firebase.firestore.Query = ref;
                     query = query.orderBy('timestamp', 'asc');
                     return query;
-                })
-                .snapshotChanges().map(actions => {
-                    return actions.map(a => {
-                        const data = a.payload.doc.data();
-                        // console.log('data', JSON.stringify(data));
-                        data.uid = a.payload.doc.id;
+                }).snapshotChanges().pipe(
+                    map(actions => actions.map(a => {
+                        const data = a.payload.doc.data() as UserDetails;
                         //const id = a.payload.doc.id; // this is firebase generated id.
+                        data.uid = a.payload.doc.id;
                         return { ...data };
-                    });
-                }));
+                    }))
+                ));
     }
+
+
+    public getUsers1(): Observable<UserDetails[]> {
+        return this.__afs.collection<UserDetails>('users', ref => {
+            let query: firebase.firestore.Query = ref;
+            query = query.orderBy('timestamp', 'desc').limit(300);
+            return query;
+        }).snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+                const data = a.payload.doc.data() as UserDetails;
+                //const id = a.payload.doc.id; // this is firebase generated id.
+                data.docId = a.payload.doc.id;
+                return { ...data };
+            }))
+        );
+    }
+
 
     sendMessage(toId: string, fromId: string, newMessage: string) {
         this.__zone.run(() => {
@@ -185,7 +200,7 @@ export class GroundFirebaseStoreService {
 
     }
 
-  
+
 
 
     addUsers(userDetails: UserDetails) {
