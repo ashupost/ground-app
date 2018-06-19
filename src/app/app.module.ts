@@ -41,6 +41,8 @@ import { GroundAuthService } from './sources/services/ground.auth.service';
 import { CaptureImagePageModule } from '../pages/capture-image/capture-image.module';
 import { ImageCropperModule } from "ngx-img-cropper";
 import { MovieService } from './sources/scroll/movie.service';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8",
@@ -71,7 +73,8 @@ export const firebaseConfig = {
     //   IonicStorageModule.forRoot({name: '__mydb1', driverOrder: ['sqlite', 'websql']}),
     IonicStorageModule.forRoot(),
     AngularFireStorageModule,
-    ImageCropperModule
+    ImageCropperModule,
+    AgmJsMarkerClustererModule
 
   ],
   bootstrap: [IonicApp],
