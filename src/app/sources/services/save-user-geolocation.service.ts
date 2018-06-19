@@ -51,8 +51,6 @@ export class SaveUserGeolocationService {
                 if (result) {
                     this.__afs.collection<UserDetails>('users')
                         .doc(userId).set(result, { merge: true })
-                } else {
-                    console.log('Not Available');
                 }
             })
         },
