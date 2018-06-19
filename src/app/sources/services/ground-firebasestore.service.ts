@@ -24,7 +24,7 @@ export class GroundFirebaseStoreService {
             this.__afs.collection<any>('photos')
                 .doc(userId)
                 .collection('photo', ref => {
-                    let query: firebase.firestore.Query = ref;
+                    let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
                     query = query.orderBy('timestamp', 'desc');
                     return query;
                 })
@@ -127,7 +127,7 @@ export class GroundFirebaseStoreService {
     getLatestGeoCordinidateByUsers(userid: string): Observable<GeoCordinate[]> {
         return this.__afs.collection<UserDetails>('users')
             .doc(userid).collection<GeoCordinate>('geolocation', ref => {
-                let query: firebase.firestore.Query = ref;
+                let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
                 query = query.orderBy('timestamp', 'desc').limit(1);
                 return query;
             }).valueChanges();
@@ -141,7 +141,7 @@ export class GroundFirebaseStoreService {
         ).switchMap(([timestamp]) =>
             this.__afs.collection<UserDetails>('users')
                 .doc(myId).collection('messages').doc(otherId).collection('chat', ref => {
-                    let query: firebase.firestore.Query = ref;
+                    let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
                     query = query.orderBy('timestamp', 'asc');
                     return query;
                 }).snapshotChanges().pipe(
@@ -203,7 +203,7 @@ export class GroundFirebaseStoreService {
 
     public getUsers(): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
-            let query: firebase.firestore.Query = ref;
+            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
         }).snapshotChanges().pipe(
@@ -218,7 +218,7 @@ export class GroundFirebaseStoreService {
 
     public getUsersScrollPagination(batch, lastKey?): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
-            let query: firebase.firestore.Query = ref;
+            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
             query = query.orderBy('uid');
             if (lastKey) query = query.startAt(lastKey)
             query = query.limit(batch);
@@ -229,7 +229,7 @@ export class GroundFirebaseStoreService {
 
     public getUsersOnline(): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
-            let query: firebase.firestore.Query = ref;
+            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
             query = query.where('status', '==', UserStatus.ONLINE);
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
