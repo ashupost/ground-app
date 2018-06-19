@@ -158,7 +158,7 @@ export class GroundFirebaseStoreService {
         this.__zone.run(() => {
             // const merge: firebase.firestore.SetOptions = { merge: false };
             let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            this.__afs.collection<UserDetails>('chat')
+            this.__afs.collection<UserDetails>('users')
                 .doc(toId).collection('messages').doc(fromId).collection('chat')
                 .add({
                     toId: toId,
