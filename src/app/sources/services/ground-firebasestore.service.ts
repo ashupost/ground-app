@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { UserDetails, GeoCordinate, UserStatus, PictureDetail, SettingUser } from '../model/userdetails';
 import { AngularFirestore, Action } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/combineLatest';
 import 'firebase/firestore';
 import * as firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 
@@ -207,14 +208,14 @@ export class GroundFirebaseStoreService {
             let query: firebase.firestore.Query = ref;
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
-        }).snapshotChanges()
-            .pipe()
-            .map(actions => actions.map(a => {
+        }).snapshotChanges().pipe(
+            map(actions => actions.map(a => {
                 const data = a.payload.doc.data() as UserDetails;
                 //const id = a.payload.doc.id; // this is firebase generated id.
                 data.docId = a.payload.doc.id;
                 return { ...data };
-            }));
+            }))
+        );
     }
 
     public getUsersScrollPagination(batch, lastKey?): Observable<UserDetails[]> {
