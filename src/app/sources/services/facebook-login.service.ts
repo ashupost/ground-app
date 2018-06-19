@@ -24,8 +24,8 @@ export class FaceBookLoginService {
         try {
             this.__facebook.login(['public_profile', 'email'])
                 .then((response: FacebookLoginResponse) => {
-                    let creadet =  firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-                    return this.__afAuth.auth.signInWithCredential(creadet);
+                    let authCredential =  firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+                    return this.__afAuth.auth.signInWithCredential(authCredential);
                 });
         } catch (err) {
             alert('FaceBook Login error Cordova' + err);
