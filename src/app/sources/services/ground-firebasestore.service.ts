@@ -154,28 +154,11 @@ export class GroundFirebaseStoreService {
                 ));
     }
 
-
-    public getUsers1(): Observable<UserDetails[]> {
-        return this.__afs.collection<UserDetails>('users', ref => {
-            let query: firebase.firestore.Query = ref;
-            query = query.orderBy('timestamp', 'desc').limit(300);
-            return query;
-        }).snapshotChanges().pipe(
-            map(actions => actions.map(a => {
-                const data = a.payload.doc.data() as UserDetails;
-                //const id = a.payload.doc.id; // this is firebase generated id.
-                data.docId = a.payload.doc.id;
-                return { ...data };
-            }))
-        );
-    }
-
-
     sendMessage(toId: string, fromId: string, newMessage: string) {
         this.__zone.run(() => {
             // const merge: firebase.firestore.SetOptions = { merge: false };
             let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            this.__afs.collection<UserDetails>('users')
+            this.__afs.collection<UserDetails>('chat')
                 .doc(toId).collection('messages').doc(fromId).collection('chat')
                 .add({
                     toId: toId,
