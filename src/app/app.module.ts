@@ -14,6 +14,7 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AgmCoreModule } from '@agm/core';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 
@@ -42,6 +43,9 @@ import { CaptureImagePageModule } from '../pages/capture-image/capture-image.mod
 import { ImageCropperModule } from "ngx-img-cropper";
 import { MovieService } from './sources/scroll/movie.service';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { HTTPService } from '../pages/http/http.service';
+import { HttpErrorHandler } from '../pages/http/http-error-handler.service';
+import { MessageService } from '../pages/http/message.service';
 
 
 export const firebaseConfig = {
@@ -58,12 +62,13 @@ export const firebaseConfig = {
     MyApp
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     PipesModule,
     DirectivesModule,
     MessagesPageModule,
     CaptureImagePageModule,
     DisplayUserPageModule,
-    BrowserModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' }),
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
@@ -107,7 +112,10 @@ export const firebaseConfig = {
     CameraService,
     Camera,
     GroundAuthService,
-    MovieService
+    MovieService,
+    HTTPService,
+    HttpErrorHandler,
+    MessageService
   ]
 })
 export class AppModule { }
