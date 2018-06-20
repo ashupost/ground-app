@@ -21,5 +21,6 @@ export class HttpPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HttpPage');
     this.items = this.__httpService.getUserJava();
+    
   }
 }
