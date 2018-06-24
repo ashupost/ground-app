@@ -35,6 +35,7 @@ export class ProfilePage {
   isCordova: boolean;
   photos: PictureDetail[] = [];
   interest_in: string;
+
   education: string;
   phoneNumber: string;
   private unsub1: Subscription;
@@ -95,7 +96,7 @@ export class ProfilePage {
 
   ionViewWillLeave() {
     console.log('ionViewWillLeave => Tab1Page');
-    this.unsub1.unsubscribe();
+   // this.unsub1.unsubscribe();
   
   }
 
@@ -119,10 +120,11 @@ export class ProfilePage {
         });
 
       this._groundFirebaseStoreService.getSettingByid(res.uid).subscribe(res => {
-          this.interest_in = res.interest_in;
-          this.structure.lower = res.age_lower;
-          this.structure.upper = res.age_upper;
-          this.education = res.education;
+         // alert(JSON.stringify(res));
+          this.interest_in =  res === null ? '' :  res.interest_in;;
+          this.structure.lower = res === null ? 0 :  res.age_lower;
+          this.structure.upper = res === null ? 0 :  res.age_lower;
+          this.education = res === null ? '' :  res.education;
         });
       }
     });

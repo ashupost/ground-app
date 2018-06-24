@@ -109,7 +109,7 @@
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.78:8100" />
     <allow-navigation href="http://192.168.1.70:9090" />
     <allow-navigation href="http://mritunjay:9090" />
     <plugin name="cordova-plugin-facebook4" spec="^2.1.0">
@@ -119,5 +119,6 @@
     <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
         <variable name="REVERSED_CLIENT_ID" value="myreversedclientid" />
     </plugin>
+    <allow-navigation href="http://192.168.1.78:8100" />
     <engine name="android" spec="7.0.0" />
 </widget>
