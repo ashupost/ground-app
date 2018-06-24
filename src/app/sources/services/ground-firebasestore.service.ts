@@ -139,8 +139,8 @@ export class GroundFirebaseStoreService {
         return Observable.combineLatest(
             timestamp$
         ).switchMap(([timestamp]) =>
-            this.__afs.collection<UserDetails>('users')
-                .doc(myId).collection('messages').doc(otherId).collection('chat', ref => {
+            this.__afs.collection<UserDetails>('messages')
+                .doc(myId).collection(otherId, ref => {
                     let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
                     query = query.orderBy('timestamp', 'asc');
                     return query;
@@ -158,16 +158,16 @@ export class GroundFirebaseStoreService {
         this.__zone.run(() => {
             // const merge: firebase.firestore.SetOptions = { merge: false };
             let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            this.__afs.collection<UserDetails>('users')
-                .doc(toId).collection('messages').doc(fromId).collection('chat')
+            this.__afs.collection<UserDetails>('messages')
+                .doc(toId).collection(fromId)
                 .add({
                     toId: toId,
                     fromId: fromId,
                     message: newMessage,
                     timestamp: timestamp
                 });
-            this.__afs.collection<UserDetails>('users')
-                .doc(fromId).collection('messages').doc(toId).collection('chat')
+            this.__afs.collection<UserDetails>('messages')
+                .doc(fromId).collection(toId)
                 .add({
                     toId: toId,
                     fromId: fromId,
