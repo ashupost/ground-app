@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserDetails, GeoCordinate, UserStatus, PictureDetail, SettingUser } from '../model/userdetails';
+import { UserDetails, GeoCordinate, UserStatus, PictureDetail, SettingUser, Message } from '../model/userdetails';
 import { AngularFirestore, Action } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
@@ -133,9 +133,9 @@ export class GroundFirebaseStoreService {
             }).valueChanges();
     }
 
-    getMessages(myId: string, otherId: string): Observable<any[]> {
-        return this.__afs.collection<UserDetails>('messages')
-            .doc(myId).collection(otherId, ref => {
+    getMessages(myId: string, otherId: string): Observable<Message[]> {
+        return this.__afs.collection<any>('messages')
+            .doc(myId).collection<Message>(otherId, ref => {
                 let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
                 query = query.orderBy('timestamp', 'asc');
                 return query;
@@ -146,7 +146,7 @@ export class GroundFirebaseStoreService {
         this.__zone.run(() => {
             // const merge: firebase.firestore.SetOptions = { merge: false };
             let timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            this.__afs.collection<UserDetails>('messages')
+            this.__afs.collection<any>('messages')
                 .doc(toId).collection(fromId)
                 .add({
                     toId: toId,

@@ -7,8 +7,8 @@ export interface PageInterface {
     tabComponent?: any;
     index?: number;
     icon: string;
-  }
-  
+}
+
 
 export class PictureDetail {
     photoType: PhotoStatus;
@@ -16,7 +16,7 @@ export class PictureDetail {
     data: any;
     timestamp: firebase.firestore.FieldValue;
     uid: string;
-    
+
 }
 
 export enum PhotoStatus {
@@ -29,6 +29,13 @@ export interface SettingUser {
     age_lower: number,
     age_upper: number,
     education: string
+}
+
+export interface Message {
+    fromId: string,
+    toId: string,
+    message: string,
+    timestamp: firebase.firestore.FieldValue
 }
 
 export class UserDetails {
@@ -53,7 +60,7 @@ export class GeoCordinate {
     latitude: number = 0;
     longitude: number = 0;
     timestamp: firebase.firestore.FieldValue
-} 
+}
 
 export enum UserStatus {
     ONLINE = "secondary",
@@ -61,10 +68,10 @@ export enum UserStatus {
     DISCONNECT = "light",
     SIGNOUT = "danger",
     IDLE = "light"
-    
+
 }
 
-export interface OnlineStatus{
+export interface OnlineStatus {
     status: string,
     timestamp: firebase.firestore.FieldValue
 }

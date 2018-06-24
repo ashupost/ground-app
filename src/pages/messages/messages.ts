@@ -4,7 +4,7 @@ import { Content } from 'ionic-angular';
 import firebase from 'firebase';
 import { GroundFirebaseStoreService } from '../../app/sources/services/ground-firebasestore.service';
 import { GroundDatabaseStatusService } from '../../app/sources/status-service/ground-database-status.service';
-import { UserDetails, GeoCordinate } from '../../app/sources/model/userdetails';
+import { UserDetails, GeoCordinate, Message } from '../../app/sources/model/userdetails';
 import { DistanceService } from '../../app/sources/services/distance.service';
 import { DisplayUserPage } from '../display-user/display-user';
 
@@ -17,7 +17,7 @@ export class MessagesPage {
 
   private fromId: string;
   user: any = {};
-  messages: any = [];
+  messages: Message[] = [];
   private newMessage: string = '';
   editorMsg = '';
   private showEmojiPicker = false;
