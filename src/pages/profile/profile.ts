@@ -96,7 +96,7 @@ export class ProfilePage {
 
   ionViewWillLeave() {
     console.log('ionViewWillLeave => Tab1Page');
-   // this.unsub1.unsubscribe();
+    this.unsub1.unsubscribe();
   
   }
 
