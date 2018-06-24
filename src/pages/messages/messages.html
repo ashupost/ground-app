@@ -4,9 +4,8 @@
       <img *ngIf="toUserDetails.photoURL" [src]="toUserDetails.photoURL" style="border-radius: 10px;" height="30px">
       <img *ngIf="!toUserDetails.photoURL" style="border-radius: 10px;" height="30px" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
       <sub class="build_version" stacked ion-text [color]="toUserDetails.status">
-        {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }} 
-        {{ otherTimestamp | relativeTimePipe }} 
-        [{{distance | number }} KM]
+        {{toUserDetails.name ? toUserDetails.name : 'NO NAME SET' }} {{ otherTimestamp | relativeTimePipe }} [{{distance | number
+        }} KM]
 
       </sub>
     </ion-title>
@@ -18,13 +17,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  
+
   <!--
       https://github.com/HsuanXyz/ionic3-chat/blob/master/src/pages/chat/chat.scss
 -->
 
   <div class="message-wrap">
     <div *ngFor="let msg of messages" class="message" [class.left]="msg.fromId !== fromId " [class.right]="msg.fromId === fromId">
+
       <img class="user-img" [src]="msg.fromId === fromId ? user.photoURL : toUserDetails.photoURL" alt="" src="">
       <ion-spinner name="dots" *ngIf="!msg.timestamp"></ion-spinner>
       <div class="msg-detail">
@@ -35,7 +35,7 @@
           <span class="triangle"></span>
           <p class="line-breaker ">{{msg.message}}</p>
         </div>
-         <!--
+        <!--
         <img [src]="msg.fromId === fromId ? user.photoURL : toUserDetails.photoURL" alt="" src="">
         -->
       </div>

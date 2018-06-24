@@ -24,7 +24,7 @@ export class GroundFirebaseStoreService {
             this.__afs.collection<any>('photos')
                 .doc(userId)
                 .collection('photo', ref => {
-                    let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+                    let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
                     query = query.orderBy('timestamp', 'desc');
                     return query;
                 })
@@ -127,31 +127,19 @@ export class GroundFirebaseStoreService {
     getLatestGeoCordinidateByUsers(userid: string): Observable<GeoCordinate[]> {
         return this.__afs.collection<UserDetails>('users')
             .doc(userid).collection<GeoCordinate>('geolocation', ref => {
-                let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+                let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
                 query = query.orderBy('timestamp', 'desc').limit(1);
                 return query;
             }).valueChanges();
     }
 
     getMessages(myId: string, otherId: string): Observable<any[]> {
-        let timestamp$ = new BehaviorSubject(null);
-        // let colorFilter$ = new BehaviorSubject(null);
-        return Observable.combineLatest(
-            timestamp$
-        ).switchMap(([timestamp]) =>
-            this.__afs.collection<UserDetails>('messages')
-                .doc(myId).collection(otherId, ref => {
-                    let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-                    query = query.orderBy('timestamp', 'asc');
-                    return query;
-                }).snapshotChanges().pipe(
-                    map(actions => actions.map(a => {
-                        const data = a.payload.doc.data() as UserDetails;
-                        //const id = a.payload.doc.id; // this is firebase generated id.
-                        data.uid = a.payload.doc.id;
-                        return { ...data };
-                    }))
-                ));
+        return this.__afs.collection<UserDetails>('messages')
+            .doc(myId).collection(otherId, ref => {
+                let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+                query = query.orderBy('timestamp', 'asc');
+                return query;
+            }).valueChanges();
     }
 
     sendMessage(toId: string, fromId: string, newMessage: string) {
@@ -203,7 +191,7 @@ export class GroundFirebaseStoreService {
 
     public getUsers(): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
-            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+            let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
         }).snapshotChanges().pipe(
@@ -218,7 +206,7 @@ export class GroundFirebaseStoreService {
 
     public getUsersScrollPagination(batch, lastKey?): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
-            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+            let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
             query = query.orderBy('uid');
             if (lastKey) query = query.startAt(lastKey)
             query = query.limit(batch);
@@ -229,7 +217,7 @@ export class GroundFirebaseStoreService {
 
     public getUsersOnline(): Observable<UserDetails[]> {
         return this.__afs.collection<UserDetails>('users', ref => {
-            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+            let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
             query = query.where('status', '==', UserStatus.ONLINE);
             query = query.orderBy('timestamp', 'desc').limit(300);
             return query;
