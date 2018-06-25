@@ -11,7 +11,6 @@ admin.initializeApp(functions.config().firebase);
 import { COMMENT_EVENT, LIKE_EVENT } from "./constants";
 import * as notificationFunctions from './notifications/index'
 import * as atomicFunctions from './atomic-operations/index'
-import { Change } from 'firebase-functions';
 
 export const firestoreInstance = admin.firestore();
 
@@ -22,6 +21,7 @@ export const firestoreInstance = admin.firestore();
 export const newFollowerNotification = functions.firestore
     .document('PublicUserData/{followerId}/Followers/{followedId}')
     .onCreate(event => {
+
         return notificationFunctions.sendNewFollowerNotification(event);
     });
 
