@@ -51,4 +51,5 @@ export class Tab3Page  implements OnInit{
     let data = { user: this.__gas.currentUser, toUserDetails: toUserDetails };
     this._app.getRootNav().push(MessagesPage, data);
   }
+
 }

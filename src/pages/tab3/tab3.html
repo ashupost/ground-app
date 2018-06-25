@@ -17,10 +17,10 @@
           <ion-item-sliding>
             <ion-item (click)="goToMessagePage(item)">
               <ion-thumbnail item-start>
-                <img *ngIf="item.photoURL" [src]="item.photoURL">
-                <img *ngIf="!item.photoURL" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+                <img *ngIf="item.photoURL" [src]="item.photoURL" style="border-radius: 10%;">
+                <img *ngIf="!item.photoURL" style="border-radius: 10%;" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
               </ion-thumbnail>
-              <ion-icon item-end ios="ios-disc" [color]="item.status" md="md-disc"></ion-icon>
+                <ion-icon item-end ios="ios-disc" [color]="item.status" md="md-disc"></ion-icon>
               <ion-icon item-end *ngIf="item.accountType === 'facebook.com'" color="primary" ios="logo-facebook" md="logo-facebook"></ion-icon>
               <ion-icon item-end *ngIf="item.accountType === 'google.com'" color="primary" ios="logo-google" md="logo-google"></ion-icon>
               <ion-icon item-end *ngIf="item.accountType === 'phone'" color="primary" ios="ios-phone-portrait" md="md-phone-portrait"></ion-icon>
@@ -29,12 +29,27 @@
               <h2>{{item.name}}
                 <span *ngIf="item.dob">, {{item.dob | agePipe}}</span>
               </h2>
-              <h3>{{item.timestamp | relativeTimePipe}}</h3>
+              <h6>{{item.timestamp | relativeTimePipe}}</h6>
+              
               <p>{{item.country}}&nbsp;{{item.state}}&nbsp;{{item.city}}&nbsp;{{item.street}}</p>
             </ion-item>
             <ion-item-options side="right">
               <button ion-button color="danger" icon-only>
                 <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-item-options>
+            <ion-item-options side="left">
+              <button ion-button color="light" icon-start>
+                <ion-icon name="ios-more"></ion-icon>
+                More
+              </button>
+              <button ion-button color="primary" icon-start>
+                <ion-icon name="text"></ion-icon>
+                Text
+              </button>
+              <button ion-button color="secondary" icon-start>
+                <ion-icon name="call"></ion-icon>
+                Call
               </button>
             </ion-item-options>
           </ion-item-sliding>
@@ -46,6 +61,6 @@
     </div>
   </ion-list>
   <ng-template #loading>
-    <ion-spinner class="spinnerCenter" name="crescent"></ion-spinner>
+    <ion-spinner color="primary" name="ios"></ion-spinner>
   </ng-template>
 </ion-content>
