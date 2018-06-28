@@ -48,12 +48,8 @@ export class CaptureImagePage implements OnInit {
   }
 
   selectImageFromCamera() {
-   // this.canSave = false;
     this.__cameraService.selectImageFromCamera()
       .then((data: any) => {
-      //  let image: any = new Image();
-       // image.src = data;
-       // this.ImageCropper.setImage(image);
        this.imageBase64Data=data;
       })
       .catch((error: any) => {
@@ -87,7 +83,7 @@ export class CaptureImagePage implements OnInit {
     setTimeout(() => { 
       loading.dismiss(); 
       this.__navCtrl.pop(); // close this page
-    }, 5000);
+    }, 3000);
     
   }
 
