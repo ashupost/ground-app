@@ -1,7 +1,6 @@
 page-capture-image {
     #profileImage { .ng2-imgcrop { canvas { width: 100%; height: 100%;} } }
     .ng2-imgcrop { input[type="file"] { 
-        
         position: absolute;
         top: 0;
         right: 0;

@@ -1,5 +1,5 @@
-import { Component, NgZone, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, Platform, LoadingController } from 'ionic-angular';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
 import { UtilService } from '../../app/sources/services/util.service';
 import { CameraService } from '../../app/sources/camera/camera.service';
 import { PictureDetail, PhotoStatus } from '../../app/sources/model/userdetails';
@@ -7,7 +7,6 @@ import { GroundFirebaseStoreService } from '../../app/sources/services/ground-fi
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
-import { ImageCropperComponent, CropperSettings, Bounds, CropPosition } from "ngx-img-cropper";
 
 @IonicPage()
 @Component({
@@ -17,37 +16,13 @@ import { ImageCropperComponent, CropperSettings, Bounds, CropPosition } from "ng
 export class CaptureImagePage implements OnInit {
 
   ngOnInit() {
-    this.cropperSettings = new CropperSettings();
-    this.cropperSettings.width = 50;
-    this.cropperSettings.height = 50;
-    this.cropperSettings.croppedWidth = 512;
-    this.cropperSettings.croppedHeight = 512;
-    this.cropperSettings.minWidth = 100;
-    this.cropperSettings.minHeight = 100;
-    this.cropperSettings.cropOnResize = true;
-    this.cropperSettings.dynamicSizing = true;
-    this.cropperSettings.noFileInput = true;
-    this.cropperSettings._rounded = false;
-    this.cropperSettings.touchRadius = 30;
-    this.cropperSettings.centerTouchRadius = 40;
-    this.cropperSettings.markerSizeMultiplier = 2;
-    this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255, 0, 0, 1)';
-    this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
-    this.data = {};
   }
 
   isCordova: boolean;
-  //base64Image: any;
   user: Observable<firebase.User>;
   currentUserId: string;
-  @ViewChild('cropper', undefined) ImageCropper: ImageCropperComponent;
 
-  public cropperSettings;
-  public croppedWidth: Number;
-  public croppedHeight: Number;
-  public data: any;
-  public canSave: boolean = true;
-
+  
   constructor(private __navCtrl: NavController,
     private __utilService: UtilService,
     private __zone: NgZone,
@@ -55,7 +30,6 @@ export class CaptureImagePage implements OnInit {
     private _groundFirebaseStoreService: GroundFirebaseStoreService,
     private afAuth: AngularFireAuth,
     private __loadingCtrl: LoadingController,
-    private __platform: Platform,
     public _navParams: NavParams) {
       this.__utilService.isCordova().then(value=>{
         this.isCordova = value;
@@ -74,24 +48,22 @@ export class CaptureImagePage implements OnInit {
   }
 
   selectImageFromCamera() {
-    this.canSave = false;
+   // this.canSave = false;
     this.__cameraService.selectImageFromCamera()
       .then((data: any) => {
-        let image: any = new Image();
-        image.src = data;
-        this.ImageCropper.setImage(image);
+      //  let image: any = new Image();
+       // image.src = data;
+       // this.ImageCropper.setImage(image);
+       this.imageBase64Data=data;
       })
       .catch((error: any) => {
         console.dir(error);
       });
   }
   selectImageFromGallary() {
-    this.canSave = false;
     this.__cameraService.selectImageFromGallary()
       .then((data: any) => {
-        let image: any = new Image();
-        image.src = data;
-        this.ImageCropper.setImage(image);
+        this.imageBase64Data=data;
       })
       .catch((error: any) => {
         console.dir(error);
@@ -100,17 +72,17 @@ export class CaptureImagePage implements OnInit {
 
 
   saveImage() {
-   // console.dir(this.data.image);
+  
    let loading = this.__loadingCtrl.create({ content: 'Please wait saving...'  });
    loading.present();
     let value = new PictureDetail();
-    value.data = this.data.image; // This is base64 image string to store in db.
+    value.data = this.croppedImage; // This is base64 image string to store in db.
     value.dataType = 'string';
     value.photoType = PhotoStatus.MAIN;
 
     this.__zone.run(() => {
       this._groundFirebaseStoreService.setPhotoUserData(this.currentUserId, value);
-      this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, this.data.image);
+      this._groundFirebaseStoreService.updatePhotoURL(this.currentUserId, this.croppedImage);
     });
     setTimeout(() => { 
       loading.dismiss(); 
@@ -119,15 +91,23 @@ export class CaptureImagePage implements OnInit {
     
   }
 
-  
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  cropperReady = false;
+  imageBase64Data: any;
 
-  fileChangeListener($event) {
+fileChangeEvent($event) {
+  this.imageChangedEvent = $event;
+}
 
-    this.__cameraService.getFileBase64($event.target.files[0]).then(loadEvent => {
-      let image: any = new Image();
-      image.src = loadEvent;
-      this.ImageCropper.setImage(image);
-    });
-    
-  }
+  imageCropped(image: string) {
+    this.croppedImage = image;
+}
+imageLoaded() {
+  this.cropperReady = true;
+}
+imageLoadFailed () {
+  console.log('Load failed');
+}
+
 }

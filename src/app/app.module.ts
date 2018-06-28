@@ -40,12 +40,13 @@ import { Camera } from '@ionic-native/camera';
 import { DisplayUserPageModule } from '../pages/display-user/display-user.module';
 import { GroundAuthService } from './sources/services/ground.auth.service';
 import { CaptureImagePageModule } from '../pages/capture-image/capture-image.module';
-import { ImageCropperModule } from "ngx-img-cropper";
 import { MovieService } from './sources/scroll/movie.service';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HTTPService } from '../pages/http/http.service';
 import { HttpErrorHandler } from '../pages/http/http-error-handler.service';
 import { MessageService } from '../pages/http/message.service';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 
 export const firebaseConfig = {
