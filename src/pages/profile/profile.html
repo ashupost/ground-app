@@ -16,7 +16,7 @@
       <ion-slide *ngFor="let photo of photos">
         <ion-card class="adv-map">
           <div style="position: relative">
-            <img [src]="photo.data" id="img2" />
+            <img [src]="photo.data" id="responsive-image" />
             <ion-fab left bottom>
               <button ion-fab mini color="danger" class="fab-map" (click)="removePhoto(photo.uid)">
                 <ion-icon name="close"></ion-icon>
