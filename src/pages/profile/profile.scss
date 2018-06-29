@@ -11,5 +11,9 @@ page-profile {
   #responsive-image {
     width: 100% !important;
     height: auto !important;
+    border: 1px solid rgb(27, 6, 6); /* Gray border */
+    border-radius: 4px;  /* Rounded border */
+    padding: 5px 5px 5px 5px;
   }
+
 }
