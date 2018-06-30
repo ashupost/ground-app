@@ -32,8 +32,9 @@ export class MenuPage {
     { title: 'Personal', pageName: 'PersonalPage', icon: 'image' },
     { title: 'Scroll', pageName: 'ScrollPage', icon: 'image' },
     { title: 'About', pageName: 'AboutPage', icon: 'image' },
+    { title: 'LocationSelectPage', pageName: 'LocationSelectPage', icon: 'image' }
 
-    { title: 'AutoCompleteMapPage', pageName: 'AutoCompleteMapPage', icon: 'image' }
+    
 
 
   ];

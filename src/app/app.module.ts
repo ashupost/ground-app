@@ -46,6 +46,9 @@ import { HTTPService } from '../pages/http/http.service';
 import { HttpErrorHandler } from '../pages/http/http-error-handler.service';
 import { MessageService } from '../pages/http/message.service';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { Connectivity } from '../providers/connectivity-service/connectivity-service';
+import { Network } from '@ionic-native/network';
+import { GoogleMaps } from '../providers/google-maps/google-maps';
 
 
 
@@ -116,7 +119,10 @@ export const firebaseConfig = {
     MovieService,
     HTTPService,
     HttpErrorHandler,
-    MessageService
+    MessageService,
+    Connectivity,
+    GoogleMaps,
+    Network
   ]
 })
 export class AppModule { }
