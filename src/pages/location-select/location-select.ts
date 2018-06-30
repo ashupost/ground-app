@@ -12,7 +12,7 @@ import { GoogleMaps } from '../../providers/google-maps/google-maps';
 })
 
 export class LocationSelectPage {
-
+// https://www.joshmorony.com/location-select-page-with-google-maps-and-ionic/
     @ViewChild('map') mapElement: ElementRef;
     @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
 
