@@ -50,15 +50,15 @@ export class AutoCompleteMapPage implements OnInit {
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.datas=place;
-
         
 
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
+          this.datas=place;
 
+        
           let address = '';
           if (place.address_components) {
             this.address = [
