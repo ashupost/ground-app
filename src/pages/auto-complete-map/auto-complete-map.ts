@@ -3,9 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapsAPILoader } from '@agm/core';
 import { ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {} from '@types/googlemaps';
 
-
+declare var google: any;
 
 @IonicPage()
 @Component({
