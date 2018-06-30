@@ -49,6 +49,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { Connectivity } from '../providers/connectivity-service/connectivity-service';
 import { Network } from '@ionic-native/network';
 import { GoogleMaps } from '../providers/google-maps/google-maps';
+import { LocationSelectPage } from '../pages/location-select/location-select';
 
 
 
@@ -63,7 +64,8 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    LocationSelectPage
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ export const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    LocationSelectPage
   ],
   providers: [
     StatusBar,

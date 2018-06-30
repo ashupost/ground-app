@@ -12,6 +12,7 @@ import { GroundFirebaseStoreService } from '../../app/sources/services/ground-fi
 import { SaveUserGeolocationService } from '../../app/sources/services/save-user-geolocation.service';
 import { UtilService } from '../../app/sources/services/util.service';
 import { GroundAuthService } from '../../app/sources/services/ground.auth.service';
+import { LocationSelectPage } from '../location-select/location-select';
 
 
 @IonicPage()
@@ -33,6 +34,7 @@ export class LoginPage {
     private __groundAuthService: GroundAuthService,
     private __groundFirebaseStoreService: GroundFirebaseStoreService,
     private __saveUserGeolocationService: SaveUserGeolocationService,
+    public modalCtrl: ModalController,
     private __googleLoginService: GoogleLoginService) {
 
     //this.__gas.currentUserId
@@ -80,5 +82,17 @@ export class LoginPage {
   signOut() {
     this.__afAuth.auth.signOut();
   }
+
+  launchLocationPage(){
+ 
+    let modal = this.modalCtrl.create(LocationSelectPage);
+
+    modal.onDidDismiss((location) => {
+        console.log(location);
+    });
+
+    modal.present();   
+
+}
 
 }
