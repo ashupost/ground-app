@@ -58,6 +58,16 @@ export class LocationSelectPage {
                 location.lng = details.geometry.location.lng();
                 this.saveDisabled = false;
                 this.maps.map.setCenter({ lat: location.lat, lng: location.lng });
+               // this.maps.map.setZoom(8);
+                var myLatlng = {lat: location.lat, lng: location.lng};
+
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: this.maps.map,
+                    title: 'Click to zoom'
+                  });
+                
+
                 this.location = location;
             });
         });
