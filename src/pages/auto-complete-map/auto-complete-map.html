@@ -8,9 +8,9 @@
     <ion-title>Auto Complete</ion-title>
   </ion-navbar>
   <ion-toolbar color="primary">
-  <ion-searchbar placeholder="search for location"
+  <input placeholder="search for location"
   autocorrect="off" autocapitalize="off" spellcheck="off" type="text" full debounce=500
-  class="form-control" #search [formControl]="searchControl"></ion-searchbar>
+  class="form-control" #search [formControl]="searchControl">
 </ion-toolbar>
 </ion-header>
 
