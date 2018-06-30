@@ -11,7 +11,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
   ],
   imports: [
     IonicPageModule.forChild(AutoCompleteMapPage),
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' , libraries: ["places"]}),
     AgmJsMarkerClustererModule
  
   ],
