@@ -57,16 +57,22 @@ export class LocationSelectPage {
                 location.lat = details.geometry.location.lat();
                 location.lng = details.geometry.location.lng();
                 this.saveDisabled = false;
-                this.maps.map.setCenter({ lat: location.lat, lng: location.lng });
                // this.maps.map.setZoom(8);
                 var myLatlng = {lat: location.lat, lng: location.lng};
-
+                   // direction to the right and in the Y direction down.
+        
+             
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     map: this.maps.map,
-                    title: 'Click to zoom'
+                    title: 'Click to zoom',
+                    animation: google.maps.Animation.DROP,
+  
+                    label: 'M',
+                    opacity: 1.0
                   });
-                
+                  this.maps.map.setCenter(marker.getPosition());
+             
 
                 this.location = location;
             });
@@ -106,5 +112,9 @@ export class LocationSelectPage {
       //  });
        // modal.present();   
     }
+
+
+   
+
   
 }
