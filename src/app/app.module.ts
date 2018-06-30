@@ -70,7 +70,7 @@ export const firebaseConfig = {
     MessagesPageModule,
     CaptureImagePageModule,
     DisplayUserPageModule,
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' , libraries: ["places"]}),
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,

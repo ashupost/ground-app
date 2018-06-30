@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PersonalPage } from './personal';
+import { AutoCompleteMapPage } from './auto-complete-map';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 
 @NgModule({
   declarations: [
-    PersonalPage,
+    AutoCompleteMapPage,
   ],
   imports: [
-    IonicPageModule.forChild(PersonalPage),
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' , libraries: ["places"]}),
-   
+    IonicPageModule.forChild(AutoCompleteMapPage),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8' }),
     AgmJsMarkerClustererModule
+ 
   ],
 })
-export class PersonalPageModule {}
+export class AutoCompleteMapPageModule {}
