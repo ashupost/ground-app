@@ -16,9 +16,9 @@ export class AutoCompleteMapPage implements OnInit {
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
+  address: any;
 
-  @ViewChild("search")
-  public searchElementRef: ElementRef;
+  @ViewChild("search") searchElementRef: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private mapsAPILoader: MapsAPILoader,
@@ -29,7 +29,7 @@ export class AutoCompleteMapPage implements OnInit {
     console.log('ionViewDidLoad AutoCompleteMapPage');
   }
 
-
+  datas: any;
   ngOnInit() {
     //set google maps defaults
     this.zoom = 4;
@@ -38,6 +38,7 @@ export class AutoCompleteMapPage implements OnInit {
 
     //create search FormControl
     this.searchControl = new FormControl();
+    
 
     //set current position
     this.setCurrentPosition();
@@ -49,12 +50,24 @@ export class AutoCompleteMapPage implements OnInit {
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          this.datas=place;
+
+        
 
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
 
+          let address = '';
+          if (place.address_components) {
+            this.address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+          
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
