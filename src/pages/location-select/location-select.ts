@@ -57,6 +57,17 @@ export class LocationSelectPage {
                 location.lat = details.geometry.location.lat();
                 location.lng = details.geometry.location.lng();
                 this.saveDisabled = false;
+
+
+                var contentString = '<strong>information</strong>';
+          
+            var infowindow = new google.maps.InfoWindow({
+              content: contentString
+            });
+          
+
+
+
                // this.maps.map.setZoom(8);
                 var myLatlng = {lat: location.lat, lng: location.lng};
                    // direction to the right and in the Y direction down.
@@ -72,6 +83,11 @@ export class LocationSelectPage {
                     opacity: 1.0
                   });
                   this.maps.map.setCenter(marker.getPosition());
+
+                  marker.addListener('click', function() {
+                    infowindow.open(this.maps, marker);
+                  });
+                
              
 
                 this.location = location;
