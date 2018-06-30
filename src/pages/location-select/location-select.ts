@@ -88,4 +88,13 @@ export class LocationSelectPage {
     close() {
         this.viewCtrl.dismiss();
     }
+
+    launchLocationPage(){
+       // let modal = this.modalCtrl.create(LocationSelect);
+       // modal.onDidDismiss((location) => {
+       //     console.log(location);
+      //  });
+       // modal.present();   
+    }
+  
 }

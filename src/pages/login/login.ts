@@ -83,16 +83,4 @@ export class LoginPage {
     this.__afAuth.auth.signOut();
   }
 
-  launchLocationPage(){
- 
-    let modal = this.modalCtrl.create(LocationSelectPage);
-
-    modal.onDidDismiss((location) => {
-        console.log(location);
-    });
-
-    modal.present();   
-
-}
-
 }
