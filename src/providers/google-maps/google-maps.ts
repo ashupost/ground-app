@@ -114,11 +114,9 @@ export class GoogleMaps {
   }
 
   enableMap(): void {
-
     if (this.pleaseConnect) {
       this.pleaseConnect.style.display = "none";
     }
-
   }
 
   addConnectivityListeners(): void {
