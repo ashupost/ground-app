@@ -15,7 +15,7 @@ export class GoogleMaps {
   currentMarker: any;
   //apiKey: string = "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8"; // Actual
   apiKey: string = "AIzaSyDanv8HnOiFtaLoQ7tNzc5v82Kuxm2SEoU"; // Dummy
-  
+
 
   constructor(public connectivityService: Connectivity, public geolocation: Geolocation) {
 
@@ -99,6 +99,28 @@ export class GoogleMaps {
         }
 
         this.map = new google.maps.Map(this.mapElement, mapOptions);
+
+        var contentString = '<strong>information</strong>';
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+
+        var marker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          title: 'Current Location',
+          animation: google.maps.Animation.DROP,
+          label: 'C',
+          opacity: 1.0
+        });
+
+        marker.addListener('click', function () {
+          infowindow.open(this.map, marker);
+        });
+
+
+
         resolve(true);
 
       });
