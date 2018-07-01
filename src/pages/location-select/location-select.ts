@@ -27,7 +27,8 @@ export class LocationSelectPage {
     location: any;
 
     constructor(public navCtrl: NavController,
-        public zone: NgZone, public maps: GoogleMaps,
+        public zone: NgZone, 
+        public maps: GoogleMaps,
         public platform: Platform,
         public geolocation: Geolocation,
         public viewCtrl: ViewController) {
