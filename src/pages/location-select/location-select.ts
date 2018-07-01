@@ -12,7 +12,7 @@ import { GoogleMaps } from '../../providers/google-maps/google-maps';
 })
 
 export class LocationSelectPage {
-// https://www.joshmorony.com/location-select-page-with-google-maps-and-ionic/
+    // https://www.joshmorony.com/location-select-page-with-google-maps-and-ionic/
     @ViewChild('map') mapElement: ElementRef;
     @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
 
@@ -27,7 +27,7 @@ export class LocationSelectPage {
     location: any;
 
     constructor(public navCtrl: NavController,
-        public zone: NgZone, 
+        public zone: NgZone,
         public maps: GoogleMaps,
         public platform: Platform,
         public geolocation: Geolocation,
@@ -58,40 +58,30 @@ export class LocationSelectPage {
                 location.lat = details.geometry.location.lat();
                 location.lng = details.geometry.location.lng();
                 this.saveDisabled = false;
-
+                this.location = location;
 
                 var contentString = '<strong>information</strong>';
-          
-            var infowindow = new google.maps.InfoWindow({
-              content: contentString
-            });
-          
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+                
+                this.maps.map.setZoom(8);
+                var myLatlng = { lat: location.lat, lng: location.lng };
 
-
-
-               // this.maps.map.setZoom(8);
-                var myLatlng = {lat: location.lat, lng: location.lng};
-                   // direction to the right and in the Y direction down.
-        
-             
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     map: this.maps.map,
                     title: 'Click to zoom',
                     animation: google.maps.Animation.DROP,
-  
                     label: 'M',
                     opacity: 1.0
-                  });
-                  this.maps.map.setCenter(marker.getPosition());
+                });
 
-                  marker.addListener('click', function() {
+                this.maps.map.setCenter(marker.getPosition());
+
+                marker.addListener('click', function () {
                     infowindow.open(this.maps, marker);
-                  });
-                
-             
-
-                this.location = location;
+                });
             });
         });
     }
@@ -122,16 +112,16 @@ export class LocationSelectPage {
         this.viewCtrl.dismiss();
     }
 
-    launchLocationPage(){
-       // let modal = this.modalCtrl.create(LocationSelect);
-       // modal.onDidDismiss((location) => {
-       //     console.log(location);
-      //  });
-       // modal.present();   
+    launchLocationPage() {
+        // let modal = this.modalCtrl.create(LocationSelect);
+        // modal.onDidDismiss((location) => {
+        //     console.log(location);
+        //  });
+        // modal.present();   
     }
 
 
-   
 
-  
+
+
 }
