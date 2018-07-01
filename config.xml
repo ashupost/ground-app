@@ -120,6 +120,6 @@
         <variable name="REVERSED_CLIENT_ID" value="myreversedclientid" />
     </plugin>
     <allow-navigation href="http://192.168.1.78:8100" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <engine name="android" spec="7.0.0" />
 </widget>
