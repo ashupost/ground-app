@@ -100,7 +100,7 @@ export class GoogleMaps {
 
         this.map = new google.maps.Map(this.mapElement, mapOptions);
 
-        var contentString = '<strong>information</strong>';
+        var contentString = '<strong>Your Current Location</strong>';
         var infowindow = new google.maps.InfoWindow({
           content: contentString
         });
