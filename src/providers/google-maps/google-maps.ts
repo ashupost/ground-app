@@ -119,8 +119,6 @@ export class GoogleMaps {
           infowindow.open(this.map, marker);
         });
 
-
-
         resolve(true);
 
       });
