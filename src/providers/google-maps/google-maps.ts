@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Connectivity } from '../connectivity-service/connectivity-service';
 
@@ -18,52 +17,36 @@ export class GoogleMaps {
 
 
   constructor(public connectivityService: Connectivity, public geolocation: Geolocation) {
-
   }
 
   init(mapElement: any, pleaseConnect: any): Promise<any> {
-
     this.mapElement = mapElement;
     this.pleaseConnect = pleaseConnect;
-
     return this.loadGoogleMaps();
-
   }
 
   loadGoogleMaps(): Promise<any> {
-
     return new Promise((resolve) => {
-
       if (typeof google == "undefined" || typeof google.maps == "undefined") {
-
         console.log("Google maps JavaScript needs to be loaded.");
         this.disableMap();
-
         if (this.connectivityService.isOnline()) {
-
           window['mapInit'] = () => {
-
             this.initMap().then(() => {
               resolve(true);
             });
-
             this.enableMap();
           }
-
           let script = document.createElement("script");
           script.id = "googleMaps";
-
           if (this.apiKey) {
             script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit&libraries=places';
           } else {
             script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
           }
-
           document.body.appendChild(script);
-
         }
       } else {
-
         if (this.connectivityService.isOnline()) {
           this.initMap();
           this.enableMap();
