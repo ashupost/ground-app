@@ -12,21 +12,21 @@ export class GoogleMaps {
   mapLoaded: any;
   mapLoadedObserver: any;
   currentMarker: any;
-  //apiKey: string = "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8"; // Actual
-  apiKey: string = "AIzaSyDanv8HnOiFtaLoQ7tNzc5v82Kuxm2SEoU"; // Dummy
+  apiKey: string = "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8"; // Actual
+ // apiKey: string = "AIzaSyDanv8HnOiFtaLoQ7tNzc5v82Kuxm2SEoU"; // Dummy
 
 
   constructor(public connectivityService: Connectivity, public geolocation: Geolocation) {
   }
 
-  init(mapElement: any, pleaseConnect: any): Promise<any> {
+  async init(mapElement: any, pleaseConnect: any): Promise<any> {
     this.mapElement = mapElement;
     this.pleaseConnect = pleaseConnect;
-    return this.loadGoogleMaps();
+    return await this.loadGoogleMaps();
   }
 
-  loadGoogleMaps(): Promise<any> {
-    return new Promise((resolve) => {
+  async loadGoogleMaps(): Promise<any> {
+    return await new Promise((resolve) => {
       if (typeof google == "undefined" || typeof google.maps == "undefined") {
         console.log("Google maps JavaScript needs to be loaded.");
         this.disableMap();
