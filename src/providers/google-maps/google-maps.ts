@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Connectivity } from '../connectivity-service/connectivity-service';
+import { MapOptions } from '@agm/core/services/google-maps-types';
 
 @Injectable()
 export class GoogleMaps {
@@ -82,11 +83,22 @@ export class GoogleMaps {
         let mapOptions = {
           center: latLng,
           zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.LARGE,
+            position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+        panControlOptions: {
+          position: google.maps.ControlPosition.LEFT_CENTER
+      },
+      panControl: true,
+      mapTypeControl: false
+
         }
 
         this.map = new google.maps.Map(this.mapElement, mapOptions);
 
+       
         var contentString = '<strong>Your Current Location</strong>';
         var infowindow = new google.maps.InfoWindow({
           content: contentString
@@ -101,6 +113,27 @@ export class GoogleMaps {
           label: 'C',
           opacity: 1.0
         });
+
+
+
+
+
+        var Item_1 = new google.maps.LatLng(52.0983128, 5.1172776);
+
+        
+        var marker1 = new google.maps.Marker({
+            position: Item_1,
+            map: this.map
+        });
+    
+      
+    
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend(latLng);
+        bounds.extend(Item_1);
+        this.map.fitBounds(bounds);
+
+
 
         marker.addListener('click', function () {
           infowindow.open(this.map, marker);
