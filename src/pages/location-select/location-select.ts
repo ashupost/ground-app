@@ -65,7 +65,7 @@ export class LocationSelectPage {
                     content: contentString
                 });
                 
-                this.maps.map.setZoom(8);
+                this.maps.map.setZoom(11);
                 var myLatlng = { lat: location.lat, lng: location.lng };
 
                 var marker = new google.maps.Marker({
@@ -76,6 +76,19 @@ export class LocationSelectPage {
                     label: 'M',
                     opacity: 1.0
                 });
+
+                var cityCircle = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    draggable: true,
+                    editable:  true,
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.05,
+                    map: this.maps.map,
+                    center: myLatlng,
+                    radius: Math.sqrt(3405) * 100
+                  });
 
                 this.maps.map.setCenter(marker.getPosition());
 

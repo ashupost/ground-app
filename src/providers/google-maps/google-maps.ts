@@ -81,7 +81,7 @@ export class GoogleMaps {
 
         let mapOptions = {
           center: latLng,
-          zoom: 13,
+          zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           zoomControlOptions: {
             style: google.maps.ZoomControlStyle.LARGE,
