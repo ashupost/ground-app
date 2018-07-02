@@ -12,8 +12,11 @@ export class GoogleMaps {
   mapLoaded: any;
   mapLoadedObserver: any;
   currentMarker: any;
-  apiKey: string = "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8"; // Actual
+  //apiKey: string = "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8"; // Actual
  // apiKey: string = "AIzaSyDanv8HnOiFtaLoQ7tNzc5v82Kuxm2SEoU"; // Dummy
+   apiKey: string = "AIzaSyCrpUPhpbPzRI4hYC7xE02WKsrxQv0HClI"; // Dummy
+
+ 
 
 
   constructor(public connectivityService: Connectivity, public geolocation: Geolocation) {
