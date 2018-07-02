@@ -13,10 +13,10 @@ export class GoogleMaps {
   mapLoadedObserver: any;
   currentMarker: any;
   //apiKey: string = "AIzaSyCxjWoBYpJNCtd1wGvNk3n8nEgR4ryvqA8"; // Actual
- // apiKey: string = "AIzaSyDanv8HnOiFtaLoQ7tNzc5v82Kuxm2SEoU"; // Dummy
-   apiKey: string = "AIzaSyCrpUPhpbPzRI4hYC7xE02WKsrxQv0HClI"; // Dummy
+  // apiKey: string = "AIzaSyDanv8HnOiFtaLoQ7tNzc5v82Kuxm2SEoU"; // Dummy
+  apiKey: string = "AIzaSyCrpUPhpbPzRI4hYC7xE02WKsrxQv0HClI"; // Dummy
 
- 
+
 
 
   constructor(public connectivityService: Connectivity, public geolocation: Geolocation) {
@@ -43,7 +43,8 @@ export class GoogleMaps {
           let script = document.createElement("script");
           script.id = "googleMaps";
           if (this.apiKey) {
-            script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit&libraries=places';
+            // script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit&libraries=places';
+            script.src = 'https://maps.googleapis.com/maps/api/js?language=en&region=US&v=3.24&key=AIzaSyCrpUPhpbPzRI4hYC7xE02WKsrxQv0HClI&libraries=places&channel=monorail-prod&callback=mapInit';
           } else {
             script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
           }
