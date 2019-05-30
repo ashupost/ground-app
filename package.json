@@ -38,7 +38,6 @@
     "@ionic/storage": "2.1.3",
     "@types/google-maps": "^3.2.0",
     "angularfire2": "^5.0.0-rc.10",
-    "cordova-android": "7.0.0",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-facebook4": "^2.1.0",
@@ -102,8 +101,6 @@
       "cordova-plugin-camera": {},
       "cordova-plugin-network-information": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }
